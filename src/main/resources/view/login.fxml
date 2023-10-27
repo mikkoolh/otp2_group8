@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280" styleClass="login-page" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" fillWidth="false" layoutY="100.0" maxHeight="400.0" maxWidth="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Log in">
+                  <font>
+                      <Font name="Futura Medium" size="40.0" />
+                  </font>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+              </Text>
+            <GridPane fx:id="loginFormGrid" hgap="5.0" vgap="20.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="97.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.5" minWidth="10.0" prefWidth="251.5" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.38958740234375" minWidth="10.0" prefWidth="17.15570068359375" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                        <TextField fx:id="usernameField" maxWidth="1.7976931348623157E308" styleClass="input-field" GridPane.columnIndex="1" />
+                  <Label prefHeight="26.0" prefWidth="116.0" styleClass="input-label" text="Username" GridPane.hgrow="ALWAYS" />
+                  <Label styleClass="input-label" text="Password" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+                <Text fx:id="loginErrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
+                <VBox alignment="TOP_CENTER" spacing="10.0">
+                    <children>
+                        <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#onLoginClick" styleClass="button-primary" text="Log in">
+                     <padding>
+                        <Insets bottom="7.0" left="40.0" right="40.0" top="7.0" />
+                     </padding></Button>
+                        <Button fx:id="createAccountBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCreateAccountClick" styleClass="text-button" text="Don't have an account? Sign up" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
