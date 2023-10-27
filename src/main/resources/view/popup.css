@@ -1,0 +1,31 @@
+.root {
+    -fx-background-color: #000;
+}
+
+HBox {
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+
+HBox:hover {
+    -fx-border-color: #84ff05;
+    -fx-border-width: 2px;
+}
+
+#saveBtn {
+    -fx-background-color: #008000;
+    -fx-text-fill: #fff;
+}
+
+#saveBtn:hover {
+    -fx-background-color: #006400;
+}
+
+#exitBtn {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: #fff;
+}
+
+#exitBtn:hover {
+    -fx-background-color: #8b0000;
+}

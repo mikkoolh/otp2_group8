@@ -1,0 +1,580 @@
+[33mcommit 9b40294dcc908f90febc5f1dc797533d7c46aabc[m[33m ([m[1;36mHEAD -> [m[1;32melmoUI[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/elmoUI[m[33m, [m[1;32mmain[m[33m)[m
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Mon Oct 2 09:04:38 2023 +0300
+
+    Update persistence.xml
+
+[33mcommit 8d062192930175568f633ffb5901c828f8a21a8f[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Sun Oct 1 23:38:41 2023 +0300
+
+    Update README.md
+
+[33mcommit 3525f699d4e11482f13bb7ad0c9e7e3c730edf9e[m
+Merge: ef1ecb5 88ee5b6
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Sun Oct 1 20:20:06 2023 +0300
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit ef1ecb5222e8539fdf3c09a88a48bc9d651cd240[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Sun Oct 1 20:19:50 2023 +0300
+
+    päivitetty persistence
+
+[33mcommit 88ee5b6e2f5a2390dd3dccacc34c0742e7ce0cf8[m
+Author: NickNoss <97677029+NickNoss@users.noreply.github.com>
+Date:   Sun Oct 1 20:14:46 2023 +0300
+
+    Update pom.xml
+
+[33mcommit 1cd9bd05f1288666f0b227ba157bd2a54ced4344[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Sun Oct 1 19:52:14 2023 +0300
+
+    dao-testit toistaiseksi kommentoitu pois
+
+[33mcommit 8df193875e2c80b9284e00b70da0296c0848d16c[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Sun Oct 1 19:45:15 2023 +0300
+
+    kommentoitu pois parit testit jotka aiheutti errorin
+
+[33mcommit 9e67d0ac2b672452407536e3e3547524970e6d70[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Sun Oct 1 19:13:45 2023 +0300
+
+    pom päivitetty
+
+[33mcommit 2307cb9760f508bd22bf81033e0d80ee9b40347e[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Sun Oct 1 19:07:49 2023 +0300
+
+    pom päivitetty
+
+[33mcommit f4e783c9eb2a088617cb28cbf287ae86d74c5d1f[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Mon Sep 25 21:57:07 2023 +0300
+
+[33mcommit d848715b5761945eba0ae3db3af5eab9d1972b7f[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Mon Sep 25 18:37:43 2023 +0300
+
+    Viimeisin versio.
+
+[33mcommit 5ceeacb5db49c54d335b4a9e476eb3367d593512[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Mon Sep 25 18:32:50 2023 +0300
+
+    Päivitetty profiili-luokkia ja ui:ta. Lisätty salasanan vaihto - toiminto.
+
+[33mcommit 51300cdab394257ef6fc978550b3c700a3e24323[m
+Merge: 6e0fedd cfd2282
+Author: NickNoss <97677029+NickNoss@users.noreply.github.com>
+Date:   Mon Sep 25 17:37:58 2023 +0300
+
+    Merge pull request #11 from mikkoolh/elmoUI
+    
+    Elmo UI
+
+[33mcommit cfd2282541ea936ce10fd61f022df9c9e0876dac[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 25 17:12:28 2023 +0300
+
+    muutettu koodi toimimaan niin, että tietokannasta tulee näkyviin vain kirjautuneen käyttäjän huoneet
+
+[33mcommit 171a0d7eb67b0a062cf7c9a6484243f5af30a7f8[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 25 15:32:51 2023 +0300
+
+    lisätty room-entity ja roomDAO-luokka
+
+[33mcommit f959b089b1cff3f8a35dff82e789338faa252140[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 25 14:39:59 2023 +0300
+
+    lisätty device-luokkaan userName parametri jotta laitteet ovat sidoksissa tiettyyn käyttäjään. Lisätty deviceDAO-luokkaan getDevicesByUsername metodi
+
+[33mcommit 6e0fedd0d176b190bfd4583e633405026a40ae78[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Mon Sep 25 14:15:03 2023 +0300
+
+    Korjattu. Menee Account creationin jälkeen LoginPage:lle, ei Ohjelmaan.
+
+[33mcommit a00e0b3bd1e37cc918c6a55a0635b5a35519e84e[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Thu Sep 21 23:48:59 2023 +0300
+
+    muutokset matleenan branchista
+
+[33mcommit 93c4b7aaaa22dc6311698261df84d0264441fc43[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Thu Sep 21 21:59:07 2023 +0300
+
+[33mcommit d0c89a4ab5439e5bdb95ceae469f7ac7959c6c57[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Wed Sep 20 15:10:28 2023 +0300
+
+    Tallentaa kirjautuneen käyttäjän. Hakee käyttäjän tiedot ja käyttää niitä profiilitoiminnoissa.
+
+[33mcommit dcd316f915d4526ecb60e2bdda1f07628d2a9c9e[m[33m ([m[1;32mmikko_ui[m[33m)[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 14:10:02 2023 +0300
+
+    korjattu nimeäminen
+
+[33mcommit 1e2641aaabbe46a96cc10cea6c67213b17e91b26[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 14:08:35 2023 +0300
+
+    koodi toimii mikolla :)
+
+[33mcommit ea4f761d5feb7fb2d9c221acd8ab00b5de7493b5[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 12:34:22 2023 +0300
+
+    lisätty kuvat
+
+[33mcommit ea4f563b6201f4aac59d08600093d5e737d371e3[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 12:33:54 2023 +0300
+
+    Jaettu käyttöliittymää ja toimintalogiikkaa osiin.
+
+[33mcommit 71376f7465fe5ba3339b6a403a77d28a7cd4e9c7[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 11:16:47 2023 +0300
+
+    Aloitettu tietokannan korjailut
+
+[33mcommit e79f16b7ff711ffc2bd0b3948a795db664a00e2e[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 10:49:17 2023 +0300
+
+    pientä viilausta asetteluun
+
+[33mcommit 77b01ab16b1aa839ef35f53f0895dd2ac3418971[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Wed Sep 20 09:28:31 2023 +0300
+
+    Päivitetty etusivun toimintalogiikka hajauttamalla sivu omiin FXML- ja controlleritiedostoihin.
+
+[33mcommit 9a44373e03d11c67e47f4be7c3a1ecc23d2a0064[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Tue Sep 19 19:03:48 2023 +0300
+
+    Singleton päivitetty
+
+[33mcommit 44f53b0c2aa9fd7dc8b47573aa9ed4233a7ab133[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Tue Sep 19 18:55:11 2023 +0300
+
+    Singletonia laitettu
+
+[33mcommit 7156b6beb8f9a0a35a38a30c60116bb9cb234ea7[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Tue Sep 19 12:07:09 2023 +0300
+
+    etusivua kehitelty
+
+[33mcommit 16ec39d0e342640db7a7dc0d693cb8d82e80067b[m
+Author: mikkoolh <mikkoolh@metropolia.fi>
+Date:   Tue Sep 19 10:56:10 2023 +0300
+
+    Putsattu Mainista keskeneräinen koodi, siirretty käyttöliittymä omaan kansioon.
+
+[33mcommit 64ef861430a5b069e4e1dc3c9e686bb7920cd2ab[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 21:20:31 2023 +0300
+
+    DeviceType + DAO testit
+
+[33mcommit 9460874f291aa452a3390607e04587003d1e495c[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 12:59:10 2023 +0300
+
+    Tyhjät luokat testeille jotka vielä puuttuu
+
+[33mcommit 690681b9c7bf94b167c869cd7cb439637157c779[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 12:51:47 2023 +0300
+
+    Loput puuttuvat luokat
+
+[33mcommit 468977d8ef20d795dcafece5d96785d692ca121d[m
+Merge: 6a50e06 60326f8
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 12:44:34 2023 +0300
+
+    Merge branch 'main' of https://github.com/mikkoolh/Ohtu_syksy_2023
+
+[33mcommit 6a50e06b78a0363022c76a5639bcb10ee583c85c[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 12:42:10 2023 +0300
+
+    Lisätty puuttuvat luokat
+
+[33mcommit 60326f88cdc38c501eb2f0f885a312217845ca62[m
+Merge: 25dfd66 7f10924
+Author: elmooe <113901248+elmooe@users.noreply.github.com>
+Date:   Mon Sep 18 12:34:58 2023 +0300
+
+    Merge pull request #9 from mikkoolh/elmo
+    
+    lisätty loput testiluokat
+
+[33mcommit 7f109247f5dd7239efaecf7e7d61d4c8467c711d[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 18 12:31:27 2023 +0300
+
+    lisätty loput testiluokat
+
+[33mcommit 25dfd662ac23ba84227768e3d157ef96c5a71b46[m
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Mon Sep 18 11:54:47 2023 +0300
+
+    Create README.md
+
+[33mcommit 3bc9414bb612ecb030dac9263b886050500ae671[m
+Merge: 3ea3d27 8e6e7bb
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 18 10:42:28 2023 +0300
+
+    Merge branch 'main' into elmo
+
+[33mcommit 3ea3d27445c136a9c395870009449622f4b30cfd[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 18 10:34:52 2023 +0300
+
+[33mcommit 8e6e7bb90d680708ccaad9da05fcf3481b54a81a[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 10:14:24 2023 +0300
+
+    refaktorointia
+
+[33mcommit 0dc14688234bd91b33ef9d72ce05c1ed99cd9802[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 18 10:11:58 2023 +0300
+
+    tehty FeatureDao-luokalle test-luokka
+
+[33mcommit 39bb2931ff732f50f96cf816f927630a35e1de5c[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 09:10:11 2023 +0300
+
+    provider korjattu
+
+[33mcommit 7524edc566d89bee55cf59c2d2651075e13a0b38[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Mon Sep 18 01:43:55 2023 +0300
+
+    Testit lisätty, DAO-testit ei toimi atm, persistence provider puuttuu
+
+[33mcommit 8256e5e14ef8001527fc86d99e2a0439b7956d30[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Sat Sep 16 15:55:53 2023 +0300
+
+    lisätty Feature-luokalle Test-luokka
+
+[33mcommit b51f3471b673ad2136eefc0b48ceefd754bfa758[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Sat Sep 16 14:51:20 2023 +0300
+
+    testiluokka luotu ManufacturerDAO:lle, ManufacturerDAO-luokkaan lisätty metodit poistolle ja listaukselle. Aikasempia metodeita paranneltu
+
+[33mcommit c6ca050221891d7c6361dedd905e8dacef9d4bd1[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Sat Sep 16 13:47:51 2023 +0300
+
+    added JUNIT Tests for Manufacturer class
+
+[33mcommit 562b12d79f69604974dbeed25408bb2fe68a64db[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Sat Sep 16 13:30:23 2023 +0300
+
+[33mcommit cedf03b38b1ae5c72aa6bf5d14230888ed9d3548[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Fri Sep 15 12:22:18 2023 +0300
+
+    Lisätty deleteAll() DeviceGroupDAO-luokkaan. Luotu testit DG ja DGDaolle.
+
+[33mcommit 49d06876557e818724a11ec6efb3c23ce69f5d57[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Wed Sep 13 19:47:14 2023 +0300
+
+    Ekat testit luotu ja suoritettu. Testaamattomat luokat siirretty /Bank-kansioon
+
+[33mcommit ed36666973ee4fc81b3edd183d1270b22aadedf3[m
+Merge: e2c037c b6fff42
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Wed Sep 13 15:15:58 2023 +0300
+
+    jaajaa
+
+[33mcommit b6fff42b0edc3780c3ce348a523119d6a6e497b8[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Wed Sep 13 15:14:56 2023 +0300
+
+    jaajaa
+
+[33mcommit e2c037cc46f8f70989af367a1f48b691500be7bc[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Wed Sep 13 14:50:06 2023 +0300
+
+    jtn!
+
+[33mcommit 48aa212d2ed17f4d90add7bc05894347c8a55cb3[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Wed Sep 13 14:06:37 2023 +0300
+
+    Paranneltu luokkia, persistencea ja module-infoa. SQL ei vieläkään toimi
+
+[33mcommit 6f2d0a2b6cb8235b03a8551017335786ced1882d[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Wed Sep 13 13:49:16 2023 +0300
+
+    pientä säätöä, että toimii vscodessa
+
+[33mcommit 24b4d1794347dc09d7b51c73236120151c8fbf9d[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Wed Sep 13 00:13:01 2023 +0300
+
+    korjattu loput javafx
+
+[33mcommit 6c397e68fb44018536a51ded668814b3d466c6c2[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Wed Sep 13 00:01:52 2023 +0300
+
+    Korjailtu testauksen siirto
+
+[33mcommit b71bdcc42c484b6324648fec114d33bad36bd314[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Tue Sep 12 23:50:23 2023 +0300
+
+    Uudestaan luotu projekti vähemmillä kilkkeillä.
+
+[33mcommit eca75d27940b4fd9faa8ab70e0ff3771756c406a[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Mon Sep 11 17:29:53 2023 +0300
+
+    Lisätty hibernate & mysql dependencyt pom.xml-tiedostoon.
+
+[33mcommit 910d39aa8211b50e1869db5f423fcd8213cbb9be[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Mon Sep 11 17:26:14 2023 +0300
+
+    Luotu persistence.xml, asetettu metropolian tietokanta
+
+[33mcommit ee907056d097cce5b72a3b7835d1dea9fa64e182[m
+Merge: 12cff38 2fafc54
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 11 12:09:29 2023 +0300
+
+    Merge branch 'elmo_branch'
+
+[33mcommit 2fafc548b99273a00b89a716a1bc32172742202c[m
+Author: elmooe <elmo.erla@live.fi>
+Date:   Mon Sep 11 12:09:00 2023 +0300
+
+    Weekday ja WeekdayDAO lisätty
+
+[33mcommit 12cff38ae3c0a7caf91fed02c9b6596a733218ab[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Mon Sep 11 09:52:18 2023 +0300
+
+    EventTime + DAO
+
+[33mcommit d0b13298bf332ca5cdfbe736fb414dee6f7c3147[m
+Merge: e30d74e 8db1a06
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Mon Sep 11 09:37:49 2023 +0300
+
+    Merge branch 'main' of https://github.com/mikkoolh/Ohtu_syksy_2023
+
+[33mcommit 8db1a06a62112b8f213b0b605a2fba171718665e[m
+Merge: 81242fb 9f4c034
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Sun Sep 10 13:50:43 2023 +0300
+
+    Merge pull request #6 from mikkoolh/GUI
+    
+    Syötteiden validointi
+
+[33mcommit 81242fb0e15afef419aea6413dd6930582c71d18[m
+Merge: 90153df 79eb0f1
+Author: NickNoss <97677029+NickNoss@users.noreply.github.com>
+Date:   Sun Sep 10 13:49:35 2023 +0300
+
+    Merge pull request #7 from mikkoolh/Matleenan-haara
+    
+    Matleenan haara
+
+[33mcommit e30d74ef61b1d7176765638047bc385b4a5941ee[m
+Merge: 1bbf204 90153df
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Sun Sep 10 13:43:28 2023 +0300
+
+    Resolve merge conflict in ProfileController.java
+
+[33mcommit 90153df2dcc0123d88d5dd14faffa9192b2ae726[m
+Merge: d02634c 109bcf0
+Author: NickNoss <97677029+NickNoss@users.noreply.github.com>
+Date:   Sun Sep 10 13:38:14 2023 +0300
+
+    Merge pull request #1 from mikkoolh/Nikin-haara
+    
+    Device/DeviceDAO-classes. Test
+
+[33mcommit 79eb0f1a055836dde0b2295f1061d05615c69b11[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Sun Sep 10 13:35:01 2023 +0300
+
+    Lisätty Device Group + dao ja getAll-metodit DeviceType- ja Feature-daoihin
+
+[33mcommit 109bcf0d17cc7bcfe3f252ab646ae42a249b0b5e[m
+Merge: b8239a9 d02634c
+Author: NickNoss <97677029+NickNoss@users.noreply.github.com>
+Date:   Sun Sep 10 13:34:43 2023 +0300
+
+    Merge branch 'main' into Nikin-haara
+
+[33mcommit 1bbf20465a0ebe30a502bdda9993ee630df9b37e[m
+Merge: d02634c b8239a9
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Sun Sep 10 13:24:49 2023 +0300
+
+    Merge branch 'Nikin-haara'
+
+[33mcommit b8239a9318c37a0c112745903059413d6dc18186[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Sun Sep 10 13:24:02 2023 +0300
+
+    Solved conflicts
+
+[33mcommit 451924c47bc959131cb8d7a755e556065943c5d8[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Sun Sep 10 13:16:48 2023 +0300
+
+    Added UserType and DAO for it
+
+[33mcommit 2a18498297964e0e03aa02426fe06cda2dae32c0[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Sun Sep 10 12:58:32 2023 +0300
+
+    Device & DeviceDAO finalized
+
+[33mcommit cff583d19fee9e00086bf730fab364ffe6928cbd[m
+Author: Nik Noss <nnossenko@gmail.com>
+Date:   Sun Sep 10 12:48:23 2023 +0300
+
+    Added jdoc comments
+
+[33mcommit ceb6f1010fe91d64d815817bbe503ed5184c5dd3[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Sat Sep 9 19:32:13 2023 +0300
+
+    Valmistaja + dao
+
+[33mcommit 2503af43c98bc792b5852b1408528f61ac1227f5[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Sat Sep 9 18:38:43 2023 +0300
+
+    Laitetyyppi, ominaisuus + daot
+
+[33mcommit 9f4c0340c1381717d3c2b58f13fa735a26a05960[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Fri Sep 8 21:23:36 2023 +0300
+
+    Syötteiden validointi
+
+[33mcommit d02634cf8e2efff5980c7bb5b8a754e0946c51a6[m
+Merge: 576eee4 cfaf503
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Fri Sep 8 15:20:33 2023 +0300
+
+    Merge pull request #5 from mikkoolh/GUI
+    
+    GUI
+
+[33mcommit cfaf5036eda4fead3c6c664df6bc7410bdf8d276[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Fri Sep 8 09:58:11 2023 +0300
+
+    Korjauksia
+
+[33mcommit 02f301854df36febf779c7d62ac66731eb361976[m
+Merge: d03e2b7 651a7bc
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Fri Sep 8 09:29:09 2023 +0300
+
+    Merge remote-tracking branch 'origin/GUI' into Nikin-haara
+
+[33mcommit 651a7bcca896bde7797f3f7e305318946f43b81f[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Fri Sep 8 09:25:03 2023 +0300
+
+    Käyttäjäprofiili lisätty
+
+[33mcommit d03e2b72b444878e2b52d006518f21314622319b[m
+Author: NickNoss <nnossenko@gmail.com>
+Date:   Thu Sep 7 19:44:10 2023 +0300
+
+    Device/DeviceDAO-classes. Test
+
+[33mcommit e74facc108cfd4a1675756d97198dcd36af1880e[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Thu Sep 7 14:53:21 2023 +0300
+
+    Rekisteröitymislomake
+
+[33mcommit 576eee4dd500e6e36e9d4086eef90219e9013e62[m
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Thu Sep 7 09:27:00 2023 +0300
+
+    Update README.md
+
+[33mcommit c04270b6454a9c4a293b1b75a4d990546b5b56c1[m
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Thu Sep 7 09:26:22 2023 +0300
+
+    Update README.md
+    
+    päivitetty työtuntien ja trellon linkki
+
+[33mcommit e20b19ef0e0f696687d8265cdc4d266153b91ee3[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Thu Sep 7 09:20:11 2023 +0300
+
+    Lisätty database-paketti tietokannan luokille.
+
+[33mcommit 0d3f52081b7c653b41b8929380d17310ab2e2b75[m
+Author: Matleena Kankaanpää <104016919+matleek@users.noreply.github.com>
+Date:   Thu Sep 7 01:43:15 2023 +0300
+
+    Login-view
+
+[33mcommit c47cfcab13eb15338d1c7b66a8c5cf9d30e5f6ad[m
+Merge: c6d6545 7314d94
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Wed Sep 6 09:52:28 2023 +0300
+
+    Merge remote-tracking branch 'Ohtu_projekti/main'
+
+[33mcommit c6d65455ce37bb73b11d3840231d3096ad52dd85[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Wed Sep 6 09:41:08 2023 +0300
+
+    Lisätty MVC-mallin paketit
+
+[33mcommit 7314d9451259d4172cc8017eefe67d1ecd629909[m
+Author: Mikko <104062512+mikkoolh@users.noreply.github.com>
+Date:   Wed Sep 6 09:37:19 2023 +0300
+
+    Create README.md
+
+[33mcommit 053de1656b0dbd41f2161f0b211fe7d42d7bb275[m
+Author: Mikko Hänninen <mikkoolh@metropolia.fi>
+Date:   Wed Sep 6 09:34:47 2023 +0300
+
+    Pohja projektille
