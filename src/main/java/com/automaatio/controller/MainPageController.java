@@ -27,7 +27,7 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        ResourceBundle resourceBundle = resources;
         cache.setMenuPane(menuPane);
         cache.setMainPane(mainPane);
         setMainPane(resourceBundle);

@@ -50,7 +50,7 @@ public class ProfileController implements Initializable, Menu {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        resourceBundle = resources;
         show();
         loadProfilePic();
     }
