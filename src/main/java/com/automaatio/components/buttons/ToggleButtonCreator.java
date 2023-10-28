@@ -6,8 +6,11 @@ import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceDAO;
 import javafx.scene.control.ToggleButton;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class ToggleButtonCreator implements IButton {
-    private final String onTxt = "On", offTxt = "Off";
+    private String onTxt, offTxt;
     private final int btnWidth = 50;
     private DeviceDAO deviceDAO = new DeviceDAO();
     @Override
@@ -16,22 +19,23 @@ public class ToggleButtonCreator implements IButton {
     }
 
     private ToggleButton createToggleBtn(Object object) {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         ToggleButton toggleButton = new ToggleButton();
         toggleButton.setPrefWidth(btnWidth);
         if (object instanceof Device){
-            setOnOff(deviceDAO.getObject(((Device) object).getDeviceID()).isOnOff(), object, toggleButton);
+            setOnOff(deviceDAO.getObject(((Device) object).getDeviceID()).isOnOff(), object, toggleButton, resourceBundle);
             toggleButton.getStyleClass().add("toggleBtn");
             toggleButton.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-                setOnOff(isSelected,object, toggleButton);
+                setOnOff(isSelected,object, toggleButton, resourceBundle);
             });
         }
         return toggleButton;
     }
 
-    private void setOnOff(boolean isSelected, Object object, ToggleButton onOff){
+    private void setOnOff(boolean isSelected, Object object, ToggleButton onOff, ResourceBundle bundle){
         if (isSelected) {
             switchOnOff(object);
-            onOff.setText(onTxt);
+            onOff.setText(bundle.getString("onBtnTxt"));
             Device device = (Device) object;
             device.setUsageData(device.getUsageData() + 1);
             deviceDAO.updateUsageData(device.getDeviceID(), device.getUsageData() + 1);
@@ -40,7 +44,7 @@ public class ToggleButtonCreator implements IButton {
             onOff.getStyleClass().add("toggleBtnOn");
         } else {
             switchOnOff(object);
-            onOff.setText(offTxt);
+            onOff.setText(bundle.getString("offBtnTxt"));
             onOff.getStyleClass().remove("toggleBtnOn");
             onOff.getStyleClass().add("toggleBtnOff");
         }

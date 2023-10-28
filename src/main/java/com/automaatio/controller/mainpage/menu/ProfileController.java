@@ -20,6 +20,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 public class ProfileController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
@@ -106,7 +107,9 @@ public class ProfileController implements Initializable, Menu {
     public void openProfile() {
         System.out.println("open profile");
         try {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user-profile.fxml"));
+            loader.setResources(resourceBundle);
             Parent newView = loader.load();
             mainPane.getChildren().clear();
             mainPane.getChildren().add(newView);

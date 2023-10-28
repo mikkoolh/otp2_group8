@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane centerShape="false" maxWidth="400" prefHeight="720.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.MainMenuController">
-    <Accordion centerShape="false" maxWidth="400" prefHeight="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <Accordion centerShape="false" maxWidth="400" prefHeight="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" expandedPane="$rooms">
         <panes>
             <TitledPane fx:id="rooms" animated="false" prefHeight="540.0" text="%menuRoomsTitleTxt">
                 <fx:include source="menu/rooms.fxml" />

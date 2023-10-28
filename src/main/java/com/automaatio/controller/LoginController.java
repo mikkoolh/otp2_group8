@@ -20,6 +20,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Controller for the login form
@@ -130,8 +132,10 @@ public class LoginController {
 
     @FXML
     protected void onCreateAccountClick(ActionEvent event) throws IOException {
-        System.out.println("create account");
-        Parent root = FXMLLoader.load(getClass().getResource("/view/create-account.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/create-account.fxml"));
+        fxmlLoader.setResources(resourceBundle);
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
