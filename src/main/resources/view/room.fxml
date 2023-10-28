@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="720" prefWidth="880.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.RoomController">
-   <Button layoutX="250.0" layoutY="659.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="All ON" />
-   <Button fx:id="deleteRoom" layoutX="400.0" layoutY="659.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="40.0" prefWidth="115.0" text="Delete Room" />
-   <Button layoutX="550.0" layoutY="659.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="All OFF" />
+   <Button layoutX="250.0" layoutY="659.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="%allOnBtnTxt" />
+   <Button fx:id="deleteRoom" layoutX="400.0" layoutY="659.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="40.0" prefWidth="115.0" text="%deleteRoomBtnTxt" />
+   <Button layoutX="550.0" layoutY="659.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="%allOffBtnTxt" />
    <ComboBox fx:id="deviceComboBox" layoutX="308.0" layoutY="543.0" maxWidth="880.0" prefHeight="25.0" prefWidth="300.0" styleClass="grid-paneDevice" />
-   <Text fx:id="roomName" layoutX="372.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Some Room&gt;">
+   <Text fx:id="roomName" layoutX="372.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%roomTitleTxt">
       <font>
          <Font name="Copperplate Gothic Bold" size="24.0" />
       </font>

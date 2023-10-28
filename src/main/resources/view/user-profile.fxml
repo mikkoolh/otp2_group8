@@ -13,7 +13,7 @@
 
 <!-- Vaihdetaan VBox -> StackPane -->
 
-<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="880.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.ProfileController">
+<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="880.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.ProfileController">
     <children>
       <GridPane alignment="CENTER" layoutX="154.0" layoutY="166.0" prefHeight="389.0" prefWidth="573.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="166.0">
         <columnConstraints>
@@ -31,27 +31,27 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-              <Text fx:id="firstName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="First Name">
+              <Text fx:id="firstName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%firstNameTxt">
                   <font>
                       <Font name="System Bold" size="20.0" />
                   </font>
               </Text>
-              <Text fx:id="lastName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="Last Name" GridPane.rowIndex="1">
+              <Text fx:id="lastName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%lastNameTxt" GridPane.rowIndex="1">
                   <font>
                       <Font name="System Bold" size="20.0" />
                   </font>
               </Text>
-              <Text fx:id="phoneNumber" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="Phone Number" GridPane.rowIndex="2">
+              <Text fx:id="phoneNumber" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%phoneNumberTxt" GridPane.rowIndex="2">
                   <font>
                       <Font name="System Bold" size="20.0" />
                   </font>
               </Text>
-              <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="Email Address" GridPane.rowIndex="3">
+              <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%emailTxt" GridPane.rowIndex="3">
                   <font>
                       <Font name="System Bold" size="20.0" />
                   </font>
               </Text>
-              <Text fx:id="birthday" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="Age" GridPane.rowIndex="4">
+              <Text fx:id="birthday" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%ageTxt" GridPane.rowIndex="4">
                   <font>
                       <Font name="System Bold" size="20.0" />
                   </font>
@@ -59,10 +59,10 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
                   <TextField fx:id="priceLimit" alignment="BOTTOM_LEFT" layoutY="2.0" maxWidth="200.0" prefHeight="26.0" prefWidth="197.0" styleClass="input-field" />
-                  <Button fx:id="saveMaxValue" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="2.0" mnemonicParsing="false" onAction="#onMaxValueSave" prefHeight="43.0" prefWidth="74.0" styleClass="button-primary" text="Save" />
+                  <Button fx:id="saveMaxValue" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="2.0" mnemonicParsing="false" onAction="#onMaxValueSave" prefHeight="43.0" prefWidth="74.0" styleClass="button-primary" text="%saveBtnTxt" />
                </children>
             </AnchorPane>
-            <Text fx:id="birthday1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="Price limit (snt)" GridPane.rowIndex="5">
+            <Text fx:id="birthday1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%priceLimitTxt" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -72,12 +72,12 @@
               <TextField fx:id="lnameField" editable="false" styleClass="input-field" stylesheets="@../styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               <TextField fx:id="phoneField" styleClass="input-field" stylesheets="@../styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
               <TextField fx:id="emailField" styleClass="input-field" stylesheets="@../styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Text fx:id="oldpass" layoutX="10.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="Old Password" GridPane.rowIndex="6">
+            <Text fx:id="oldpass" layoutX="10.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%oldPasswordTxt" GridPane.rowIndex="6">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="newpass" layoutX="10.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="New Password" GridPane.rowIndex="7">
+            <Text fx:id="newpass" layoutX="10.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%newPasswordTxt" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -86,7 +86,7 @@
             <PasswordField fx:id="newpassField" styleClass="input-field" stylesheets="@../styles.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <Button fx:id="changeBtn" layoutX="365.0" layoutY="583.0" mnemonicParsing="false" onAction="#onChangePasswordClick" styleClass="button-primary" text="Change Password" />
+      <Button fx:id="changeBtn" layoutX="365.0" layoutY="583.0" mnemonicParsing="false" onAction="#onChangePasswordClick" styleClass="button-primary" text="%changePasswordBtnTxt" />
       <Text fx:id="profileErrorText" fill="RED" layoutX="241.0" layoutY="661.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
             <Font name="System Bold" size="18.0" />

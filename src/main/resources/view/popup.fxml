@@ -1,64 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<GridPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.menu.MenuPopupController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.menu.MenuPopupController">
     <stylesheets>
         <URL value="@popup.css" />
     </stylesheets>
 
     <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="0">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
         <ImageView fx:id="male" fitHeight="200" fitWidth="200" onMouseClicked="#onImageClick" />
     </HBox>
 
     <HBox spacing="20" GridPane.columnIndex="1" GridPane.rowIndex="0">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
         <ImageView fx:id="female" fitHeight="200" fitWidth="200" onMouseClicked="#onImageClick" />
     </HBox>
 
     <HBox spacing="20" GridPane.columnIndex="2" GridPane.rowIndex="0">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
         <ImageView fx:id="anime" fitHeight="200" fitWidth="200" onMouseClicked="#onImageClick" />
     </HBox>
 
     <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
         <ImageView fx:id="hacker" fitHeight="200" fitWidth="200" onMouseClicked="#onImageClick" />
     </HBox>
 
     <HBox spacing="20" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
         <ImageView fx:id="detective" fitHeight="200" fitWidth="200" onMouseClicked="#onImageClick" />
     </HBox>
 
     <HBox spacing="20" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
         <ImageView fx:id="defaultpic" fitHeight="200" fitWidth="200" onMouseClicked="#onImageClick" />
     </HBox>
 
     <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
-        <Button fx:id="saveBtn" onAction="#onSaveClick" text="Save" />
+        <Button fx:id="saveBtn" onAction="#onSaveClick" text="%saveBtnTxt" />
     </VBox>
 
     <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="2">
-        <Button fx:id="exitBtn" onAction="#onExitClick" text="Exit" />
+        <Button fx:id="exitBtn" onAction="#onExitClick" text="%exitBtnTxt" />
     </VBox>
 
     <columnConstraints>
