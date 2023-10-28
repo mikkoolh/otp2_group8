@@ -133,8 +133,9 @@ public class ProfileController implements Initializable, Menu {
     @FXML
     protected void onBtnClick(ActionEvent event) throws IOException {
         System.out.println("Pic selection window");
-
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup.fxml"));
+        loader.setResources(resourceBundle);
         Parent root = loader.load();
         MenuPopupController popupController = loader.getController();
 
