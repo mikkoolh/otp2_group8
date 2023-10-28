@@ -130,7 +130,7 @@ public class ProfileController {
      */
     @FXML
     private void initialize() {
-        etusivuText.setText("Username " + loggedInUsername);
+        etusivuText.setText(loggedInUsername);
         fnameField.setText(loggedInName);
         lnameField.setText(user.getLastName());
         bdayField.setText(String.valueOf(user.getAge()));

@@ -37,7 +37,7 @@
               </rowConstraints>
                <children>
                         <TextField fx:id="usernameField" maxWidth="1.7976931348623157E308" styleClass="input-field" GridPane.columnIndex="2" />
-                  <Label styleClass="input-label" text="%usernameTxt" GridPane.hgrow="ALWAYS" />
+                  <Label styleClass="input-label" text="%usernameTxt" />
                   <Label styleClass="input-label" text="%passwordTxt" GridPane.rowIndex="1" />
                </children>
             </GridPane>
