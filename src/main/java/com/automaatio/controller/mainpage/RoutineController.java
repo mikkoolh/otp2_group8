@@ -95,7 +95,7 @@ public class RoutineController implements Initializable {
         noRoutinesToShow = true;
         try {
             routines = util.sortByTime(fetchRoutines()); // Sort fetched routines by time
-            DatabaseTool.resetWeekdays(); // voi poistaa sit ku ei tarvi enää tehdä testejä
+            DatabaseTool.resetWeekdays();
             weekdays = weekdayDAO.getAll();
             initializeForm();
             loadRoutines();
@@ -379,8 +379,7 @@ public class RoutineController implements Initializable {
                     // Get the corresponding weekday from the database
                     Weekday selectedWeekday = (Weekday) weekdayDAO.getObject(entry.getKey().getWeekdayId());
                     // Create event time
-                    EventTime eventTime = new EventTime(startTime, endTime, selectedWeekday);
-                    eventTimeDAO.addObject(eventTime);
+                    EventTime eventTime = eventTimeDAO.addAndReturnObject(new EventTime(startTime, endTime, selectedWeekday));
 
                     User user = cache.getUser();
                     Device device = cache.getDevice();
@@ -506,5 +505,4 @@ public class RoutineController implements Initializable {
         boolean timeInputOk = validateTimeInput(startTimePicker, endTimePicker);
         saveButton.setDisable(!timeInputOk || !weekdaySelectionOk);
     }
-
 }
