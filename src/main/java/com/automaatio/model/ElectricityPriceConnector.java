@@ -29,6 +29,6 @@ public class ElectricityPriceConnector {
     }
 
     public String getElPrice(){
-        return String.format("%.2f", getElPriceNow()) + "ct/kWh";
+        return String.format("%.2f", getElPriceNow());
     }
 }

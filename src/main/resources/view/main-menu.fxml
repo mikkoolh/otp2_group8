@@ -5,28 +5,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane centerShape="false" maxWidth="400" prefHeight="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.MainMenuController" styleClass="main-pane">
-    <Accordion centerShape="false" maxWidth="400" prefHeight="720.0" expandedPane="$rooms" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane centerShape="false" maxWidth="400" prefHeight="720.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.MainMenuController">
+    <Accordion centerShape="false" maxWidth="400" prefHeight="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" expandedPane="$rooms">
         <panes>
-            <TitledPane fx:id="rooms" animated="false" prefHeight="540.0" text="Rooms">
+            <TitledPane fx:id="rooms" animated="false" prefHeight="540.0" text="%menuRoomsTitleTxt">
                 <fx:include source="menu/rooms.fxml" />
                 <font>
                     <Font name="Copperplate Gothic Bold" size="24.0" />
                 </font>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="540.0" text="Devices">
+            <TitledPane animated="false" prefHeight="540.0" text="%menuDevicesTitleTxt">
                 <fx:include source="menu/devices.fxml" />
                 <font>
                     <Font name="Copperplate Gothic Bold" size="24.0" />
                 </font>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="540.0" text="Routines">
+            <TitledPane animated="false" prefHeight="540.0" text="%menuRoutinesTitleTxt">
                 <fx:include source="menu/routines.fxml" />
                 <font>
                     <Font name="Copperplate Gothic Bold" size="24.0" />
                 </font>
             </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="98.0" prefHeight="540.0" text="Profile">
+            <TitledPane animated="false" layoutX="10.0" layoutY="98.0" prefHeight="540.0" text="%menuProfileTitleTxt">
                 <fx:include source="menu/profile.fxml" />
                 <font>
                     <Font name="Copperplate Gothic Bold" size="24.0" />

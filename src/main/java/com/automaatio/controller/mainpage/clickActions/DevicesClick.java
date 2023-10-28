@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class DevicesClick implements ClickActions {
     DeviceDAO deviceDAO = new DeviceDAO();
     private CacheSingleton cache = CacheSingleton.getInstance();
@@ -16,7 +19,9 @@ public class DevicesClick implements ClickActions {
     public void onExpandClick(Object object) {
         cache.setDevice((Device) object);
         try {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/device.fxml"));
+            loader.setResources(resourceBundle);
             Parent newView = loader.load();
             cache.getMainPane().getChildren().clear();
             cache.getMainPane().getChildren().add(newView);

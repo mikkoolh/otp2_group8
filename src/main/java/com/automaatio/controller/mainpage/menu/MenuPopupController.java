@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PopupController implements Initializable{
+public class MenuPopupController implements Initializable{
     @FXML
     private ImageView male, female, anime, hacker, detective, defaultpic;
     @FXML

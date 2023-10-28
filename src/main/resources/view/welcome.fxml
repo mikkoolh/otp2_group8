@@ -9,7 +9,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.automaatio.controller.mainpage.WelcomeController" prefWidth="880.0" styleClass="main-pane">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home Automation" textAlignment="CENTER" wrappingWidth="880.0" AnchorPane.topAnchor="10.0">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%homeScreenWelcomeTxt" textAlignment="CENTER" wrappingWidth="880.0" AnchorPane.topAnchor="10.0">
                         <font>
                             <Font name="Copperplate Gothic Bold" size="48.0" />
                         </font>

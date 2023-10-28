@@ -1,6 +1,8 @@
 package com.automaatio.utils;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,10 @@ public class NavigationUtil {
      * @throws IOException
      */
     public void openMainPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/main-page.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/main-page.fxml"));
+        fxmlLoader.setResources(resourceBundle);
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
@@ -38,9 +43,13 @@ public class NavigationUtil {
      * @throws IOException
      */
     public void openLoginPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+        fxmlLoader.setResources(resourceBundle);
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

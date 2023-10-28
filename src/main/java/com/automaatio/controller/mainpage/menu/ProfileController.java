@@ -20,6 +20,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 public class ProfileController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
@@ -39,6 +40,7 @@ public class ProfileController implements Initializable, Menu {
     ImageView profileView;
 
     private ElectricityPriceConnector elConnect;
+    private ResourceBundle resourceBundle;
 
     private int selectedPic = cache.getUser().getSelectedPicture();
 
@@ -48,6 +50,7 @@ public class ProfileController implements Initializable, Menu {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         show();
         loadProfilePic();
     }
@@ -91,12 +94,12 @@ public class ProfileController implements Initializable, Menu {
     @Override
     public void show() {
         usernameTXT.setText(username);
-        nameTXT.setText("Welcome " + name + "!");
+        nameTXT.setText(resourceBundle.getString("greetingTxt") + name + "!");
         loadProfilePic();
 
         try {
             elConnect = new ElectricityPriceConnector();
-            electricityPrice.setText("Current electricity rate: " + elConnect.getElPrice());
+            electricityPrice.setText(resourceBundle.getString("elPriceDefaultTxt") + elConnect.getElPrice()+ resourceBundle.getString("elPriceUnitsTxt"));
         } catch (Exception e) {
             System.out.println("Ongelma sähkönhinnan lataamisessa: " + e);
         }
@@ -106,7 +109,9 @@ public class ProfileController implements Initializable, Menu {
     public void openProfile() {
         System.out.println("open profile");
         try {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user-profile.fxml"));
+            loader.setResources(resourceBundle);
             Parent newView = loader.load();
             mainPane.getChildren().clear();
             mainPane.getChildren().add(newView);
@@ -131,7 +136,7 @@ public class ProfileController implements Initializable, Menu {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup.fxml"));
         Parent root = loader.load();
-        PopupController popupController = loader.getController();
+        MenuPopupController popupController = loader.getController();
 
         popupController.setProfileController(this);
 

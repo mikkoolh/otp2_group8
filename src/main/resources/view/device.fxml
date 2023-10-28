@@ -9,8 +9,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane centerShape="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.DeviceController" styleClass="anchor-pane">
-    <GridPane alignment="CENTER" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="276.0" styleClass="grid-paneDevice">
+<AnchorPane centerShape="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="880.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.DeviceController">
+    <GridPane alignment="CENTER" styleClass="grid-paneDevice" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="276.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
@@ -22,14 +22,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Button fx:id="changeNameButton" maxWidth="1.7976931348623157E308" onAction="#changeDeviceName" prefHeight="26.0" text="Change name" GridPane.columnIndex="1" />
+            <Button fx:id="changeNameButton" maxWidth="1.7976931348623157E308" onAction="#changeDeviceName" prefHeight="26.0" text="%changeDeviceNameTxt" GridPane.columnIndex="1" />
             <TextField fx:id="deviceNameField" maxWidth="1.7976931348623157E308" text="0" />
-            <Label text="Change the location of your device" GridPane.rowIndex="1" />
-            <ComboBox fx:id="deviceGroup" maxWidth="1.7976931348623157E308" promptText="Enter device group" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Times that the device has been used" GridPane.rowIndex="3" />
-            <TextField fx:id="usageData" maxWidth="1.7976931348623157E308" promptText="Enter usage data" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="changeModelCode" maxWidth="1.7976931348623157E308" onAction="#changeModelCode" prefHeight="26.0" text="Change model code" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="modelCode" maxWidth="1.7976931348623157E308" promptText="Enter model code" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="%changeDeviceLocationTxt" GridPane.rowIndex="1" />
+            <ComboBox fx:id="deviceGroup" maxWidth="1.7976931348623157E308" promptText="%selectDeviceGroupTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="%usageTimesTxt" GridPane.rowIndex="3" />
+            <TextField fx:id="usageData" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="changeModelCode" maxWidth="1.7976931348623157E308" onAction="#changeModelCode" prefHeight="26.0" text="%changeModelCodeTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="modelCode" maxWidth="1.7976931348623157E308" promptText="%enterModelCodeTxt" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         </children>
     </GridPane>
 </AnchorPane>
