@@ -131,7 +131,7 @@ public class ProfileController implements Initializable, Menu {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup.fxml"));
         Parent root = loader.load();
-        PopupController popupController = loader.getController();
+        MenuPopupController popupController = loader.getController();
 
         popupController.setProfileController(this);
 
