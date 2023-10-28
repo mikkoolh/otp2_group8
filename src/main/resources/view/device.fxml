@@ -22,7 +22,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Button fx:id="changeNameButton" maxWidth="1.7976931348623157E308" onAction="#changeDeviceName" prefHeight="26.0" text="%changeNameTxt" GridPane.columnIndex="1" />
+            <Button fx:id="changeNameButton" maxWidth="1.7976931348623157E308" onAction="#changeDeviceName" prefHeight="26.0" text="%changeDeviceNameTxt" GridPane.columnIndex="1" />
             <TextField fx:id="deviceNameField" maxWidth="1.7976931348623157E308" text="0" />
             <Label text="%changeDeviceLocationTxt" GridPane.rowIndex="1" />
             <ComboBox fx:id="deviceGroup" maxWidth="1.7976931348623157E308" promptText="%selectDeviceGroupTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
