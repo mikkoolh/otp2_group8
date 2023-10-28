@@ -65,7 +65,7 @@
                   <Button fx:id="saveMaxValue" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMaxValueSave" styleClass="button-primary" text="%saveBtnTxt" />
                </children>
             </HBox>
-            <Text fx:id="birthday1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%priceLimitTxt" GridPane.rowIndex="5">
+            <Text fx:id="birthday1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%elPriceLimitTxt" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
