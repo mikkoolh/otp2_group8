@@ -41,7 +41,7 @@
                                 <Font name="Copperplate Gothic Bold" size="16.0" />
                             </font>
                         </Text>
-            <Text fx:id="electricityPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="%electricityPriceDefaultTxt" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text fx:id="electricityPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="%elPriceDefaultTxt" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font name="Copperplate Gothic Bold" size="16.0" />
                </font>

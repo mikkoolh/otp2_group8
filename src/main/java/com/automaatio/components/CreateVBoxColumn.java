@@ -32,8 +32,11 @@ public class CreateVBoxColumn {
 
         HBox buttonsRow = new HBox(hBoxSpacing);
 
-        buttonsRow.getChildren().addAll(expandBtn, deleteBtn, paneBuilder(75));
+        buttonsRow.getChildren().addAll(expandBtn, deleteBtn, paneBuilder(10));
+
+
         HBox.setHgrow(buttonsRow.getChildren().get(buttonsRow.getChildren().size()-1), Priority.ALWAYS);
+
 
         if (object instanceof Device){
             buttonsRow.getChildren().add(onOff);

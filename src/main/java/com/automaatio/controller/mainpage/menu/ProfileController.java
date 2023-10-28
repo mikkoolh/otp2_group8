@@ -40,6 +40,7 @@ public class ProfileController implements Initializable, Menu {
     ImageView profileView;
 
     private ElectricityPriceConnector elConnect;
+    private ResourceBundle resourceBundle;
 
     private int selectedPic = cache.getUser().getSelectedPicture();
 
@@ -49,6 +50,7 @@ public class ProfileController implements Initializable, Menu {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         show();
         loadProfilePic();
     }
@@ -92,12 +94,12 @@ public class ProfileController implements Initializable, Menu {
     @Override
     public void show() {
         usernameTXT.setText(username);
-        nameTXT.setText("Welcome " + name + "!");
+        nameTXT.setText(resourceBundle.getString("greetingTxt") + name + "!");
         loadProfilePic();
 
         try {
             elConnect = new ElectricityPriceConnector();
-            electricityPrice.setText("Current electricity rate: " + elConnect.getElPrice());
+            electricityPrice.setText(resourceBundle.getString("elPriceDefaultTxt") + elConnect.getElPrice()+ resourceBundle.getString("elPriceUnitsTxt"));
         } catch (Exception e) {
             System.out.println("Ongelma sähkönhinnan lataamisessa: " + e);
         }

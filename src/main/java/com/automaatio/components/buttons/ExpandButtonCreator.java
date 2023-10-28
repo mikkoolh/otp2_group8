@@ -21,7 +21,7 @@ public class ExpandButtonCreator implements IButton {
             label = resourceBundle.getString("openBtnTxt");
         }
         Button editBtn = new Button(label);
-        editBtn.getStyleClass().add("editBtn");
+        editBtn.getStyleClass().add("expandBtn");
         editBtn.setOnAction(event -> clickActions.onExpandClick(object));
         return editBtn;
     }

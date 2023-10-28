@@ -10,8 +10,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ToggleButtonCreator implements IButton {
-    private String onTxt, offTxt;
-    private final int btnWidth = 50;
+
     private DeviceDAO deviceDAO = new DeviceDAO();
     @Override
     public ToggleButton create(Object object, ClickActions clickActions) {
@@ -21,7 +20,6 @@ public class ToggleButtonCreator implements IButton {
     private ToggleButton createToggleBtn(Object object) {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         ToggleButton toggleButton = new ToggleButton();
-        toggleButton.setPrefWidth(btnWidth);
         if (object instanceof Device){
             setOnOff(deviceDAO.getObject(((Device) object).getDeviceID()).isOnOff(), object, toggleButton, resourceBundle);
             toggleButton.getStyleClass().add("toggleBtn");

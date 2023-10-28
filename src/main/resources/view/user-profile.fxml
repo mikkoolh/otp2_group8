@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -56,12 +58,13 @@
                       <Font name="System Bold" size="20.0" />
                   </font>
               </Text>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <TextField fx:id="priceLimit" alignment="BOTTOM_LEFT" layoutY="2.0" maxWidth="200.0" prefHeight="26.0" prefWidth="197.0" styleClass="input-field" />
-                  <Button fx:id="saveMaxValue" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="2.0" mnemonicParsing="false" onAction="#onMaxValueSave" prefHeight="43.0" prefWidth="74.0" styleClass="button-primary" text="%saveBtnTxt" />
+                  <TextField fx:id="priceLimit" alignment="BOTTOM_LEFT" maxWidth="125.0" styleClass="input-field" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button fx:id="saveMaxValue" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMaxValueSave" styleClass="button-primary" text="%saveBtnTxt" />
                </children>
-            </AnchorPane>
+            </HBox>
             <Text fx:id="birthday1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="input-label" text="%priceLimitTxt" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="20.0" />

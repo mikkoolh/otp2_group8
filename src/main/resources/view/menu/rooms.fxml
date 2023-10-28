@@ -17,8 +17,8 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
         </HBox>
-        <ScrollPane fx:id="roomsScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-            <VBox fx:id="roomsVBox" />
+        <ScrollPane fx:id="roomsScrollPane" hbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <VBox fx:id="roomsVBox" maxWidth="340.0" prefWidth="340.0" />
         </ScrollPane>
     </children>
 </AnchorPane>
