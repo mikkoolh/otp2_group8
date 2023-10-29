@@ -1,11 +1,9 @@
 package com.automaatio.components.buttons;
 
-import com.automaatio.components.buttons.IButton;
 import com.automaatio.controller.mainpage.clickActions.ClickActions;
 import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceDAO;
 import javafx.scene.control.ToggleButton;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
 

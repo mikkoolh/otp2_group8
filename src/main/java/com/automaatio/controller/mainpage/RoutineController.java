@@ -85,6 +85,7 @@ public class RoutineController implements Initializable {
     private final int FONT_SIZE_TEXT = 24;
     private ErrorMessageHandler errorHandler;
 
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -304,7 +305,7 @@ public class RoutineController implements Initializable {
     private ToggleSwitch getToggleSwitch(Routine routine) {
         ToggleSwitch toggle = new ToggleSwitch();
         toggle.setSelected(routine.getAutomated());
-        toggle.setText("Automate");
+        toggle.setText(resourceBundle.getString("automateTxt"));
 
         toggle.setOnMouseClicked(mouseEvent -> {
             routineDAO.toggleOnOff(routine.getRoutineID(), routine.getAutomated());
@@ -326,7 +327,7 @@ public class RoutineController implements Initializable {
             alert.setContentText("Delete routine for " + cache.getDevice().getName() + " on " + time.getWeekday().getName() + "s at "
                     + util.getFormattedTime(time.getStartTime()) + "-" +
                     util.getFormattedTime(time.getStartTime()) + "?");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteBtnTxt"));
 
             // Respond to user input
             if (alert.showAndWait().get() == ButtonType.OK) {
@@ -422,7 +423,7 @@ public class RoutineController implements Initializable {
         formGrid.add(clockTimes, 0,0);
 
         // Tooltip
-        weekdayTooltip = new Label("Select at least one day of the week");
+        weekdayTooltip = new Label(resourceBundle.getString("selectAtLeastOneWeekdayTxt"));
         weekdayTooltip.setStyle("-fx-text-fill: #5E5E5E; -fx-font-family: Verdana; -fx-font-style: italic; -fx-font-size: 11px;");
         clockTimes.add(weekdayTooltip, 1, 3);
 
@@ -453,7 +454,7 @@ public class RoutineController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.NONE, null, ButtonType.OK,
                     ButtonType.CANCEL);
             alert.setContentText("Delete " + fetchRoutines().size() + " routines for " + cache.getDevice().getName() + "?");
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete all");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteAllBtnTxt"));
 
             // Respond to user input
             if (alert.showAndWait().get() == ButtonType.OK) {
