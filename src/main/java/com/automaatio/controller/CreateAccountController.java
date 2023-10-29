@@ -1,9 +1,8 @@
 package com.automaatio.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
+import java.util.Locale;
+import java.util.ResourceBundle;
 import com.automaatio.components.buttons.TogglableEyeIconCreator;
 import com.automaatio.components.SwitchablePasswordField;
 import com.automaatio.model.database.User;
@@ -41,11 +40,13 @@ public class CreateAccountController {
     private Button saveButton;
     @FXML
     private GridPane formGrid;
+    private final ResourceBundle resourceBundle;
 
     public CreateAccountController() {
         nav = new NavigationUtil();
         validator = new FormInputValidator();
         userDAO = new UserDAO();
+        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
     }
 
     /**
@@ -89,7 +90,7 @@ public class CreateAccountController {
             System.out.println("created user");
         } catch (Exception e) {
             System.out.println(e);
-            createAccountErrorText.setText("Error creating account");
+            createAccountErrorText.setText(resourceBundle.getString("createAccountErrorTxt"));
         }
     }
 
@@ -129,13 +130,13 @@ public class CreateAccountController {
                 // If the username input passes validation, check if it's already taken
                 try {
                     if (userDAO.getObject(newValue.trim()) != null) {
-                        usernameTooltip.setText("Username already taken");
+                        usernameTooltip.setText(resourceBundle.getString("usernameTakenTxt"));
                     } else {
-                        usernameTooltip.setText("Username available");
+                        usernameTooltip.setText(resourceBundle.getString("usernameAvailableTxt"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    createAccountErrorText.setText("Error. Please try again shortly.");
+                    createAccountErrorText.setText(resourceBundle.getString("tryAgainTxt"));
                 }
                 toggleButton();
             }

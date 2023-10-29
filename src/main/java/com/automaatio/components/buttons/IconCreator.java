@@ -10,6 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * @author Matleena Kankaanpää
  * 7.10.2023
@@ -18,6 +21,8 @@ import javafx.scene.layout.BorderPane;
  */
 
 public abstract class IconCreator {
+    protected ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+
     public Button create(String image, String tooltip) {
         Button button = new Button();
         ImageView imageView = new ImageView(new Image(image));

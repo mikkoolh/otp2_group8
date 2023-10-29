@@ -7,6 +7,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * @author Matleena Kankaanpää
  * 7.10.2023
@@ -19,6 +22,7 @@ public abstract class TogglableIconCreator {
     protected Button button;
     protected ImageView defaultView, altView;
     private Tooltip defaultTooltip, altTooltip;
+    protected ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
 
     public Button create(String defaultImage, String altImage, String defaultTooltipText, String altTooltipText) {
         button = new Button();

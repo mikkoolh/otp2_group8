@@ -47,10 +47,12 @@ public class LoginController {
 
     private final NavigationUtil nav;
     private final UserDAO userDAO;
+    private final ResourceBundle resourceBundle;
 
     public LoginController() {
-        this.nav = new NavigationUtil();
-        this.userDAO = new UserDAO();
+        nav = new NavigationUtil();
+        userDAO = new UserDAO();
+        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
     }
 
     @FXML
@@ -97,7 +99,7 @@ public class LoginController {
 
             if (user == null) {
                 // User not found
-                loginErrorText.setText("Username not found");
+                loginErrorText.setText(resourceBundle.getString("usernameNotFoundTxt"));
                 System.out.println("user not found");
             } else {
                 // User exists, check password
@@ -119,21 +121,19 @@ public class LoginController {
                     loginErrorText.setText("");
                     nav.openMainPage(event);
                 } else {
-                    loginErrorText.setText("Password incorrect");
+                    loginErrorText.setText(resourceBundle.getString("wrongPasswordTxt"));
                     System.out.println("wrong password");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             // Database connection error
-            loginErrorText.setText("Error. Please try again shortly.");
+            loginErrorText.setText(resourceBundle.getString("tryAgainTxt"));
         }
     }
 
     @FXML
     protected void onCreateAccountClick(ActionEvent event) throws IOException {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/create-account.fxml"));
         fxmlLoader.setResources(resourceBundle);
 

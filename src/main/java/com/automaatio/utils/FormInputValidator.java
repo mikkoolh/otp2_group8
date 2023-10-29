@@ -2,6 +2,9 @@ package com.automaatio.utils;
 
 import javafx.scene.text.Text;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * User input validation
  * @author Matleena Kankaanpää
@@ -12,7 +15,10 @@ public class FormInputValidator {
     private final Integer USERNAME_MIN_LENGTH, PASSWORD_MIN_LENGTH,
             USERNAME_MAX_LENGTH, PASSWORD_MAX_LENGTH, FIRSTNAME_MAX_LENGTH, LASTNAME_MAX_LENGTH, PHONE_MIN_LENGTH, PHONE_MAX_LENGTH;
 
+    private final ResourceBundle resourceBundle;
+
     public FormInputValidator() {
+        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         this.USERNAME_MIN_LENGTH = 5;
         this.USERNAME_MAX_LENGTH = 40;
         this.PASSWORD_MIN_LENGTH = 8;
@@ -24,7 +30,7 @@ public class FormInputValidator {
     }
     public boolean validateUsername(String input, Text errorField) {
         if (input.isEmpty()) {
-            errorField.setText("Required field");
+            errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (includesSpaces(input)) {
             errorField.setText("Username cannot contain spaces");
@@ -41,7 +47,7 @@ public class FormInputValidator {
 
     public boolean validateFirstName(String input, Text errorField) {
         if (input.isEmpty()) {
-            errorField.setText("Required field");
+            errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (input.length() > FIRSTNAME_MAX_LENGTH) {
             errorField.setText("First name must be " + FIRSTNAME_MAX_LENGTH + " characters or less");
@@ -53,7 +59,7 @@ public class FormInputValidator {
 
     public boolean validateLastName(String input, Text errorField) {
         if (input.isEmpty()) {
-            errorField.setText("Required field");
+            errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (input.length() > LASTNAME_MAX_LENGTH) {
             errorField.setText("Last name must be " + LASTNAME_MAX_LENGTH + " characters or less");
@@ -65,7 +71,7 @@ public class FormInputValidator {
 
     public boolean validateEmail(String input, Text errorField) {
         if (input.isEmpty()){
-            errorField.setText("Required field");
+            errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (!input.matches("^(?=.{1,64}@)[\\p{L}0-9_-]+(\\.[\\p{L}0-9_-]+)*@"
                 + "[^-][\\p{L}0-9-]+(\\.[\\p{L}0-9-]+)*(\\.[\\p{L}]{2,})$")) {
@@ -78,7 +84,7 @@ public class FormInputValidator {
 
     public boolean validatePhoneNumber(String input, Text errorField) {
         if (input.isEmpty()){
-            errorField.setText("Required field");
+            errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (!input.matches("^+?[0-9-]{" + PHONE_MIN_LENGTH + "," + PHONE_MAX_LENGTH + "}$")) {
             errorField.setText("Invalid phone number");
@@ -90,7 +96,7 @@ public class FormInputValidator {
 
     public boolean validatePassword(String input, Text errorField) {
         if (input.isEmpty()){
-            errorField.setText("Required field");
+            errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (input.length() < PASSWORD_MIN_LENGTH) {
             errorField.setText("Password must be at least " + PASSWORD_MIN_LENGTH + " characters");
