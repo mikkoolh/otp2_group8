@@ -24,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.controlsfx.control.ToggleSwitch;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -84,6 +85,8 @@ public class RoutineController implements Initializable {
     private final String FONT = "System";
     private final int FONT_SIZE_TEXT = 24;
     private ErrorMessageHandler errorHandler;
+
+    private Locale currentLocale = new Locale("fi", "FI"); // tähän currentlocale
 
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
 
@@ -230,7 +233,6 @@ public class RoutineController implements Initializable {
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("cancel clicked");
                 deleteButton.setVisible(!deleteButton.isVisible());
                 cancelButton.setVisible(!cancelButton.isVisible());
                 timeContainer.getChildren().clear();
@@ -282,7 +284,7 @@ public class RoutineController implements Initializable {
                 errorHandler.hideErrorMessage(errorMessageField);
             } else {
                 System.out.println("up8 failed");
-                errorHandler.showErrorMessage("An error occurred", errorMessageField);
+                errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
             }
         });
 
@@ -324,10 +326,9 @@ public class RoutineController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.NONE, null, ButtonType.OK,
                     ButtonType.CANCEL);
             EventTime time = routineToDelete.getEventTime();
-            alert.setContentText("Delete routine for " + cache.getDevice().getName() + " on " + time.getWeekday().getName() + "s at "
-                    + util.getFormattedTime(time.getStartTime()) + "-" +
-                    util.getFormattedTime(time.getStartTime()) + "?");
+            alert.setContentText(getConfirmDeleteRoutineTxt(time.getWeekday().getName(), util.getFormattedTime(time.getStartTime()), util.getFormattedTime(time.getStartTime())));
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteBtnTxt"));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText(resourceBundle.getString("cancelBtnTxt"));
 
             // Respond to user input
             if (alert.showAndWait().get() == ButtonType.OK) {
@@ -337,11 +338,19 @@ public class RoutineController implements Initializable {
                     loadRoutines();
                 } catch(Exception e) {
                     e.printStackTrace();
-                    errorHandler.showErrorMessage("An error occurred", errorMessageField);
+                    errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
                 }
             }
         }
     };
+
+    private String getConfirmDeleteRoutineTxt(String weekday, String startTime, String endTime) {
+        Object[] args = { cache.getDevice().getName(), weekday, startTime, endTime };
+        MessageFormat formatter = new MessageFormat("");
+        formatter.setLocale(currentLocale);
+        formatter.applyPattern(resourceBundle.getString("confirmDeleteRoutineTemplate"));
+        return formatter.format(args);
+    }
 
     @FXML
     private void hideForm() {
@@ -396,7 +405,7 @@ public class RoutineController implements Initializable {
                     hideForm();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    errorHandler.showErrorMessage("An error occurred", errorMessageField);
+                    errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
                 }
             }
         }
@@ -405,7 +414,7 @@ public class RoutineController implements Initializable {
     private void initializeForm() {
         addRoutineForm.setPadding(new Insets(10));
         addRoutineForm.setStyle("-fx-border-color: black; -fx-border-radius: 10;");
-        formTitle.setText("Add a custom routine for " + cache.getDevice().getName());
+        formTitle.setText(getFormTitle());
 
         // Weekday checkboxes
         for (Weekday weekday : weekdayDAO.getAll()) {
@@ -447,14 +456,28 @@ public class RoutineController implements Initializable {
         }
     }
 
+    /*
+    Applies the name of the cached device to the
+    "Add a new routine for _" template in the current language
+     */
+    private String getFormTitle() {
+        Object[] args = { cache.getDevice().getName() };
+        MessageFormat formatter = new MessageFormat("");
+        formatter.setLocale(currentLocale);
+        formatter.applyPattern(resourceBundle.getString("addRoutineTemplate"));
+        return formatter.format(args);
+    }
+
     @FXML
     private void deleteAll() {
         try {
             // Define the popup
             Alert alert = new Alert(Alert.AlertType.NONE, null, ButtonType.OK,
                     ButtonType.CANCEL);
-            alert.setContentText("Delete " + fetchRoutines().size() + " routines for " + cache.getDevice().getName() + "?");
+            String alertTxt = getDeleteAllConfirmation(fetchRoutines().size());
+            alert.setContentText(alertTxt);
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteAllBtnTxt"));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText(resourceBundle.getString("cancelBtnTxt"));
 
             // Respond to user input
             if (alert.showAndWait().get() == ButtonType.OK) {
@@ -463,12 +486,24 @@ public class RoutineController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            errorHandler.showErrorMessage("An error occurred", errorMessageField);
+            errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
         }
     }
 
+    /*
+    Applies the name of the cached device and routine count to the
+    "Delete _ routines for _?" template in the current language
+     */
+    private String getDeleteAllConfirmation(int amount) {
+        Object[] args = { amount, cache.getDevice().getName() };
+        MessageFormat formatter = new MessageFormat("");
+        formatter.setLocale(currentLocale);
+        formatter.applyPattern(resourceBundle.getString("confirmDeleteAllRoutinesTemplate"));
+        return formatter.format(args);
+    }
+
     private void displayErrorText() {
-        errorHandler.showErrorMessage("Error. Unable to load routines.", errorMessageField);
+        errorHandler.showErrorMessage(resourceBundle.getString("routinesLoadErrorTxt"), errorMessageField);
         noRoutinesText.setVisible(false); // Don't display both disclaimers
     }
 

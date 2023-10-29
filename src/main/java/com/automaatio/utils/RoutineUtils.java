@@ -18,7 +18,6 @@ import java.util.*;
 
 public class RoutineUtils {
 
-
     /**
      * Sorts a list of routines by time
      *
