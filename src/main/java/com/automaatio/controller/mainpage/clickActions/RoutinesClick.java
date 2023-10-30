@@ -1,6 +1,8 @@
 package com.automaatio.controller.mainpage.clickActions;
 
 import com.automaatio.model.database.Device;
+import com.automaatio.model.database.UserDAO;
+import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,14 +13,14 @@ import java.util.ResourceBundle;
 
 public class RoutinesClick implements ClickActions {
     private CacheSingleton cache = CacheSingleton.getInstance();
+    private BundleLoader bundleLoader = new BundleLoader();
 
     @Override
     public void onExpandClick(Object object) {
         cache.setDevice((Device) object);
         try{
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/routine.fxml"));
-            loader.setResources(resourceBundle);
+            loader.setResources(bundleLoader.loadResourceByUsersLocale());
             Parent newView = loader.load();
             cache.getMainPane().getChildren().clear();
             cache.getMainPane().getChildren().add(newView);

@@ -13,7 +13,7 @@ public class GraphicalUI extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
         FXMLLoader fxmlLoader = new FXMLLoader(GraphicalUI.class.getResource("/view/login.fxml"));
         fxmlLoader.setResources(resourceBundle);
         Scene scene = new Scene(fxmlLoader.load());
