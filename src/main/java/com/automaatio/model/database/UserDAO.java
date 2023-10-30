@@ -7,6 +7,7 @@ import jakarta.persistence.TypedQuery;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Mikko Hänninen
@@ -75,9 +76,7 @@ public class UserDAO implements IDAO {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
-            query.setParameter("username", username);
-            User user = query.getSingleResult();
+            User user = getUserQuery(em, username).getSingleResult();
             em.getTransaction().commit();
             return user;
         } catch (NoResultException e) {
@@ -96,9 +95,7 @@ public class UserDAO implements IDAO {
         em.getTransaction().begin();
 
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
-            query.setParameter("username", username);
-            User user = query.getSingleResult();
+            User user = getUserQuery(em, username).getSingleResult();
             if (user != null) {
                 if (BCrypt.checkpw(oldPassword, user.getPassword())) {
                     String newHashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
@@ -154,9 +151,7 @@ public class UserDAO implements IDAO {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
-            query.setParameter("username", username);
-            User user = query.getSingleResult();
+            User user = getUserQuery(em, username).getSingleResult();
             user.setMaxPrice(price);
             em.merge(user);
             em.getTransaction().commit();
@@ -192,9 +187,7 @@ public class UserDAO implements IDAO {
         em.getTransaction().begin();
 
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
-            query.setParameter("username", username);
-            User user = query.getSingleResult();
+            User user = getUserQuery(em, username).getSingleResult();
 
             if (user != null) {
                 user.setSelectedPicture(selectedPictureId);
@@ -211,5 +204,52 @@ public class UserDAO implements IDAO {
         } finally {
             em.close();
         }
+    }
+
+    public void updateLocale(String username, Locale locale){
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        em.getTransaction().begin();
+
+        try {
+            User user = em.find(User.class, username);
+
+            if (user != null) {
+                user.setLocale(locale.toString());
+                em.merge(user);
+                em.getTransaction().commit();
+                System.out.println("Locale updated to: "+locale.toString()+" for user: " + username);
+            } else {
+                System.out.println("User not found: " + username);
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.out.println("Error updating Locale for user: " + username);
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+    public Locale getLocale(String username){
+        Locale locale = new Locale("en", "US");
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try (em) {
+            em.getTransaction().begin();
+            User user = em.find(User.class, username);
+            if (user != null) {
+                locale = user.getLocale();
+                em.getTransaction().commit();
+            } else {
+
+            }
+        } catch (Exception e) {
+            System.out.println("Ongelma tietojen hakemisessa.");
+        }
+        return locale;
+    }
+
+    private TypedQuery<User> getUserQuery(EntityManager em, String username){
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+        query.setParameter("username", username);
+        return query;
     }
 }

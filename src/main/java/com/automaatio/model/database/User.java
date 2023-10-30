@@ -2,6 +2,8 @@ package com.automaatio.model.database;
 
 import jakarta.persistence.*;
 
+import java.util.Locale;
+
 /**
  * @author Mikko Hänninen
  * @author Matleena Kankaanpää
@@ -40,6 +42,9 @@ public class User {
     @Column(name = "max_price")
     private double maxPrice;
 
+    @Column(name = "locale")
+    private String locale;
+
     /**
      * Parameterless constructor
      */
@@ -66,6 +71,7 @@ public class User {
         this.age = age;
         this.userType = userType;
         this.maxPrice = 30;
+        locale = "en_US";
     }
 
     public String getUsername() {
@@ -140,6 +146,12 @@ public class User {
         this.selectedPicture = selectedPicture;
     }
 
+    public void setLocale(String locale){
+        this.locale = locale;
+    }
+    public Locale getLocale(){
+        return new Locale(locale.split("_")[0], locale.split("_")[1]);
+    }
     @Override
     public String toString() {
         return username;
