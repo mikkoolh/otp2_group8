@@ -22,7 +22,7 @@ public class LocaleSelector {
     private Image us, fi;
     private final String lang_US = "English", lang_FI= "Suomi";
     private Locale userLocale;
-    private final int SIZE = 20;
+    private final int SIZE = 30;
     private final UserDAO userDAO = new UserDAO();
     private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png";
 
