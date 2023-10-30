@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.automaatio.controller.mainpage.WelcomeController" prefWidth="880.0" styleClass="main-pane">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%homeScreenWelcomeTxt" textAlignment="CENTER" wrappingWidth="880.0" AnchorPane.topAnchor="10.0">
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="880.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.WelcomeController">
+    <children>
+                <Text layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%homeScreenWelcomeTxt" textAlignment="CENTER" wrappingWidth="880.0" AnchorPane.topAnchor="41.5078125">
                         <font>
                             <Font name="Copperplate Gothic Bold" size="48.0" />
                         </font>
                         <effect>
                             <DropShadow />
                         </effect>
-                    </Text>
-                <HBox.margin>
-                    <Insets left="10.0" />
-                </HBox.margin>
+                </Text>
+    </children>
 </AnchorPane>

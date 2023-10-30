@@ -49,8 +49,8 @@ public class MainPageController implements Initializable {
     public void setMainPane(ResourceBundle bundle){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/welcome.fxml"));
-            Parent firstView = loader.load();
             loader.setResources(bundle);
+            Parent firstView = loader.load();
             mainPane.getChildren().add(firstView);
         } catch (IOException e) {
             System.out.println(e);

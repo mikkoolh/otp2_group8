@@ -48,13 +48,12 @@ public class LoginController {
     private final NavigationUtil nav;
     private final UserDAO userDAO;
     private final ResourceBundle resourceBundle;
-    private LocaleSelector locales;
+
 
     public LoginController() {
         nav = new NavigationUtil();
         userDAO = new UserDAO();
         resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
-        locales = new LocaleSelector();
     }
 
     @FXML
@@ -62,7 +61,6 @@ public class LoginController {
         loginButton.setDisable(true);
         loginButton.setPadding(new Insets(7, 40, 7, 40));
 
-        loginFormGrid.add(locales.getLocaleSelector(),1,1);
         // Eye button
         Button togglePasswordButton = (new TogglableEyeIconCreator()).create();
         togglePasswordButton.addEventHandler(ActionEvent.ACTION, (e)-> {

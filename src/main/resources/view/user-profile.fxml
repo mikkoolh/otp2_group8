@@ -89,12 +89,29 @@
             <PasswordField fx:id="newpassField" styleClass="input-field" stylesheets="@../styles.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <Button fx:id="changeBtn" layoutX="365.0" layoutY="583.0" mnemonicParsing="false" onAction="#onChangePasswordClick" styleClass="button-primary" text="%changePasswordBtnTxt" />
+      <Button fx:id="changeBtn" layoutX="317.0" layoutY="583.0" mnemonicParsing="false" onAction="#onChangePasswordClick" styleClass="button-primary" text="%changePasswordBtnTxt" />
       <Text fx:id="profileErrorText" fill="RED" layoutX="241.0" layoutY="661.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Label fx:id="etusivuText" alignment="CENTER" layoutX="391.0" layoutY="73.0" styleClass="title" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label fx:id="usernameText" alignment="CENTER" layoutX="1.0" layoutY="28.0" styleClass="title" text="Failed to load user" textAlignment="CENTER" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" />
+      <GridPane fx:id="languageGrid" layoutX="154.0" layoutY="115.0" prefHeight="30.0" prefWidth="573.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.4000244140625" minWidth="10.0" prefWidth="257.4000244140625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.4000244140625" minWidth="10.0" prefWidth="27.59992675781251" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.20007324218756" minWidth="10.0" prefWidth="289.20007324218756" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%languageTxt">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
     </children>
 </AnchorPane>

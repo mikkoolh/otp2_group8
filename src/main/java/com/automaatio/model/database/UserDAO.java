@@ -164,24 +164,6 @@ public class UserDAO implements IDAO {
         }
     }
 
-    public double getMaxPrice(String username) {
-        double maxPrice = 0;
-        EntityManager em = MysqlDBJpaConn.getInstance();
-        try (em) {
-            em.getTransaction().begin();
-            User user = em.find(User.class, username);
-            if (user != null) {
-                maxPrice = user.getMaxPrice();
-                em.getTransaction().commit();
-            } else {
-                maxPrice = 0.0;
-            }
-        } catch (Exception e) {
-            System.out.println("Ongelma tietojen hakemisessa.");
-        }
-        return maxPrice;
-    }
-
     public void updatePicture(String username, int selectedPictureId) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -239,7 +221,7 @@ public class UserDAO implements IDAO {
                 locale = user.getLocale();
                 em.getTransaction().commit();
             } else {
-
+                System.out.println("User not found!");
             }
         } catch (Exception e) {
             System.out.println("Ongelma tietojen hakemisessa.");
