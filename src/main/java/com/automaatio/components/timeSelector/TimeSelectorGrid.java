@@ -1,4 +1,4 @@
-package com.automaatio.components;
+package com.automaatio.components.timeSelector;
 
 import com.dlsc.gemsfx.TimePicker;
 import javafx.scene.control.Label;
