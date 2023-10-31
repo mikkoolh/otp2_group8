@@ -5,6 +5,7 @@ import com.automaatio.model.database.DeviceDAO;
 import com.automaatio.model.database.DeviceGroup;
 import com.automaatio.model.database.DeviceGroupDAO;
 import com.automaatio.utils.CacheSingleton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,7 +13,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,6 +38,8 @@ public class DeviceController implements Initializable, IController {
     private ComboBox<DeviceGroup> deviceGroup;
     @FXML
     private TextField usageData;
+    @FXML
+    private Button changeAutomationButton;
 
     private Device device = CacheSingleton.getInstance().getDevice();
 
@@ -47,6 +49,7 @@ public class DeviceController implements Initializable, IController {
     public void initialize(URL location, ResourceBundle resources) {
         deviceNameField.setText(device.getName());
         changeNameButton.setOnAction(e -> changeDeviceName());
+        changeAutomationButton.setOnAction((e -> changeAutomation()));
 
         modelCode.setText(device.getModelCode());
         usageData.setText(Long.toString(device.getUsageData()));
@@ -100,6 +103,10 @@ public class DeviceController implements Initializable, IController {
         String newModelCode = modelCode.getText();
         device.setModelCode(newModelCode);
         deviceDAO.updateModelCode(device.getDeviceID(), newModelCode);
+    }
+
+    public void changeAutomation() {
+        deviceDAO.updateAutomation(device.getDeviceID());
     }
 }
 
