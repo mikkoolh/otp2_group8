@@ -1,6 +1,7 @@
 package com.automaatio.controller.mainpage.menu;
 
 import com.automaatio.model.ElectricityPriceConnector;
+import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import com.automaatio.utils.NavigationUtil;
 import javafx.event.ActionEvent;
@@ -29,6 +30,7 @@ public class ProfileController implements Initializable, Menu {
     private final String username = cache.getUser().getUsername();
 
     private final String name = cache.getUser().getFirstName();
+    private BundleLoader bundleLoader = new BundleLoader();
 
     @FXML
     Text usernameTXT, nameTXT, electricityPrice;
@@ -109,7 +111,7 @@ public class ProfileController implements Initializable, Menu {
     public void openProfile() {
         System.out.println("open profile");
         try {
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+            ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user-profile.fxml"));
             loader.setResources(resourceBundle);
             Parent newView = loader.load();
