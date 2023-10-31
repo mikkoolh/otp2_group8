@@ -271,4 +271,24 @@ public class DeviceDAO implements IDAO {
         em.getTransaction().commit();
         em.close();
     }
+
+    public void updateAutomation(int deviceID) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        em.getTransaction().begin();
+        Device device = em.find(Device.class, deviceID);
+
+        if (device != null) {
+            if (device.isAutomation() != true) {
+                device.setAutomation(true);
+                em.merge(device);
+                System.out.println("Laitteen " + device.getDeviceID() + " Automation arvo muutettu trueksi");
+            } else {
+                device.setAutomation(false);
+                em.merge(device);
+                System.out.println("Laitteen " + device.getDeviceID() + " Automation arvo muutettu falseksi");
+            }
+        }
+        em.getTransaction().commit();
+        em.close();
+    }
 }
