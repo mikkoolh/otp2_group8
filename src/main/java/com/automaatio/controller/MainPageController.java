@@ -1,6 +1,8 @@
 package com.automaatio.controller;
 
 
+import com.automaatio.model.database.UserDAO;
+import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,7 @@ public class MainPageController implements Initializable {
     @FXML
     private Pane mainPane, menuPane;
     private CacheSingleton cache = CacheSingleton.getInstance();
+    private BundleLoader bundleLoader = new BundleLoader();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -34,11 +37,10 @@ public class MainPageController implements Initializable {
         setMenuPane(resourceBundle);
     }
 
-
     public void setMenuPane(ResourceBundle bundle){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main-menu.fxml"));
-            loader.setResources(bundle);
+            loader.setResources(bundleLoader.loadResourceByUsersLocale());
             Parent firstView = loader.load();
             menuPane.getChildren().add(firstView);
         } catch (IOException e) {
@@ -49,7 +51,7 @@ public class MainPageController implements Initializable {
     public void setMainPane(ResourceBundle bundle){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/welcome.fxml"));
-            loader.setResources(bundle);
+            loader.setResources(bundleLoader.loadResourceByUsersLocale());
             Parent firstView = loader.load();
             mainPane.getChildren().add(firstView);
         } catch (IOException e) {

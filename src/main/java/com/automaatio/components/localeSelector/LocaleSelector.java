@@ -2,6 +2,7 @@ package com.automaatio.components.localeSelector;
 
 
 import com.automaatio.model.database.UserDAO;
+import com.automaatio.utils.CacheSingleton;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,16 +22,18 @@ public class LocaleSelector {
     private ComboBox<LocaleItem> languagesCBox;
     private Image us, fi;
     private final String lang_US = "English", lang_FI= "Suomi";
+
     private Locale userLocale;
     private final int SIZE = 30;
     private final UserDAO userDAO = new UserDAO();
+    private CacheSingleton cacheSingleton = CacheSingleton.getInstance();
     private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png";
 
     public LocaleSelector(){
         languagesCBox = new ComboBox<LocaleItem>();
         us = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathUSFlag)));
         fi = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathFIFlag)));
-        fetchLocale("mikko");
+        fetchLocale(cacheSingleton.getUser().getUsername());
     }
 
     public ComboBox<LocaleItem> getComboBox(){
@@ -82,7 +85,7 @@ public class LocaleSelector {
             }
         });
     }
-    private void fetchLocale(String username){
+    private void fetchLocale(String username) {
         userLocale = userDAO.getLocale(username);
         System.out.println(userLocale);
     }

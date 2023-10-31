@@ -3,6 +3,8 @@ package com.automaatio.controller.mainpage.clickActions;
 import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceDAO;
 
+import com.automaatio.model.database.UserDAO;
+import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,16 +14,16 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DevicesClick implements ClickActions {
-    DeviceDAO deviceDAO = new DeviceDAO();
+    private DeviceDAO deviceDAO = new DeviceDAO();
     private CacheSingleton cache = CacheSingleton.getInstance();
+    private BundleLoader bundleLoader = new BundleLoader();
 
     @Override
     public void onExpandClick(Object object) {
         cache.setDevice((Device) object);
         try {
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/device.fxml"));
-            loader.setResources(resourceBundle);
+            loader.setResources(bundleLoader.loadResourceByUsersLocale());
             Parent newView = loader.load();
             cache.getMainPane().getChildren().clear();
             cache.getMainPane().getChildren().add(newView);

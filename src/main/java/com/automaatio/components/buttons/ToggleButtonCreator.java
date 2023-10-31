@@ -3,6 +3,7 @@ package com.automaatio.components.buttons;
 import com.automaatio.controller.mainpage.clickActions.ClickActions;
 import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceDAO;
+import com.automaatio.utils.BundleLoader;
 import javafx.scene.control.ToggleButton;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -10,19 +11,19 @@ import java.util.ResourceBundle;
 public class ToggleButtonCreator implements IButton {
 
     private DeviceDAO deviceDAO = new DeviceDAO();
+    private BundleLoader bundleLoader = new BundleLoader();
     @Override
     public ToggleButton create(Object object, ClickActions clickActions) {
         return createToggleBtn(object);
     }
 
     private ToggleButton createToggleBtn(Object object) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
         ToggleButton toggleButton = new ToggleButton();
         if (object instanceof Device){
-            setOnOff(deviceDAO.getObject(((Device) object).getDeviceID()).isOnOff(), object, toggleButton, resourceBundle);
+            setOnOff(deviceDAO.getObject(((Device) object).getDeviceID()).isOnOff(), object, toggleButton, bundleLoader.loadResourceByUsersLocale());
             toggleButton.getStyleClass().add("toggleBtn");
             toggleButton.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-                setOnOff(isSelected,object, toggleButton, resourceBundle);
+                setOnOff(isSelected,object, toggleButton, bundleLoader.loadResourceByUsersLocale());
             });
         }
         return toggleButton;

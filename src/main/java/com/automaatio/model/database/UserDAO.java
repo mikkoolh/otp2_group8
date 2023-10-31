@@ -211,23 +211,39 @@ public class UserDAO implements IDAO {
             em.close();
         }
     }
-    public Locale getLocale(String username){
-        Locale locale = new Locale("en", "US");
+    public Locale getLocale(String username) {
         EntityManager em = MysqlDBJpaConn.getInstance();
-        try (em) {
-            em.getTransaction().begin();
-            User user = em.find(User.class, username);
-            if (user != null) {
-                locale = user.getLocale();
-                em.getTransaction().commit();
+        em.getTransaction().begin();
+
+        try {
+            User user = getUserQuery(em, username).getSingleResult();
+            if (user != null && user.getLocale() != null) {
+                String localeString = user.getLocale().toString();
+                String[] parts = localeString.split("_");
+                if (parts.length == 2) {
+                    String language = parts[0];
+                    String country = parts[1];
+                    em.getTransaction().commit();
+                    return new Locale(language, country);
+                } else {
+                    throw new IllegalArgumentException("Locale format in database is incorrect");
+                }
             } else {
-                System.out.println("User not found!");
+                throw new NoResultException("User not found");
             }
+        } catch (NoResultException e) {
+            em.getTransaction().rollback();
+            System.out.println("User not found: " + username);
+            return new Locale("en", "US");  //Jos käyttäjää ei löydy niin oletuskieli englanti
         } catch (Exception e) {
-            System.out.println("Ongelma tietojen hakemisessa.");
+            em.getTransaction().rollback();
+            System.out.println("Error fetching locale for user: " + username);
+            throw e;
+        } finally {
+            em.close();
         }
-        return locale;
     }
+
 
     private TypedQuery<User> getUserQuery(EntityManager em, String username){
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
