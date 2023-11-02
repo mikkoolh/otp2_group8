@@ -5,15 +5,17 @@ import com.automaatio.model.database.DeviceGroup;
 import com.automaatio.model.database.User;
 import javafx.scene.layout.Pane;
 
+import java.util.Locale;
+
 public class CacheSingleton {
 
     private static CacheSingleton instance;
     private DeviceGroup room;
     private User user;
     private Device device;
+    private Locale tempLocale = new Locale("en", "US");
 
     private Pane mainPane, menuPane;
-
 
     private ViewDirection viewDirection;
 
@@ -67,6 +69,14 @@ public class CacheSingleton {
 
     public Pane getMenuPane() {
         return menuPane;
+    }
+
+    public void setTempLocale(Locale tempLocale) {
+        this.tempLocale = tempLocale;
+    }
+
+    public Locale getTempLocale() {
+        return tempLocale;
     }
 
     public void setMainPane(Pane mainPane) {

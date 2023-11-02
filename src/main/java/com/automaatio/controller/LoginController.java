@@ -113,16 +113,14 @@ public class LoginController {
 
                 if (BCrypt.checkpw(password, user.getPassword())) {
                     System.out.println("password correct");
-
+                    System.out.println(user.getLocale() +" " + user.getLocale().toString().equals(CountryNames.lang_SA.toString()) + " " + CountryNames.lang_SA);
                     cache.setUser(userDAO.getObject(username));
-                    if(user.getLocale().toString().equals(CountryNames.lang_RTL)){
+                    if(user.getLocale().toString().equals("ar_SA")) {
                         cache.setDirection(ViewDirection.RTL);
-                    } else if(user.getLocale().toString().equals(CountryNames.lang_SA)) {
-                        cache.setDirection(ViewDirection.RTL);
+
                     } else {
                         cache.setDirection(ViewDirection.LTR);
                     }
-
                     loginErrorText.setText("");
                     nav.openMainPage(event);
                 } else {
