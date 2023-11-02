@@ -3,6 +3,7 @@ package com.automaatio.utils;
 import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceGroup;
 import com.automaatio.model.database.User;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.util.Locale;
@@ -14,6 +15,8 @@ public class CacheSingleton {
     private User user;
     private Device device;
     private Locale tempLocale = new Locale("en", "US");
+
+    private FXMLLoader currentLoader;
 
     private Pane mainPane, menuPane;
 
@@ -85,5 +88,13 @@ public class CacheSingleton {
 
     public void setMenuPane(Pane menuPane) {
         this.menuPane = menuPane;
+    }
+
+    public FXMLLoader getCurrentLoader() {
+        return currentLoader;
+    }
+
+    public void setCurrentLoader(FXMLLoader currentLoader) {
+        this.currentLoader = currentLoader;
     }
 }

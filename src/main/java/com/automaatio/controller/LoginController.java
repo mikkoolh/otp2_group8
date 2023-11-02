@@ -60,6 +60,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+        cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/login.fxml")));
         loginButton.setDisable(true);
         loginButton.setPadding(new Insets(7, 40, 7, 40));
 

@@ -7,11 +7,14 @@ import com.automaatio.components.buttons.TogglableEyeIconCreator;
 import com.automaatio.components.SwitchablePasswordField;
 import com.automaatio.model.database.User;
 import com.automaatio.model.database.UserDAO;
+import com.automaatio.utils.BundleLoader;
+import com.automaatio.utils.CacheSingleton;
 import com.automaatio.utils.FormInputValidator;
 import com.automaatio.utils.NavigationUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -36,17 +39,18 @@ public class CreateAccountController {
     private TextField firstNameField, lastNameField, emailField, phoneNumberField, usernameField;
     @FXML
     private Text createAccountErrorText, usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip;
+    private CacheSingleton cache = CacheSingleton.getInstance();
     @FXML
     private Button saveButton;
     @FXML
     private GridPane formGrid;
-    private final ResourceBundle resourceBundle;
+    private ResourceBundle resourceBundle;
 
     public CreateAccountController() {
         nav = new NavigationUtil();
         validator = new FormInputValidator();
         userDAO = new UserDAO();
-        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        resourceBundle = ResourceBundle.getBundle("TextResources", cache.getTempLocale());
     }
 
     /**
@@ -96,6 +100,7 @@ public class CreateAccountController {
 
     @FXML
     private void initialize() {
+        cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/create-account.fxml")));
         saveButton.setDisable(true);
         Platform.runLater(() -> usernameField.requestFocus()); // Autofocus
 

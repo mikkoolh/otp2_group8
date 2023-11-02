@@ -6,15 +6,21 @@ import com.automaatio.utils.CacheSingleton;
 import com.automaatio.utils.CountryNames;
 import com.automaatio.utils.NavigationUtil;
 import com.automaatio.utils.ViewDirection;
+import com.automaatio.view.GraphicalUI;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -34,18 +40,18 @@ public class LocaleSelector {
     private final int SIZE = 30, idx_FI = 0, idx_US = 1, idx_RU = 2, idx_SA = 3;
     private final UserDAO userDAO = new UserDAO();
 
-    private CacheSingleton cacheSingleton = CacheSingleton.getInstance();
+    private CacheSingleton cache = CacheSingleton.getInstance();
 
-    private boolean loggedIn = cacheSingleton.getUser() != null;
+    private boolean loggedIn = cache.getUser() != null;
     private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png", pathRUFlag="/images/248-russia.png", pathSAFlag = "/images/133-saudi-arabia.png";
 
     public LocaleSelector(){
         languagesCBox = new ComboBox<LocaleItem>();
         fetchImages();
         if (loggedIn) {
-            fetchLocale(cacheSingleton.getUser().getUsername());
+            fetchLocale(cache.getUser().getUsername());
         } else {
-           userLocale = cacheSingleton.getTempLocale();
+           userLocale = cache.getTempLocale();
         }
     }
 
@@ -58,8 +64,8 @@ public class LocaleSelector {
         languagesCBox.valueProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends LocaleItem> observable, LocaleItem oldValue, LocaleItem newValue) {
-                String username = cacheSingleton.getUser().getUsername(), value = newValue.toString();
-                cacheSingleton.setDirection(ViewDirection.LTR);
+                String username = cache.getUser().getUsername(), value = newValue.toString();
+                cache.setDirection(ViewDirection.LTR);
                 Locale tempLocale = null;
                 if(value.equals(lang_FI)){
                     tempLocale = new Locale("fi", "FI");
@@ -68,7 +74,7 @@ public class LocaleSelector {
                 } else if (value.equals(lang_RU)) {
                     tempLocale = new Locale("ru", "RU");
                 } else if (value.equals(lang_SA)) {
-                    cacheSingleton.setDirection(ViewDirection.RTL);
+                    cache.setDirection(ViewDirection.RTL);
                     tempLocale = new Locale("ar", "SA");
                 } else {
                     System.out.println("Invalid click");
@@ -152,7 +158,24 @@ public class LocaleSelector {
                 throw new RuntimeException(e);
             }
         } else {
-            //TODO toteuta ilman loggausta
+            FXMLLoader fxmlLoader = cache.getCurrentLoader();
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+                if(cache.getDirection() == ViewDirection.RTL){
+                    root.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                } else{
+                    root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                }
+                Stage stage = GraphicalUI.getPrimaryStage();
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }
