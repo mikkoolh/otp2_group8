@@ -1,5 +1,6 @@
 package com.automaatio.components.localeSelector;
 
+import com.automaatio.utils.ViewDirection;
 import javafx.scene.image.Image;
 
 public class LocaleItem {

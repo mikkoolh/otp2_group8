@@ -55,8 +55,7 @@ public class RoomController implements Initializable, IController {
             }
         });
 
-        deviceComboBox.setPromptText("Select your device to be added");
-
+        deviceComboBox.setPromptText(resources.getString("selectDeviceToAdd"));
         showDevices();
     }
 

@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.controlsfx.control.spreadsheet.Grid;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;

@@ -15,6 +15,9 @@ public class CacheSingleton {
     private Pane mainPane, menuPane;
 
 
+    private ViewDirection viewDirection;
+
+
     private CacheSingleton() {
     }
 
@@ -48,6 +51,14 @@ public class CacheSingleton {
     public Device getDevice() {
         System.out.println("getDevice in singleton: " + device.getName());
         return device;
+    }
+
+    public void setDirection(ViewDirection viewDirection) {
+        this.viewDirection = viewDirection;
+    }
+
+    public ViewDirection getDirection(){
+        return viewDirection;
     }
 
     public Pane getMainPane() {
