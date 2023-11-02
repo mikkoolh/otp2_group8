@@ -42,7 +42,7 @@
                </children>
             </GridPane>
                 <Text fx:id="loginErrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
-                <VBox alignment="TOP_CENTER" spacing="10.0">
+                <VBox fx:id="lowerLoginVBox" alignment="TOP_CENTER" spacing="10.0">
                     <children>
                         <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#onLoginClick" styleClass="button-primary" text="%loginBtnTxt">
                      <padding>

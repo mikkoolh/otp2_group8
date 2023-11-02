@@ -66,23 +66,6 @@ public class ProfileController {
         languageGrid.add(localeSelector.getComboBox(),2,0);
     }
 
-
-    @FXML
-    private void onBackClick(ActionEvent event) throws IOException {
-        System.out.println("return to main page");
-
-        NavigationUtil nav = new NavigationUtil();
-        nav.openMainPage(event);
-    }
-
-    @FXML
-    private void onLogoutClick(ActionEvent event) throws IOException {
-        System.out.println("log out");
-
-        NavigationUtil nav = new NavigationUtil();
-        nav.openLoginPage(event);
-    }
-
     @FXML
     private void onChangePasswordClick() {
         String oldPass = oldpassField.getText();

@@ -24,10 +24,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 
 public class LocaleSelector {
@@ -42,7 +39,7 @@ public class LocaleSelector {
 
     private CacheSingleton cache = CacheSingleton.getInstance();
 
-    private boolean loggedIn = cache.getUser() != null;
+    private final boolean loggedIn = cache.getUser() != null;
     private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png", pathRUFlag="/images/248-russia.png", pathSAFlag = "/images/133-saudi-arabia.png";
 
     public LocaleSelector(){
@@ -64,7 +61,10 @@ public class LocaleSelector {
         languagesCBox.valueProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends LocaleItem> observable, LocaleItem oldValue, LocaleItem newValue) {
-                String username = cache.getUser().getUsername(), value = newValue.toString();
+                String value = newValue.toString(), username ="";
+                if(loggedIn){
+                    username = cache.getUser().getUsername();
+                }
                 cache.setDirection(ViewDirection.LTR);
                 Locale tempLocale = null;
                 if(value.equals(lang_FI)){
@@ -81,8 +81,14 @@ public class LocaleSelector {
                 }
                 if (loggedIn) {
                     userDAO.updateLocale(username, tempLocale);
+                } else{
+                    cache.setTempLocale(tempLocale);
                 }
-                showNewLang();
+                try {
+                    showNewLang();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         languagesCBox.setPrefWidth(286);
@@ -150,7 +156,7 @@ public class LocaleSelector {
         userLocale = userDAO.getLocale(username);
         System.out.println(userLocale);
     }
-    private void showNewLang(){
+    private void showNewLang() throws IOException {
         if (loggedIn) {
             try {
                 navigationUtil.changeLanguage();
@@ -159,8 +165,9 @@ public class LocaleSelector {
             }
         } else {
             FXMLLoader fxmlLoader = cache.getCurrentLoader();
+            fxmlLoader.setResources(ResourceBundle.getBundle("TextResources", cache.getTempLocale()));
+            System.out.println(cache.getTempLocale() + " at showNewLang");
             Parent root = null;
-            try {
                 root = fxmlLoader.load();
                 if(cache.getDirection() == ViewDirection.RTL){
                     root.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
@@ -172,9 +179,6 @@ public class LocaleSelector {
                 scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
                 stage.setScene(scene);
                 stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
 
         }
     }

@@ -29,21 +29,11 @@ public class NavigationUtil {
         bundleLoader = new BundleLoader();
     }
 
-    /**
-     *
-     * @param event
-     * @throws IOException
-     */
     public void openMainPage(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("/view/main-page.fxml"));
         setResourcesAndShow();
     }
 
-    /**
-     * Opens the login page
-     * @param event Button click
-     * @throws IOException
-     */
     public void openLoginPage(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
         setResourcesAndShow();
@@ -55,7 +45,11 @@ public class NavigationUtil {
     }
 
     public void setResourcesAndShow() throws IOException{
-        fxmlLoader.setResources(bundleLoader.loadResourceByUsersLocale());
+        if (cache.getUser() != null){
+            fxmlLoader.setResources(bundleLoader.loadResourceByUsersLocale());
+        } else {
+            fxmlLoader.setResources(ResourceBundle.getBundle("TextResources", cache.getTempLocale()));
+        }
         root = fxmlLoader.load();
         setRootDirection(); //Set RTL or LTR
         Stage stage = GraphicalUI.getPrimaryStage();

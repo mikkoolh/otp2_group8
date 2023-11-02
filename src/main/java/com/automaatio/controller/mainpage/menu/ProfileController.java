@@ -125,9 +125,9 @@ public class ProfileController implements Initializable, Menu {
 
     @FXML
     private void onLogoutClick(ActionEvent event) throws IOException {
-        System.out.println("log out");
+        cache.setUser(null);
+        System.out.println(cache.getUser() + " at Profile logout");
 
-        // Siirry login-sivulle
         NavigationUtil nav = new NavigationUtil();
         nav.openLoginPage(event);
     }

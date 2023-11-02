@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
@@ -34,6 +35,8 @@ public class LoginController {
 
     @FXML
     private TextField usernameField;
+    @FXML
+    private VBox lowerLoginVBox;
 
     @FXML
     private Button loginButton;
@@ -60,6 +63,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+        System.out.println(cache.getUser());
         cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/login.fxml")));
         loginButton.setDisable(true);
         loginButton.setPadding(new Insets(7, 40, 7, 40));
@@ -78,6 +82,7 @@ public class LoginController {
         switchableField = new SwitchablePasswordField();
         passwordField = switchableField.getField();
         loginFormGrid.add(passwordField, 2, 1);
+        lowerLoginVBox.getChildren().add(new LocaleSelector().getComboBox());
 
         // Change listeners for input fields
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -139,7 +144,7 @@ public class LoginController {
     @FXML
     protected void onCreateAccountClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/create-account.fxml"));
-        fxmlLoader.setResources(bundleLoader.loadResourceByUsersLocale());
+        fxmlLoader.setResources(ResourceBundle.getBundle("TextResources", cache.getTempLocale()));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
