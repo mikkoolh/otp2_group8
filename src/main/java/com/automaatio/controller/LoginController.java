@@ -41,13 +41,15 @@ public class LoginController {
     private TextInputControl passwordField;
     @FXML
     private GridPane loginFormGrid;
+    @FXML
+    private GridPane languageGrid;
 
     private final CacheSingleton cache = CacheSingleton.getInstance();
 
     private final NavigationUtil nav;
     private final UserDAO userDAO;
     private final BundleLoader bundleLoader;
-
+    //private LocaleSelector localeSelector = new LocaleSelector();
 
 
     public LoginController() {
@@ -84,6 +86,7 @@ public class LoginController {
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
             updateUI();
         });
+        //languageGrid.add(localeSelector.getComboBox(),2,0);
     }
 
     /**
@@ -113,6 +116,8 @@ public class LoginController {
 
                     cache.setUser(userDAO.getObject(username));
                     if(user.getLocale().toString().equals(CountryNames.lang_RTL)){
+                        cache.setDirection(ViewDirection.RTL);
+                    } else if(user.getLocale().toString().equals(CountryNames.lang_SA)) {
                         cache.setDirection(ViewDirection.RTL);
                     } else {
                         cache.setDirection(ViewDirection.LTR);

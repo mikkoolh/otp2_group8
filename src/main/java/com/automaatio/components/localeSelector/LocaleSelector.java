@@ -26,19 +26,23 @@ import java.util.Objects;
 
 public class LocaleSelector {
     private ComboBox<LocaleItem> languagesCBox;
-    private Image us, fi, ru, un;
-    private final String lang_US = CountryNames.lang_US.toString(), lang_FI= CountryNames.lang_FI.toString(), lang_RTL = CountryNames.lang_RTL.toString(),  lang_RU = CountryNames.lang_RU.toString();
+    private Image us, fi, ru, un, sa;
+    private final String lang_US = CountryNames.lang_US.toString(), lang_FI= CountryNames.lang_FI.toString(), lang_RTL = CountryNames.lang_RTL.toString(),  lang_RU = CountryNames.lang_RU.toString(), lang_SA = CountryNames.lang_SA.toString();
     private NavigationUtil navigationUtil = new NavigationUtil();
     private Locale userLocale;
-    private final int SIZE = 30, idx_FI = 0, idx_US = 1, idx_RU = 2, idx_RTL = 3;
+    private final int SIZE = 30, idx_FI = 0, idx_US = 1, idx_RU = 2, idx_RTL = 3, idx_SA = 4;
     private final UserDAO userDAO = new UserDAO();
     private CacheSingleton cacheSingleton = CacheSingleton.getInstance();
-    private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png", pathRUFlag="/images/248-russia.png", pathUNFlag = "/images/082-united-nations.png";
+    private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png", pathRUFlag="/images/248-russia.png", pathUNFlag = "/images/082-united-nations.png", pathSAFlag = "/images/133-saudi-arabia.png";
 
     public LocaleSelector(){
         languagesCBox = new ComboBox<LocaleItem>();
         fetchImages();
-        fetchLocale(cacheSingleton.getUser().getUsername());
+        if (cacheSingleton.getUser() != null) {
+            fetchLocale(cacheSingleton.getUser().getUsername());
+        } else {
+            //TODO Tähän et jos ei ole vielä useria, miten kielenvalinta siinä tapauksessa
+        }
     }
 
     public ComboBox<LocaleItem> getComboBox(){
@@ -68,6 +72,10 @@ public class LocaleSelector {
 
                     userDAO.updateLocale(username, new Locale("fi", "FI"));
                     showNewLang();
+                } else if (value.equals(CountryNames.lang_SA.toString())) {
+                    cacheSingleton.setDirection(ViewDirection.RTL);
+                    userDAO.updateLocale(username, new Locale("ar", "SA"));
+                    showNewLang();
                 } else {
                     System.out.println("Invalid click");
                 }
@@ -91,6 +99,8 @@ public class LocaleSelector {
             languagesCBox.setValue(temp.get(idx_RU));
         } else if (userLocale.toString().equals(lang_RTL)) { //TODO KORJAAA KUN VALITTU
             languagesCBox.setValue(temp.get(idx_RTL));
+        } else if (userLocale.toString().equals("ar_SA")){
+            languagesCBox.setValue(temp.get(idx_SA));
         } else {
             System.out.println("not valid initial value");
         }
@@ -104,6 +114,7 @@ public class LocaleSelector {
         temp.add(idx_US, new LocaleItem(us, lang_US));
         temp.add(idx_RU, new LocaleItem(ru, lang_RU));
         temp.add(idx_RTL, new LocaleItem(un, lang_RTL));
+        temp.add(idx_SA, new LocaleItem(sa, lang_SA));
         return temp;
     }
 
@@ -134,6 +145,7 @@ public class LocaleSelector {
         fi = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathFIFlag)));
         ru = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathRUFlag)));
         un = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathUNFlag)));
+        sa = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathSAFlag)));
     }
 
     private void fetchLocale(String username) {

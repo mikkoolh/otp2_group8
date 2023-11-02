@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231030 17:04:06.023" rpa="false" schemaversion="4">
+<suite id="s1" name="Test" source="C:\Users\Omen\Desktop\otp2_group8\src\test\java\test.robot">
+<test id="s1-t1" name="Open App" line="6">
+<kw name="Run" library="OS">
+<arg>java -cp . Main</arg>
+<doc>Runs the given command in the system and returns the output.</doc>
+<msg timestamp="20231030 17:04:06.422" level="INFO">Running command 'java -cp . Main 2&gt;&amp;1'.</msg>
+<status status="PASS" starttime="20231030 17:04:06.417" endtime="20231030 17:04:06.503"/>
+</kw>
+<status status="PASS" starttime="20231030 17:04:06.417" endtime="20231030 17:04:06.503"/>
+</test>
+<status status="PASS" starttime="20231030 17:04:06.024" endtime="20231030 17:04:06.504"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

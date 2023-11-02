@@ -3,8 +3,9 @@ package com.automaatio.utils;
 public enum CountryNames {
     lang_US("English"),
     lang_FI("Suomi"),
-    lang_RU("русский"),
-    lang_RTL("RTL lang.")
+    lang_RU("Русский"),
+    lang_RTL("RTL lang."),
+    lang_SA("اَلْعَرَبِيَّةُ")
     ;
 
     private String name;
