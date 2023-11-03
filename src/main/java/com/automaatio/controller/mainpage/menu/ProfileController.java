@@ -4,6 +4,7 @@ import com.automaatio.model.ElectricityPriceConnector;
 import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import com.automaatio.utils.NavigationUtil;
+import com.automaatio.utils.ViewDirection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,7 +127,7 @@ public class ProfileController implements Initializable, Menu {
     @FXML
     private void onLogoutClick(ActionEvent event) throws IOException {
         cache.setUser(null);
-        System.out.println(cache.getUser() + " at Profile logout");
+        cache.setDirection(ViewDirection.LTR);
 
         NavigationUtil nav = new NavigationUtil();
         nav.openLoginPage(event);
