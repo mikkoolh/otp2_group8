@@ -27,9 +27,7 @@ public class ProfileController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
     private final Pane mainPane;
 
-    private final String username = cache.getUser().getUsername();
-
-    private final String name = cache.getUser().getFirstName();
+    private final String username = cache.getUser().getUsername(), name = cache.getUser().getFirstName();
     private BundleLoader bundleLoader = new BundleLoader();
 
     @FXML
@@ -111,7 +109,7 @@ public class ProfileController implements Initializable, Menu {
     public void openProfile() {
         System.out.println("open profile");
         try {
-            ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
+            resourceBundle = bundleLoader.loadResourceByUsersLocale();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user-profile.fxml"));
             loader.setResources(resourceBundle);
             Parent newView = loader.load();
@@ -127,15 +125,14 @@ public class ProfileController implements Initializable, Menu {
     private void onLogoutClick(ActionEvent event) throws IOException {
         cache.setUser(null);
         cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
-
         NavigationUtil nav = new NavigationUtil();
         nav.openLoginPage(event);
     }
 
     @FXML
     protected void onBtnClick(ActionEvent event) throws IOException {
-        System.out.println("Pic selection window");
-        ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
+
+        resourceBundle = bundleLoader.loadResourceByUsersLocale();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup.fxml"));
         loader.setResources(resourceBundle);
         Parent root = loader.load();

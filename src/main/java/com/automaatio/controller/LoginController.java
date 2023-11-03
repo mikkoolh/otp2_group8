@@ -45,15 +45,12 @@ public class LoginController {
     private TextInputControl passwordField;
     @FXML
     private GridPane loginFormGrid;
-    @FXML
-    private GridPane languageGrid;
 
     private final CacheSingleton cache = CacheSingleton.getInstance();
 
     private final NavigationUtil nav;
     private final UserDAO userDAO;
     private final BundleLoader bundleLoader;
-    //private LocaleSelector localeSelector = new LocaleSelector();
 
 
     public LoginController() {
@@ -124,7 +121,6 @@ public class LoginController {
                         cache.setDirection(NodeOrientation.RIGHT_TO_LEFT);
                     } else {
                         cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
-
                     }
                     loginErrorText.setText("");
                     nav.openMainPage(event);
