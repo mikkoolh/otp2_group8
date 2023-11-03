@@ -1,5 +1,8 @@
 package com.automaatio.components.timeSelector;
 
+import com.automaatio.model.database.HistoryEvents;
+import com.automaatio.utils.BundleLoader;
+import com.automaatio.utils.CacheSingleton;
 import com.dlsc.gemsfx.TimePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -13,15 +16,14 @@ import java.util.ResourceBundle;
  */
 
 public class TimeSelectorGrid {
-    private final ResourceBundle resources;
-    public TimeSelectorGrid(ResourceBundle resources) {
-        this.resources = resources;
-    }
-
     public GridPane create(TimePicker startTime, TimePicker endTime) {
+        CacheSingleton cache = CacheSingleton.getInstance();
+        Locale currentLocale = cache.getUser().getLocale();
+        BundleLoader bundleLoader = new BundleLoader();
+        ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
         GridPane grid = new GridPane();
-        grid.add(new Label(resources.getString("startingFromTxt")), 0, 0);
-        grid.add(new Label(resources.getString("endingAtTxt")), 0, 1);
+        grid.add(new Label(resourceBundle.getString("startingFromTxt")), 0, 0);
+        grid.add(new Label(resourceBundle.getString("endingAtTxt")), 0, 1);
         grid.add(startTime, 1, 0);
         grid.add(endTime, 1, 1);
         grid.setHgap(40);

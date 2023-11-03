@@ -24,7 +24,7 @@ public class DevicesClick implements ClickActions {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/device.fxml"));
             loader.setResources(bundleLoader.loadResourceByUsersLocale());
-            Parent newView = loader.load();
+            Parent newView = loader.load(); // TODO: Antaa virhettä nyt painatessa laitteen edit-nappia. Virheviesti heittää tänne.
             cache.getMainPane().getChildren().clear();
             cache.getMainPane().getChildren().add(newView);
         } catch (Exception e) {

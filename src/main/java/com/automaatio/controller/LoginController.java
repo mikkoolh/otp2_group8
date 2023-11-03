@@ -9,10 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -44,15 +46,12 @@ public class LoginController {
     private TextInputControl passwordField;
     @FXML
     private GridPane loginFormGrid;
-    @FXML
-    private GridPane languageGrid;
 
     private final CacheSingleton cache = CacheSingleton.getInstance();
 
     private final NavigationUtil nav;
     private final UserDAO userDAO;
     private final BundleLoader bundleLoader;
-    //private LocaleSelector localeSelector = new LocaleSelector();
 
 
     public LoginController() {
@@ -92,6 +91,16 @@ public class LoginController {
             updateUI();
         });
         //languageGrid.add(localeSelector.getComboBox(),2,0);
+
+        passwordField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    onLoginClick(new ActionEvent(passwordField, passwordField));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -118,13 +127,11 @@ public class LoginController {
 
                 if (BCrypt.checkpw(password, user.getPassword())) {
                     System.out.println("password correct");
-                    System.out.println(user.getLocale() +" " + user.getLocale().toString().equals(CountryNames.lang_SA.toString()) + " " + CountryNames.lang_SA);
                     cache.setUser(userDAO.getObject(username));
                     if(user.getLocale().toString().equals("ar_SA")) {
-                        cache.setDirection(ViewDirection.RTL);
-
+                        cache.setDirection(NodeOrientation.RIGHT_TO_LEFT);
                     } else {
-                        cache.setDirection(ViewDirection.LTR);
+                        cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
                     }
                     loginErrorText.setText("");
                     nav.openMainPage(event);

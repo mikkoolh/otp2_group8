@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,15 +22,12 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 public class ProfileController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
     private final Pane mainPane;
 
-    private final String username = cache.getUser().getUsername();
-
-    private final String name = cache.getUser().getFirstName();
+    private final String username = cache.getUser().getUsername(), name = cache.getUser().getFirstName();
     private BundleLoader bundleLoader = new BundleLoader();
 
     @FXML
@@ -111,7 +109,7 @@ public class ProfileController implements Initializable, Menu {
     public void openProfile() {
         System.out.println("open profile");
         try {
-            ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
+            resourceBundle = bundleLoader.loadResourceByUsersLocale();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user-profile.fxml"));
             loader.setResources(resourceBundle);
             Parent newView = loader.load();
@@ -126,16 +124,15 @@ public class ProfileController implements Initializable, Menu {
     @FXML
     private void onLogoutClick(ActionEvent event) throws IOException {
         cache.setUser(null);
-        System.out.println(cache.getUser() + " at Profile logout");
-
+        cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
         NavigationUtil nav = new NavigationUtil();
         nav.openLoginPage(event);
     }
 
     @FXML
     protected void onBtnClick(ActionEvent event) throws IOException {
-        System.out.println("Pic selection window");
-        ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
+
+        resourceBundle = bundleLoader.loadResourceByUsersLocale();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup.fxml"));
         loader.setResources(resourceBundle);
         Parent root = loader.load();

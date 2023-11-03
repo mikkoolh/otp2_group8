@@ -17,16 +17,16 @@
     <children>
         <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="%createAccountTxt" wrappingWidth="278.4344787597656">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="%createAccountTxt" textAlignment="CENTER" wrappingWidth="1216.8343200683594">
                     <font>
                         <Font size="20.0" />
                     </font>
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin></Text>
-                <GridPane fx:id="formGrid" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="500.0" vgap="5.0">
+                <GridPane fx:id="formGrid" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" vgap="5.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" />
                     </columnConstraints>
                     <rowConstraints>

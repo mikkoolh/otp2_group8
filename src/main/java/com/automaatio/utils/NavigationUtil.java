@@ -51,19 +51,11 @@ public class NavigationUtil {
             fxmlLoader.setResources(ResourceBundle.getBundle("TextResources", cache.getTempLocale()));
         }
         root = fxmlLoader.load();
-        setRootDirection(); //Set RTL or LTR
+        root.setNodeOrientation(cache.getDirection());
         Stage stage = GraphicalUI.getPrimaryStage();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
-    }
-
-    private void setRootDirection(){
-        if(cache.getDirection() == ViewDirection.RTL){
-            root.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        } else{
-            root.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        }
     }
 }
