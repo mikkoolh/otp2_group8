@@ -1,8 +1,6 @@
 package com.automaatio.components.timeSelector;
 
-import com.automaatio.model.database.HistoryEvents;
 import com.automaatio.utils.BundleLoader;
-import com.automaatio.utils.CacheSingleton;
 import com.dlsc.gemsfx.TimePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -17,8 +15,6 @@ import java.util.ResourceBundle;
 
 public class TimeSelectorGrid {
     public GridPane create(TimePicker startTime, TimePicker endTime) {
-        CacheSingleton cache = CacheSingleton.getInstance();
-        Locale currentLocale = cache.getUser().getLocale();
         BundleLoader bundleLoader = new BundleLoader();
         ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
         GridPane grid = new GridPane();

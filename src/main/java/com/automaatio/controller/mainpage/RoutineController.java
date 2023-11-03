@@ -210,7 +210,7 @@ public class RoutineController implements Initializable {
         newEndTime.setTime(routine.getEventTime().getEndTime().toLocalTime());
 
         // Grid containing time pickers (editing mode)
-        GridPane newClockTimes = (new TimeSelectorGrid(resourceBundle)).create(newStartTime, newEndTime);
+        GridPane newClockTimes = (new TimeSelectorGrid()).create(newStartTime, newEndTime);
 
         // Store time pickers in an array
         List<TimePicker> editingTimePickers = Arrays.asList(newStartTime, newEndTime);
@@ -439,7 +439,7 @@ public class RoutineController implements Initializable {
         // Time pickers
         startTimePicker = (new TimeSelector()).getTimePicker();
         endTimePicker = (new TimeSelector()).getTimePicker();
-        GridPane clockTimes = (new TimeSelectorGrid(resourceBundle)).create(startTimePicker, endTimePicker);
+        GridPane clockTimes = (new TimeSelectorGrid()).create(startTimePicker, endTimePicker);
         clockTimes.add(weekdaysVBox, 1, 2);
         formGrid.add(clockTimes, 0,0);
 
