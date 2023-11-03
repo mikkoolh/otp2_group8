@@ -1,8 +1,6 @@
 package com.automaatio.utils;
 
 import javafx.scene.text.Text;
-
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -16,9 +14,11 @@ public class FormInputValidator {
             USERNAME_MAX_LENGTH, PASSWORD_MAX_LENGTH, FIRSTNAME_MAX_LENGTH, LASTNAME_MAX_LENGTH, PHONE_MIN_LENGTH, PHONE_MAX_LENGTH;
 
     private final ResourceBundle resourceBundle;
+    private final CompoundMessageCreator compoundMessageCreator;
 
     public FormInputValidator() {
-        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        resourceBundle = ResourceBundle.getBundle("TextResources", (new CurrentLocale().getCurrentLocale()));
+        compoundMessageCreator = new CompoundMessageCreator();
         this.USERNAME_MIN_LENGTH = 5;
         this.USERNAME_MAX_LENGTH = 40;
         this.PASSWORD_MIN_LENGTH = 8;
@@ -33,13 +33,22 @@ public class FormInputValidator {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (includesSpaces(input)) {
-            errorField.setText("Username cannot contain spaces");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { resourceBundle.getString("usernameTxt") },
+                    "inputCannotContainSpacesTemplate"
+            ));
             return false;
         } else if (input.length() < USERNAME_MIN_LENGTH) {
-            errorField.setText("Username must be at least " + USERNAME_MIN_LENGTH + " characters");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { USERNAME_MIN_LENGTH },
+                    "usernameMinLengthTemplate"
+            ));
             return false;
         } else if (input.length() > USERNAME_MAX_LENGTH) {
-            errorField.setText("Username must be " + USERNAME_MAX_LENGTH + " characters or less");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { USERNAME_MAX_LENGTH },
+                    "usernameMaxLengthTemplate"
+            ));
             return false;
         }
         return true;
@@ -50,7 +59,10 @@ public class FormInputValidator {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (input.length() > FIRSTNAME_MAX_LENGTH) {
-            errorField.setText("First name must be " + FIRSTNAME_MAX_LENGTH + " characters or less");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { FIRSTNAME_MAX_LENGTH },
+                    "firstNameMaxLengthTemplate"
+            ));
             return false;
         }
         errorField.setText("");
@@ -62,7 +74,10 @@ public class FormInputValidator {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (input.length() > LASTNAME_MAX_LENGTH) {
-            errorField.setText("Last name must be " + LASTNAME_MAX_LENGTH + " characters or less");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { LASTNAME_MAX_LENGTH },
+                    "lastNameMaxLengthTemplate"
+            ));
             return false;
         }
         errorField.setText("");
@@ -75,7 +90,7 @@ public class FormInputValidator {
             return false;
         } else if (!input.matches("^(?=.{1,64}@)[\\p{L}0-9_-]+(\\.[\\p{L}0-9_-]+)*@"
                 + "[^-][\\p{L}0-9-]+(\\.[\\p{L}0-9-]+)*(\\.[\\p{L}]{2,})$")) {
-            errorField.setText("Invalid email address");
+            errorField.setText(resourceBundle.getString("invalidEmailTxt"));
             return false;
         }
         errorField.setText("");
@@ -87,7 +102,7 @@ public class FormInputValidator {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (!input.matches("^+?[0-9-]{" + PHONE_MIN_LENGTH + "," + PHONE_MAX_LENGTH + "}$")) {
-            errorField.setText("Invalid phone number");
+            errorField.setText(resourceBundle.getString("invalidPhoneNumberTxt"));
             return false;
         }
         errorField.setText("");
@@ -99,16 +114,25 @@ public class FormInputValidator {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (input.length() < PASSWORD_MIN_LENGTH) {
-            errorField.setText("Password must be at least " + PASSWORD_MIN_LENGTH + " characters");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { PASSWORD_MIN_LENGTH },
+                    "passwordMinLengthTemplate"
+            ));
             return false;
         } else if (input.length() > PASSWORD_MAX_LENGTH) {
-            errorField.setText("Password must be " + PASSWORD_MAX_LENGTH + " characters or less");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { PASSWORD_MAX_LENGTH },
+                    "passwordMaxLengthTemplate"
+            ));
             return false;
         } else if (!input.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{0," + PASSWORD_MAX_LENGTH +"}$")) {
-            errorField.setText("Password must contain at least one letter and a number");
+            errorField.setText(resourceBundle.getString("passwordFormatTxt"));
             return false;
         } else if (includesSpaces(input)) {
-            errorField.setText("Password cannot contain spaces");
+            errorField.setText(compoundMessageCreator.create(
+                    new Object[] { resourceBundle.getString("passwordTxt") },
+                    "inputCannotContainSpacesTemplate"
+            ));
             return false;
         }
         errorField.setText("");

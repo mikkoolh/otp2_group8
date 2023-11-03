@@ -39,12 +39,12 @@ public class CreateAccountController {
     private TextField firstNameField, lastNameField, emailField, phoneNumberField, usernameField;
     @FXML
     private Text createAccountErrorText, usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip;
-    private CacheSingleton cache = CacheSingleton.getInstance();
+    private final CacheSingleton cache = CacheSingleton.getInstance();
     @FXML
     private Button saveButton;
     @FXML
     private GridPane formGrid;
-    private ResourceBundle resourceBundle;
+    private final ResourceBundle resourceBundle;
 
     public CreateAccountController() {
         nav = new NavigationUtil();
