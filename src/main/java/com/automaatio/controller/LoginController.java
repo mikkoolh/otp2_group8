@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -118,13 +119,12 @@ public class LoginController {
 
                 if (BCrypt.checkpw(password, user.getPassword())) {
                     System.out.println("password correct");
-                    System.out.println(user.getLocale() +" " + user.getLocale().toString().equals(CountryNames.lang_SA.toString()) + " " + CountryNames.lang_SA);
                     cache.setUser(userDAO.getObject(username));
                     if(user.getLocale().toString().equals("ar_SA")) {
-                        cache.setDirection(ViewDirection.RTL);
-
+                        cache.setDirection(NodeOrientation.RIGHT_TO_LEFT);
                     } else {
-                        cache.setDirection(ViewDirection.LTR);
+                        cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
+
                     }
                     loginErrorText.setText("");
                     nav.openMainPage(event);

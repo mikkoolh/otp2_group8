@@ -4,6 +4,7 @@ import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceGroup;
 import com.automaatio.model.database.User;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.layout.Pane;
 
 import java.util.Locale;
@@ -20,7 +21,7 @@ public class CacheSingleton {
 
     private Pane mainPane, menuPane;
 
-    private ViewDirection viewDirection;
+    private NodeOrientation nodeOrientation;
 
 
     private CacheSingleton() {
@@ -58,12 +59,12 @@ public class CacheSingleton {
         return device;
     }
 
-    public void setDirection(ViewDirection viewDirection) {
-        this.viewDirection = viewDirection;
+    public void setDirection(NodeOrientation nodeOrientation) {
+        this.nodeOrientation = nodeOrientation;
     }
 
-    public ViewDirection getDirection(){
-        return viewDirection;
+    public NodeOrientation getDirection(){
+        return nodeOrientation;
     }
 
     public Pane getMainPane() {

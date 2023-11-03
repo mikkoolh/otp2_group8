@@ -4,11 +4,11 @@ import com.automaatio.model.ElectricityPriceConnector;
 import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import com.automaatio.utils.NavigationUtil;
-import com.automaatio.utils.ViewDirection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,7 +22,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 public class ProfileController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
@@ -127,7 +126,7 @@ public class ProfileController implements Initializable, Menu {
     @FXML
     private void onLogoutClick(ActionEvent event) throws IOException {
         cache.setUser(null);
-        cache.setDirection(ViewDirection.LTR);
+        cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
 
         NavigationUtil nav = new NavigationUtil();
         nav.openLoginPage(event);
