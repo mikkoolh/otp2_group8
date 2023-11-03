@@ -6,8 +6,6 @@ import com.automaatio.utils.CacheSingleton;
 import com.dlsc.gemsfx.TimePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -18,7 +16,6 @@ import java.util.ResourceBundle;
  */
 
 public class TimeSelectorGrid {
-
     public GridPane create(TimePicker startTime, TimePicker endTime) {
         CacheSingleton cache = CacheSingleton.getInstance();
         Locale currentLocale = cache.getUser().getLocale();

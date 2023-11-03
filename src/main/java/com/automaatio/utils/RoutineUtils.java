@@ -6,6 +6,7 @@ import com.automaatio.model.database.Weekday;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -50,13 +51,15 @@ public class RoutineUtils {
 
     /**
      * Time formatter
-     *
      * @param time A LocalDateTime object
-     * @return A string in HH:mm format
+     * @return The time as a String in the current locale (HH:mm/hh:mm)
      */
     public String getFormattedTime(LocalDateTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        return time.format(formatter);
+        DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT, (new CurrentLocale().getCurrentLocale()));
+        Date tempDate = new Date();
+        tempDate.setHours(time.toLocalTime().getHour());
+        tempDate.setMinutes(time.toLocalTime().getMinute());
+        return timeFormatter.format(tempDate);
     }
 
     /**
