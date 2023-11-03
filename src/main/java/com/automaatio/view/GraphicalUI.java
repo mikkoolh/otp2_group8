@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class GraphicalUI extends Application {
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -17,9 +18,13 @@ public class GraphicalUI extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(GraphicalUI.class.getResource("/view/login.fxml"));
         fxmlLoader.setResources(resourceBundle);
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("HomeAutomation v.28.10.-23");
+        stage.setTitle("HomeAutomation v.2.11.-23");
         stage.setScene(scene);
+        primaryStage = stage;
         stage.show();
+    }
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     public static void main(String[] args) {

@@ -20,7 +20,6 @@ public class ExpandButtonCreator implements IButton {
         } else if (object instanceof DeviceGroup) {
             label = bundleLoader.loadResourceByUsersLocale().getString("openBtnTxt");
         }
-
         Button editBtn = new Button(label);
         editBtn.getStyleClass().add("expandBtn");
         editBtn.setOnAction(event -> clickActions.onExpandClick(object));

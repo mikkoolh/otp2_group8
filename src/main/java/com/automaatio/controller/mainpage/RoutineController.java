@@ -8,10 +8,7 @@ import com.automaatio.components.buttons.SaveIconCreator;
 import com.automaatio.components.timeSelector.TimeSelector;
 import com.automaatio.components.timeSelector.TimeSelectorGrid;
 import com.automaatio.model.database.*;
-import com.automaatio.utils.CacheSingleton;
-import com.automaatio.utils.DatabaseTool;
-import com.automaatio.utils.ErrorMessageHandler;
-import com.automaatio.utils.RoutineUtils;
+import com.automaatio.utils.*;
 import com.dlsc.gemsfx.TimePicker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -87,9 +84,10 @@ public class RoutineController implements Initializable {
     private final int FONT_SIZE_TEXT = 24;
     private ErrorMessageHandler errorHandler;
 
-    private Locale currentLocale = new Locale("fi", "FI"); // tähän currentlocale
+    private Locale currentLocale = cache.getUser().getLocale(); // tähän currentlocale
 
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+    private BundleLoader bundleLoader = new BundleLoader();
+    private final ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

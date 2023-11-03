@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.controlsfx.control.spreadsheet.Grid;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -64,23 +64,6 @@ public class ProfileController {
         phoneField.setText(user.getPhoneNumber());
         priceLimit.setText(Double.toString(user.getMaxPrice()));
         languageGrid.add(localeSelector.getComboBox(),2,0);
-    }
-
-
-    @FXML
-    private void onBackClick(ActionEvent event) throws IOException {
-        System.out.println("return to main page");
-
-        NavigationUtil nav = new NavigationUtil();
-        nav.openMainPage(event);
-    }
-
-    @FXML
-    private void onLogoutClick(ActionEvent event) throws IOException {
-        System.out.println("log out");
-
-        NavigationUtil nav = new NavigationUtil();
-        nav.openLoginPage(event);
     }
 
     @FXML
@@ -141,11 +124,4 @@ public class ProfileController {
         }
 
     }
-
-    /**
-     * Initialize the user profile fields with default values.
-     * This method is automatically called when the FXML file is loaded.
-     */
-
-
 }

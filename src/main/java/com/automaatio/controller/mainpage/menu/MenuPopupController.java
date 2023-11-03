@@ -2,6 +2,7 @@ package com.automaatio.controller.mainpage.menu;
 
 import com.automaatio.model.database.User;
 import com.automaatio.model.database.UserDAO;
+import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MenuPopupController implements Initializable{

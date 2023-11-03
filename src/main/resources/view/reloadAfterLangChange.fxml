@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="720.0" prefWidth="1280" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.LanguageReloadController" styleClass="anchor-pane">
+      <AnchorPane fx:id="menuPane" centerShape="false" maxWidth="400" prefHeight="720.0" prefWidth="400.0" />
+      <AnchorPane fx:id="mainPane" centerShape="false" layoutX="401.0" prefHeight="720.0" prefWidth="880.0" />
+</AnchorPane>

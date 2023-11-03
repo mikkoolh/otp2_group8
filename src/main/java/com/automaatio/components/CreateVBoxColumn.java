@@ -6,6 +6,7 @@ import com.automaatio.components.buttons.DeleteButtonCreator;
 import com.automaatio.controller.mainpage.clickActions.ClickActions;
 import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceGroup;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

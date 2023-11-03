@@ -4,17 +4,18 @@ import com.automaatio.components.localeSelector.LocaleSelector;
 import com.automaatio.components.buttons.TogglableEyeIconCreator;
 import com.automaatio.components.SwitchablePasswordField;
 import com.automaatio.model.database.*;
-import com.automaatio.utils.CacheSingleton;
-import com.automaatio.utils.NavigationUtil;
+import com.automaatio.utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
@@ -35,6 +36,8 @@ public class LoginController {
 
     @FXML
     private TextField usernameField;
+    @FXML
+    private VBox lowerLoginVBox;
 
     @FXML
     private Button loginButton;
@@ -47,17 +50,18 @@ public class LoginController {
 
     private final NavigationUtil nav;
     private final UserDAO userDAO;
-    private final ResourceBundle resourceBundle;
+    private final BundleLoader bundleLoader;
 
 
     public LoginController() {
         nav = new NavigationUtil();
         userDAO = new UserDAO();
-        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        bundleLoader = new BundleLoader();
     }
 
     @FXML
     private void initialize() {
+        cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/login.fxml")));
         loginButton.setDisable(true);
         loginButton.setPadding(new Insets(7, 40, 7, 40));
 
@@ -75,6 +79,7 @@ public class LoginController {
         switchableField = new SwitchablePasswordField();
         passwordField = switchableField.getField();
         loginFormGrid.add(passwordField, 2, 1);
+        lowerLoginVBox.getChildren().add(new LocaleSelector().getComboBox());
 
         // Change listeners for input fields
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -84,6 +89,7 @@ public class LoginController {
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
             updateUI();
         });
+        //languageGrid.add(localeSelector.getComboBox(),2,0);
     }
 
     /**
@@ -100,7 +106,7 @@ public class LoginController {
 
             if (user == null) {
                 // User not found
-                loginErrorText.setText(resourceBundle.getString("usernameNotFoundTxt"));
+                loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("usernameNotFoundTxt"));
                 System.out.println("user not found");
             } else {
                 // User exists, check password
@@ -110,36 +116,31 @@ public class LoginController {
 
                 if (BCrypt.checkpw(password, user.getPassword())) {
                     System.out.println("password correct");
-
-                    // Save user in cache
                     cache.setUser(userDAO.getObject(username));
-                    User loggedInUser = cache.getUser();
-                    String usernamecache = loggedInUser.getUsername();
-                    System.out.println(username);
-                    System.out.println("cacheusername: " + usernamecache);
-                    System.out.println("maxprice in login:" +loggedInUser.getMaxPrice());
-
+                    if(user.getLocale().toString().equals("ar_SA")) {
+                        cache.setDirection(NodeOrientation.RIGHT_TO_LEFT);
+                    } else {
+                        cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
+                    }
                     loginErrorText.setText("");
                     nav.openMainPage(event);
                 } else {
-                    loginErrorText.setText(resourceBundle.getString("wrongPasswordTxt"));
+                    loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("wrongPasswordTxt"));
                     System.out.println("wrong password");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             // Database connection error
-            loginErrorText.setText(resourceBundle.getString("tryAgainTxt"));
+            loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("tryAgainTxt"));
         }
     }
 
     @FXML
     protected void onCreateAccountClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/create-account.fxml"));
-        fxmlLoader.setResources(resourceBundle);
-
+        fxmlLoader.setResources(ResourceBundle.getBundle("TextResources", cache.getTempLocale()));
         Parent root = fxmlLoader.load();
-
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -147,8 +148,6 @@ public class LoginController {
     }
 
     /*
-         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
-
     Disables the login button and clears the error message
     when both fields are empty
      */
