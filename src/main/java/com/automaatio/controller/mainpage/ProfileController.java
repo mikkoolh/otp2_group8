@@ -124,11 +124,4 @@ public class ProfileController {
         }
 
     }
-
-    /**
-     * Initialize the user profile fields with default values.
-     * This method is automatically called when the FXML file is loaded.
-     */
-
-
 }
