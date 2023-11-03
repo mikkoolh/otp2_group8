@@ -148,9 +148,11 @@ public class User {
     public void setLocale(String locale){
         this.locale = locale;
     }
+
     public Locale getLocale(){
         return new Locale(locale.split("_")[0], locale.split("_")[1]);
     }
+
     @Override
     public String toString() {
         return username;
