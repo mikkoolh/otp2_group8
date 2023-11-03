@@ -6,7 +6,7 @@
     <persistence-unit name="DevPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://10.120.32.57:3306/mikkoolh"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://omatarvot"/>
             <property name="jakarta.persistence.jdbc.user" value="mikkoolh"/>
             <property name="jakarta.persistence.jdbc.password" value="automaatio"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> <!-- Updated driver class -->
