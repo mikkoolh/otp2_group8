@@ -1,8 +1,6 @@
 package com.automaatio.utils;
 
 import javafx.scene.text.Text;
-
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -16,9 +14,11 @@ public class FormInputValidator {
             USERNAME_MAX_LENGTH, PASSWORD_MAX_LENGTH, FIRSTNAME_MAX_LENGTH, LASTNAME_MAX_LENGTH, PHONE_MIN_LENGTH, PHONE_MAX_LENGTH;
 
     private final ResourceBundle resourceBundle;
+    private final CompoundMessageCreator compountMessageCreator;
 
     public FormInputValidator() {
-        resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        resourceBundle = ResourceBundle.getBundle("TextResources", (new CurrentLocale().getCurrentLocale()));
+        compountMessageCreator = new CompoundMessageCreator();
         this.USERNAME_MIN_LENGTH = 5;
         this.USERNAME_MAX_LENGTH = 40;
         this.PASSWORD_MIN_LENGTH = 8;
@@ -33,13 +33,28 @@ public class FormInputValidator {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
             return false;
         } else if (includesSpaces(input)) {
-            errorField.setText("Username cannot contain spaces");
+            errorField.setText(compountMessageCreator.create(
+                    new Object[] { resourceBundle.getString("usernameTxt") },
+                    "inputCannotContainSpacesTemplate"
+            ));
             return false;
         } else if (input.length() < USERNAME_MIN_LENGTH) {
-            errorField.setText("Username must be at least " + USERNAME_MIN_LENGTH + " characters");
+            errorField.setText(compountMessageCreator.create(
+                    new Object[] {
+                            resourceBundle.getString("usernameTxt"),
+                            USERNAME_MIN_LENGTH
+                    },
+                    "inputMinLengthTemplate"
+            ));
             return false;
         } else if (input.length() > USERNAME_MAX_LENGTH) {
-            errorField.setText("Username must be " + USERNAME_MAX_LENGTH + " characters or less");
+            errorField.setText(compountMessageCreator.create(
+                    new Object[] {
+                            resourceBundle.getString("usernameTxt"),
+                            USERNAME_MAX_LENGTH
+                    },
+                    "inputMaxLengthTemplate"
+            ));
             return false;
         }
         return true;
