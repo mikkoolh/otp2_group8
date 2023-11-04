@@ -1,4 +1,4 @@
-package com.automaatio.model;
+package com.automaatio.utils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
@@ -10,7 +10,7 @@ public class ElectricityPriceConnector {
         return price < getElPriceNow();
     }
 
-    private double getElPriceNow(){
+    public double getElPriceNow(){
         double currentPrice = Double.MAX_VALUE;
         try{
             URI uri = java.net.URI.create("https://api.spot-hinta.fi/JustNow");

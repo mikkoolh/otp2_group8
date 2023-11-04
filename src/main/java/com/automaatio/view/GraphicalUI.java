@@ -1,9 +1,14 @@
 package com.automaatio.view;
 
+import com.automaatio.Main;
+import com.automaatio.controller.LoginController;
+import com.automaatio.controller.MainPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -11,6 +16,8 @@ import java.util.ResourceBundle;
 
 public class GraphicalUI extends Application {
     private static Stage primaryStage;
+    private static MainPageController mainC;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -25,6 +32,15 @@ public class GraphicalUI extends Application {
     }
     public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    @Override
+    public void stop() throws Exception {
+        mainC.stopMoottori();
+    }
+
+    public static void setMainC(MainPageController main){
+        mainC = main;
     }
 
     public static void main(String[] args) {

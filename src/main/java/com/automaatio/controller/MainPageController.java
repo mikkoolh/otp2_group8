@@ -1,9 +1,11 @@
 package com.automaatio.controller;
 
 
+import com.automaatio.model.Moottori;
 import com.automaatio.model.database.UserDAO;
 import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
+import com.automaatio.view.GraphicalUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +29,7 @@ public class MainPageController extends Thread implements Initializable{
     private Pane mainPane, menuPane;
     private CacheSingleton cache = CacheSingleton.getInstance();
     private BundleLoader bundleLoader = new BundleLoader();
+    private Moottori moottori;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +38,9 @@ public class MainPageController extends Thread implements Initializable{
         cache.setMainPane(mainPane);
         setMainPane(resourceBundle);
         setMenuPane(resourceBundle);
+        moottori = new Moottori(this);
+        moottori.start();
+        GraphicalUI.setMainC(this);
     }
 
     public void setMenuPane(ResourceBundle bundle){
@@ -57,5 +63,10 @@ public class MainPageController extends Thread implements Initializable{
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public void stopMoottori(){
+        System.out.println("window closed");
+        moottori.stopRunning();
     }
 }

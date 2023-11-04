@@ -1,6 +1,6 @@
 package com.automaatio.controller.mainpage.menu;
 
-import com.automaatio.model.ElectricityPriceConnector;
+import com.automaatio.utils.ElectricityPriceConnector;
 import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
 import com.automaatio.utils.NavigationUtil;
