@@ -20,14 +20,16 @@ public class Moottori extends Thread{
 
     public void run(){
         System.out.println("Moottori käynnistyi!");
+        elPriceNow = elPrice.getElPriceNow();
+        mainController.setElPriceInUI(elPrice.getElPriceNow());
 
         while(running){
             LocalDateTime currentTime = LocalDateTime.now();
             if (currentTime.getMinute() == 1 && currentTime.getSecond() == 0) {
-                elPriceNow=elPrice.getElPriceNow();
+                elPriceNow = elPrice.getElPriceNow();
             }
-            System.out.println("tarkistus joka sek");
 
+            mainController.setElPriceInUI(elPriceNow);
             try {
                 Thread.sleep(INTERVAL);
             } catch (InterruptedException e) {

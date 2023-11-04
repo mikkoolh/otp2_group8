@@ -1,6 +1,7 @@
 package com.automaatio.controller.mainpage.menu;
 
 import com.automaatio.components.CreateVBoxColumn;
+import com.automaatio.controller.mainpage.MainMenuController;
 import com.automaatio.controller.mainpage.clickActions.DeviceGroupsClick;
 import com.automaatio.model.database.DeviceGroup;
 import com.automaatio.model.database.DeviceGroupDAO;
@@ -22,6 +23,7 @@ public class RoomsController implements Initializable, Menu {
     private TextField newRoomTextField;
     private final CreateVBoxColumn deviceGroupRow = new CreateVBoxColumn();
 
+
     @FXML
     private VBox roomsVBox;
 
@@ -29,6 +31,7 @@ public class RoomsController implements Initializable, Menu {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MainMenuController.setRoomsController(this);
         show();
     }
 

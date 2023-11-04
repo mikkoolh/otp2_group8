@@ -1,6 +1,7 @@
 package com.automaatio.controller;
 
 
+import com.automaatio.controller.mainpage.MainMenuController;
 import com.automaatio.model.Moottori;
 import com.automaatio.model.database.UserDAO;
 import com.automaatio.utils.BundleLoader;
@@ -29,6 +30,7 @@ public class MainPageController extends Thread implements Initializable{
     private Pane mainPane, menuPane;
     private CacheSingleton cache = CacheSingleton.getInstance();
     private BundleLoader bundleLoader = new BundleLoader();
+    private MainMenuController menuController;
     private Moottori moottori;
 
     @Override
@@ -48,6 +50,7 @@ public class MainPageController extends Thread implements Initializable{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main-menu.fxml"));
             loader.setResources(bundleLoader.loadResourceByUsersLocale());
             Parent firstView = loader.load();
+            menuController = loader.getController();
             menuPane.getChildren().add(firstView);
         } catch (IOException e) {
             System.out.println(e);
@@ -63,6 +66,19 @@ public class MainPageController extends Thread implements Initializable{
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public void setElPriceInUI(Double price){
+        menuController.setELPriceInUI(price);
+    }
+
+    public void reloadDevices(){
+        menuController.reloadMenuDevices();
+
+    }
+
+    public void reloadRooms(){
+        menuController.reloadMenuRooms();
     }
 
     public void stopMoottori(){

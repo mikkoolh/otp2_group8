@@ -117,4 +117,8 @@ public class RoomController implements Initializable, IController {
             deviceGroupDAO.deleteGroup(cache.getRoom().getDeviceGroupId());
         }
     }
+
+    public void reload() {
+        showDevices();
+    }
 }

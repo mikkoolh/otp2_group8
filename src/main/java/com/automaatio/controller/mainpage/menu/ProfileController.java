@@ -1,5 +1,7 @@
 package com.automaatio.controller.mainpage.menu;
 
+import com.automaatio.Main;
+import com.automaatio.controller.mainpage.MainMenuController;
 import com.automaatio.utils.ElectricityPriceConnector;
 import com.automaatio.utils.BundleLoader;
 import com.automaatio.utils.CacheSingleton;
@@ -39,17 +41,18 @@ public class ProfileController implements Initializable, Menu {
     @FXML
     ImageView profileView;
 
-    private ElectricityPriceConnector elConnect;
     private ResourceBundle resourceBundle;
 
     private int selectedPic = cache.getUser().getSelectedPicture();
 
     public ProfileController() {
         mainPane = cache.getMainPane();
+        MainMenuController.setMenuProfileController(this);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         resourceBundle = resources;
         show();
         loadProfilePic();
@@ -97,13 +100,10 @@ public class ProfileController implements Initializable, Menu {
         nameTXT.setText(resourceBundle.getString("greetingTxt") + name + "!");
         loadProfilePic();
 
-        try {
-            elConnect = new ElectricityPriceConnector();
-            electricityPrice.setText(resourceBundle.getString("elPriceDefaultTxt") + elConnect.getElPrice()+ resourceBundle.getString("elPriceUnitsTxt"));
-        } catch (Exception e) {
-            System.out.println("Ongelma sähkönhinnan lataamisessa: " + e);
-        }
+    }
 
+    public void setElPriceNow(Double price){
+       electricityPrice.setText(resourceBundle.getString("elPriceDefaultTxt") + String.format("%.2f", price) + resourceBundle.getString("elPriceUnitsTxt"));
     }
 
     public void openProfile() {

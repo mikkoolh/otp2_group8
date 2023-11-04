@@ -108,5 +108,8 @@ public class DeviceController implements Initializable, IController {
     public void changeAutomation() {
         deviceDAO.updateAutomation(device.getDeviceID());
     }
+
+    public void reload() {
+    }
 }
 

@@ -33,7 +33,7 @@ public class DeviceGroupsClick implements ClickActions {
 
     @Override
     public void onDeleteClick(Object object, VBox mainVBox, VBox boxToDelete) {
-        deviceGroupDAO.removeDeviceFromGroup(cache.getRoom(),(Device) object);
+        deviceGroupDAO.deleteGroup(((DeviceGroup) object).getDeviceGroupId());
         mainVBox.getChildren().remove(boxToDelete);
     }
 }
