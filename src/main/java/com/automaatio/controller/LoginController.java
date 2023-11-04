@@ -5,6 +5,7 @@ import com.automaatio.components.buttons.TogglableEyeIconCreator;
 import com.automaatio.components.SwitchablePasswordField;
 import com.automaatio.model.database.*;
 import com.automaatio.utils.*;
+import com.automaatio.view.GraphicalUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,7 @@ public class LoginController {
     private final NavigationUtil nav;
     private final UserDAO userDAO;
     private final BundleLoader bundleLoader;
+    private GraphicalUI graphUI;
 
 
     public LoginController() {
@@ -134,7 +136,7 @@ public class LoginController {
                         cache.setDirection(NodeOrientation.LEFT_TO_RIGHT);
                     }
                     loginErrorText.setText("");
-                    nav.openMainPage(event);
+                    nav.openMainPage(event, graphUI);
                 } else {
                     loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("wrongPasswordTxt"));
                     System.out.println("wrong password");
@@ -172,4 +174,7 @@ public class LoginController {
         }
     }
 
+    public void setGraphicalUI(GraphicalUI graphicalUI) {
+        graphUI = graphicalUI;
+    }
 }

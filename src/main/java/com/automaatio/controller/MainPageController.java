@@ -35,14 +35,12 @@ public class MainPageController extends Thread implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ResourceBundle resourceBundle = resources;
         cache.setMenuPane(menuPane);
         cache.setMainPane(mainPane);
-        setMainPane(resourceBundle);
-        setMenuPane(resourceBundle);
+        setMainPane(resources);
+        setMenuPane(resources);
         moottori = new Moottori(this);
         moottori.start();
-        GraphicalUI.setMainC(this);
     }
 
     public void setMenuPane(ResourceBundle bundle){
@@ -77,8 +75,9 @@ public class MainPageController extends Thread implements Initializable{
 
     }
 
-    public void reloadRooms(){
+    public void deleteRoomFromMain(){
         menuController.reloadMenuRooms();
+
     }
 
     public void stopMoottori(){

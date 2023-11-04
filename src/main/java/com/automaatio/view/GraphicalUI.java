@@ -16,7 +16,8 @@ import java.util.ResourceBundle;
 
 public class GraphicalUI extends Application {
     private static Stage primaryStage;
-    private static MainPageController mainC;
+    private MainPageController mainC;
+    private LoginController loginC;
 
 
     @Override
@@ -25,6 +26,8 @@ public class GraphicalUI extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(GraphicalUI.class.getResource("/view/login.fxml"));
         fxmlLoader.setResources(resourceBundle);
         Scene scene = new Scene(fxmlLoader.load());
+        loginC = fxmlLoader.getController();
+        loginC.setGraphicalUI(this);
         stage.setTitle("HomeAutomation v.2.11.-23");
         stage.setScene(scene);
         primaryStage = stage;
@@ -34,13 +37,14 @@ public class GraphicalUI extends Application {
         return primaryStage;
     }
 
+    public void setMainC(MainPageController mainCont){
+        System.out.println(mainCont);
+        mainC = mainCont;
+    }
+
     @Override
     public void stop() throws Exception {
         mainC.stopMoottori();
-    }
-
-    public static void setMainC(MainPageController main){
-        mainC = main;
     }
 
     public static void main(String[] args) {
