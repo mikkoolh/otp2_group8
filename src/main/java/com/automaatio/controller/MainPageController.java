@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  *
  */
 
-public class MainPageController implements Initializable {
+public class MainPageController extends Thread implements Initializable{
     @FXML
     private Pane mainPane, menuPane;
     private CacheSingleton cache = CacheSingleton.getInstance();
