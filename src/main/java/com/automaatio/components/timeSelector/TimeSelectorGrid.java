@@ -1,10 +1,9 @@
 package com.automaatio.components.timeSelector;
 
+import com.automaatio.utils.BundleLoader;
 import com.dlsc.gemsfx.TimePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -16,7 +15,8 @@ import java.util.ResourceBundle;
 
 public class TimeSelectorGrid {
     public GridPane create(TimePicker startTime, TimePicker endTime) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
+        BundleLoader bundleLoader = new BundleLoader();
+        ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
         GridPane grid = new GridPane();
         grid.add(new Label(resourceBundle.getString("startingFromTxt")), 0, 0);
         grid.add(new Label(resourceBundle.getString("endingAtTxt")), 0, 1);
