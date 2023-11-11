@@ -2,12 +2,9 @@ package com.automaatio.utils;
 
 import com.automaatio.model.database.Routine;
 import com.automaatio.model.database.Weekday;
-
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -70,15 +67,18 @@ public class RoutineUtils {
      */
     public LinkedHashMap<String, ArrayList<Routine>> getRoutinesByWeekday(List<Weekday> weekdays, List<Routine> routines) {
         LinkedHashMap<String, ArrayList<Routine>> map = new LinkedHashMap<>();
+        DatabaseLocalizer localizer = new DatabaseLocalizer();
 
-        // Fill LinkedHashMap keys with weekdays
+        // Fill LinkedHashMap keys with localized weekday names
         for (Weekday w : weekdays) {
-            map.put(w.getName(), new ArrayList<Routine>());
+            String localizedName = localizer.localizeWeekday(w);
+            map.put(localizedName, new ArrayList<>());
         }
 
         // Add each weekday to the corresponding list in the LinkedHashMap
         for (Routine routine : routines) {
-            map.get(routine.getEventTime().getWeekday().getName()).add(routine);
+            String localizedName = localizer.localizeWeekday(routine.getEventTime().getWeekday());
+            map.get(localizedName).add(routine);
         }
         return map;
     }

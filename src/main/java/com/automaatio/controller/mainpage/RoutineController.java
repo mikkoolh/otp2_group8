@@ -87,6 +87,7 @@ public class RoutineController implements Initializable {
     private ErrorMessageHandler errorHandler;
     private ResourceBundle resourceBundle;
     private CompoundMessageCreator compoundMessageCreator;
+    private DatabaseLocalizer localizer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -95,6 +96,7 @@ public class RoutineController implements Initializable {
         resourceBundle = resources;
         errorHandler = new ErrorMessageHandler();
         compoundMessageCreator = new CompoundMessageCreator();
+        localizer = new DatabaseLocalizer();
         errorMessageField.getStyleClass().add("error-text");
         noRoutinesToShow = true;
 
@@ -146,7 +148,7 @@ public class RoutineController implements Initializable {
                     routineVBox.setAlignment(Pos.TOP_LEFT);
                     deleteAllButton.setVisible(true);
                     HBox splitBox = new HBox();
-                    Label weekdayLabel = new WeekdayLabel(weekday).create();
+                    Label weekdayLabel = new Label(weekday);
                     weekdayLabel.setMinWidth(60);
                     noRoutinesToShow = false;
 
@@ -336,7 +338,7 @@ public class RoutineController implements Initializable {
             alert.setContentText(compoundMessageCreator.create(
                     new Object[] {
                             cache.getDevice(),
-                            time.getWeekday().getName(),
+                            localizer.localizeWeekday(time.getWeekday()),
                             util.getFormattedTime(time.getStartTime()),
                             util.getFormattedTime(time.getStartTime())
                     },
@@ -430,7 +432,7 @@ public class RoutineController implements Initializable {
 
         // Weekday checkboxes
         for (Weekday weekday : weekdayDAO.getAll()) {
-            weekdayCheckBoxes.put(weekday, new CheckBox(weekday.getName()));
+            weekdayCheckBoxes.put(weekday, new CheckBox(localizer.localizeWeekday(weekday)));
         }
         VBox weekdaysVBox = new VBox();
         weekdaysVBox.getChildren().addAll(weekdayCheckBoxes.values());
