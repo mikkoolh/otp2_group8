@@ -67,7 +67,7 @@ public class RoutineUtils {
      */
     public LinkedHashMap<String, ArrayList<Routine>> getRoutinesByWeekday(List<Weekday> weekdays, List<Routine> routines) {
         LinkedHashMap<String, ArrayList<Routine>> map = new LinkedHashMap<>();
-        DatabaseLocalizer localizer = new DatabaseLocalizer();
+        LocalizationTool localizer = new LocalizationTool();
 
         // Fill LinkedHashMap keys with localized weekday names
         for (Weekday w : weekdays) {

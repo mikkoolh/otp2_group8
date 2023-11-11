@@ -1,6 +1,5 @@
 package com.automaatio.controller.mainpage;
 
-import com.automaatio.components.*;
 import com.automaatio.components.buttons.CancelIconCreator;
 import com.automaatio.components.buttons.DeleteIconCreator;
 import com.automaatio.components.buttons.EditIconCreator;
@@ -22,9 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.controlsfx.control.ToggleSwitch;
 
-import javax.swing.*;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -54,7 +51,7 @@ public class RoutineController implements Initializable {
     private VBox routineVBox;
 
     @FXML
-    private Button addRoutineButton, deleteAllButton, saveButton;
+    private Button automateAllButton, addRoutineButton, deleteAllButton, saveButton;
 
     @FXML
     private Text noRoutinesText, formTitle;
@@ -87,7 +84,7 @@ public class RoutineController implements Initializable {
     private ErrorMessageHandler errorHandler;
     private ResourceBundle resourceBundle;
     private CompoundMessageCreator compoundMessageCreator;
-    private DatabaseLocalizer localizer;
+    private LocalizationTool localizer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,14 +93,14 @@ public class RoutineController implements Initializable {
         resourceBundle = resources;
         errorHandler = new ErrorMessageHandler();
         compoundMessageCreator = new CompoundMessageCreator();
-        localizer = new DatabaseLocalizer();
+        localizer = new LocalizationTool();
         errorMessageField.getStyleClass().add("error-text");
         noRoutinesToShow = true;
 
         try {
             routines = util.sortByTime(fetchRoutines()); // Sort fetched routines by time
             DatabaseTool.resetWeekdays();
-            weekdays = weekdayDAO.getAll();
+            weekdays = localizer.sortWeekdays(weekdayDAO.getAll());
             initializeForm();
             loadRoutines();
         } catch (Exception e) {
@@ -322,6 +319,11 @@ public class RoutineController implements Initializable {
 
         toggleSwitches.put(routine, toggle);
         return toggle;
+    }
+
+    @FXML
+    public void automateAll(ActionEvent actionEvent) {
+        System.out.println("automate all");
     }
 
     // Shows a confirmation popup when the "Delete routine" button is clicked
