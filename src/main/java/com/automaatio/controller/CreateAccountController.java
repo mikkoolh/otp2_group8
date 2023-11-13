@@ -82,19 +82,23 @@ public class CreateAccountController {
         // Create a new user
         User user = new User(username, firstName, lastName, phoneNumber, email, BCrypt.hashpw(password, BCrypt.gensalt()), 0, 1);
         System.out.println(user);
-        saveUser(user);
-        createAccountErrorText.setText("");
-        nav.openLoginPage(event);
+
+        if (saveUser(user)) {
+            createAccountErrorText.setText("");
+            nav.openLoginPage(event);
+        }
     }
 
     // Creates a new user into the database when the save button is clicked
-    private void saveUser(User user) {
+    private boolean saveUser(User user) {
         try {
             userDAO.addObject(user);
             System.out.println("created user");
+            return true;
         } catch (Exception e) {
-            System.out.println(e);
             createAccountErrorText.setText(resourceBundle.getString("createAccountErrorTxt"));
+            System.out.println(e);
+            return false;
         }
     }
 

@@ -20,9 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.io.IOException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -51,18 +49,17 @@ public class LoginController {
 
     private final NavigationUtil nav;
     private final UserDAO userDAO;
-    private final BundleLoader bundleLoader;
-
+    private ResourceBundle resourceBundle;
 
     public LoginController() {
         nav = new NavigationUtil();
         userDAO = new UserDAO();
-        bundleLoader = new BundleLoader();
     }
 
     @FXML
     private void initialize() {
         cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/login.fxml")));
+        resourceBundle = ResourceBundle.getBundle("TextResources", cache.getTempLocale());
         loginButton.setDisable(true);
         loginButton.setPadding(new Insets(7, 40, 7, 40));
 
@@ -117,7 +114,7 @@ public class LoginController {
 
             if (user == null) {
                 // User not found
-                loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("usernameNotFoundTxt"));
+                loginErrorText.setText(resourceBundle.getString("usernameNotFoundTxt"));
                 System.out.println("user not found");
             } else {
                 // User exists, check password
@@ -136,14 +133,14 @@ public class LoginController {
                     loginErrorText.setText("");
                     nav.openMainPage(event);
                 } else {
-                    loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("wrongPasswordTxt"));
+                    loginErrorText.setText(resourceBundle.getString("wrongPasswordTxt"));
                     System.out.println("wrong password");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             // Database connection error
-            loginErrorText.setText(bundleLoader.loadResourceByUsersLocale().getString("tryAgainTxt"));
+            loginErrorText.setText(resourceBundle.getString("tryAgainTxt"));
         }
     }
 
