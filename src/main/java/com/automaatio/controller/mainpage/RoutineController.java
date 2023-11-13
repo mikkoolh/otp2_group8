@@ -481,10 +481,7 @@ public class RoutineController implements Initializable {
 
             // "Delete [amount] routines for [device]?" text
             alert.setContentText(compoundMessageCreator.create(
-                    new Object[] {
-                            fetchRoutines().size(),
-                            cache.getDevice().getName()
-                    },
+                    new Object[] { cache.getDevice().getName() },
                     "confirmDeleteAllRoutinesTemplate"
             ));
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteAllBtnTxt"));
