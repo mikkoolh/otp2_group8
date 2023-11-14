@@ -10,7 +10,7 @@ import jakarta.persistence.*;
  */
 
 @Entity
-@Table(name = "weekday_loc")
+@Table(name = "weekday")
 public class Weekday {
 
     @Id
