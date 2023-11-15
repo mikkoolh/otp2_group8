@@ -19,32 +19,55 @@ public class Weekday {
     private int weekdayId;
 
     @Column
-    private String name;
+    private String name_en;
+
+    @Column
+    private String name_fi;
+
+    @Column
+    private String name_ru;
+
+    @Column
+    private String name_ar;
 
     public Weekday() {}
 
     /**
      * Parametrized constructor
-     * @param name name of the day
      */
-    public Weekday(String name) {
-        this.name = name;
+    public Weekday(String name_en, String name_fi, String name_ru, String name_ar) {
+        this.name_en = name_en;
+        this.name_fi = name_fi;
+        this.name_ru = name_ru;
+        this.name_ar = name_ar;
     }
 
     public int getWeekdayId() {
         return weekdayId;
     }
 
-    public String getName() {
-        return name;
+    public String getName_en() {
+        return name_en;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getName_fi() {
+        return name_fi;
+    }
+
+    public String getName_ru() {
+        return name_ru;
+    }
+
+    public String getName_ar() {
+        return name_ar;
     }
 
     @Override
     public String toString() {
-        return name;
+        return name_en;
+    }
+
+    public void setName_en(String name_en) {
+        this.name_en = name_en;
     }
 }

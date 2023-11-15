@@ -43,6 +43,11 @@
                                 <children>
                                     <Button fx:id="addRoutineButton" onAction="#showForm" text="%addCustomRoutineTxt" />
                                     <Pane HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="automateAllButton" mnemonicParsing="false" onAction="#automateAll" text="%automateAllTxt">
+                                        <HBox.margin>
+                                            <Insets />
+                                        </HBox.margin>
+                                    </Button>
                                 </children>
                             </HBox>
                             <Label fx:id="errorMessageField">

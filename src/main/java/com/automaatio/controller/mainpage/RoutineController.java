@@ -1,6 +1,5 @@
 package com.automaatio.controller.mainpage;
 
-import com.automaatio.components.*;
 import com.automaatio.components.buttons.CancelIconCreator;
 import com.automaatio.components.buttons.DeleteIconCreator;
 import com.automaatio.components.buttons.EditIconCreator;
@@ -22,9 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.controlsfx.control.ToggleSwitch;
 
-import javax.swing.*;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -54,7 +51,7 @@ public class RoutineController implements Initializable {
     private VBox routineVBox;
 
     @FXML
-    private Button addRoutineButton, deleteAllButton, saveButton;
+    private Button automateAllButton, addRoutineButton, deleteAllButton, saveButton;
 
     @FXML
     private Text noRoutinesText, formTitle;
@@ -87,6 +84,7 @@ public class RoutineController implements Initializable {
     private ErrorMessageHandler errorHandler;
     private ResourceBundle resourceBundle;
     private CompoundMessageCreator compoundMessageCreator;
+    private LocalizationTool localizer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -95,13 +93,14 @@ public class RoutineController implements Initializable {
         resourceBundle = resources;
         errorHandler = new ErrorMessageHandler();
         compoundMessageCreator = new CompoundMessageCreator();
+        localizer = new LocalizationTool();
         errorMessageField.getStyleClass().add("error-text");
         noRoutinesToShow = true;
 
         try {
             routines = util.sortByTime(fetchRoutines()); // Sort fetched routines by time
             DatabaseTool.resetWeekdays();
-            weekdays = weekdayDAO.getAll();
+            weekdays = localizer.sortWeekdays(weekdayDAO.getAll());
             initializeForm();
             loadRoutines();
         } catch (Exception e) {
@@ -146,7 +145,7 @@ public class RoutineController implements Initializable {
                     routineVBox.setAlignment(Pos.TOP_LEFT);
                     deleteAllButton.setVisible(true);
                     HBox splitBox = new HBox();
-                    Label weekdayLabel = new WeekdayLabel(weekday).create();
+                    Label weekdayLabel = new Label(weekday);
                     weekdayLabel.setMinWidth(60);
                     noRoutinesToShow = false;
 
@@ -322,6 +321,11 @@ public class RoutineController implements Initializable {
         return toggle;
     }
 
+    @FXML
+    public void automateAll(ActionEvent actionEvent) {
+        System.out.println("automate all");
+    }
+
     // Shows a confirmation popup when the "Delete routine" button is clicked
     private final EventHandler<ActionEvent> deleteRoutine = new EventHandler<>() {
         public void handle(ActionEvent event) {
@@ -336,7 +340,7 @@ public class RoutineController implements Initializable {
             alert.setContentText(compoundMessageCreator.create(
                     new Object[] {
                             cache.getDevice(),
-                            time.getWeekday().getName(),
+                            localizer.localizeWeekday(time.getWeekday()),
                             util.getFormattedTime(time.getStartTime()),
                             util.getFormattedTime(time.getStartTime())
                     },
@@ -430,7 +434,7 @@ public class RoutineController implements Initializable {
 
         // Weekday checkboxes
         for (Weekday weekday : weekdayDAO.getAll()) {
-            weekdayCheckBoxes.put(weekday, new CheckBox(weekday.getName()));
+            weekdayCheckBoxes.put(weekday, new CheckBox(localizer.localizeWeekday(weekday)));
         }
         VBox weekdaysVBox = new VBox();
         weekdaysVBox.getChildren().addAll(weekdayCheckBoxes.values());
@@ -477,10 +481,7 @@ public class RoutineController implements Initializable {
 
             // "Delete [amount] routines for [device]?" text
             alert.setContentText(compoundMessageCreator.create(
-                    new Object[] {
-                            fetchRoutines().size(),
-                            cache.getDevice().getName()
-                    },
+                    new Object[] { cache.getDevice().getName() },
                     "confirmDeleteAllRoutinesTemplate"
             ));
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteAllBtnTxt"));
