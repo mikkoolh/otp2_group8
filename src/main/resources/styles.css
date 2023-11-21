@@ -43,6 +43,7 @@
 .roomDeleteButton {
     -fx-background-color: #344347;
     -fx-text-fill: white;
+    -fx-font-size: 16px;
 }
 
 .scroll-pane {
