@@ -57,12 +57,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.sonatype.sisu</groupId>
             <artifactId>sisu-inject-bean</artifactId>
             <version>1.4.2</version>
@@ -101,7 +95,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version> <!-- Use the latest version -->
+                <version>0.8.10</version> <!-- Use the latest version -->
                 <executions>
                     <execution>
                         <goals>
