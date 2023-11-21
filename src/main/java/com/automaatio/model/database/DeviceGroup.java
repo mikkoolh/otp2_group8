@@ -56,6 +56,8 @@ public class DeviceGroup {
         this.name = name;
     }
 
+    public User getUser() { return user; }
+
     @Override
     public String toString() {
         return getName();

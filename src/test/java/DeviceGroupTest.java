@@ -1,25 +1,32 @@
-import com.automaatio.model.database.Device;
+import com.automaatio.model.database.User;
 import com.automaatio.model.database.DeviceGroup;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DeviceGroupTest {
+    @Test
+    public void testDeviceGroupConstructorAndGetters() {
+        User user = new User();
+        DeviceGroup deviceGroup = new DeviceGroup("TestGroup", user);
 
-    //Testataan konstruktoria ja gettereita
-   /* @Test
-    public void testDeviceGroupConstructor() {
-        DeviceGroup dg = new DeviceGroup("OlohuoneTesti");
-
-        Assertions.assertEquals("OlohuoneTesti", dg.getName(), "Name should be 'OlohuoneTesti'");
-    }*/
+        assertEquals("TestGroup", deviceGroup.getName());
+        assertEquals(user, deviceGroup.getUser());
+    }
 
     @Test
-    public void testDevGroupGettersAndSetters() {
-        DeviceGroup dg = new DeviceGroup();
+    public void testSetName() {
+        DeviceGroup deviceGroup = new DeviceGroup();
+        deviceGroup.setName("testName");
 
-        dg.setName("GetteriSetteriRyhmä");
+        assertEquals("testName", deviceGroup.getName());
+    }
 
-        Assertions.assertEquals("GetteriSetteriRyhmä", dg.getName(),"Name should be 'GetteriSetteriRyhmä'");
+    @Test
+    public void testToString() {
+        DeviceGroup deviceGroup = new DeviceGroup("TestGroup", null);
+
+        assertEquals("TestGroup", deviceGroup.toString());
     }
 }
