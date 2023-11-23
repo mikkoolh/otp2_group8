@@ -92,7 +92,7 @@ public class Device {
         onOff = !onOff;
     }
 
-
+    public String getUserName() { return this.userName; }
 
     public boolean isAutomation() {
         return automation;
