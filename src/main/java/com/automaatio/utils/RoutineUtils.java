@@ -78,7 +78,9 @@ public class RoutineUtils {
         // Add each weekday to the corresponding list in the LinkedHashMap
         for (Routine routine : routines) {
             String localizedName = localizer.localizeWeekday(routine.getEventTime().getWeekday());
-            map.get(localizedName).add(routine);
+            if (localizedName != null && map.containsKey(localizedName)) {
+                map.get(localizedName).add(routine);
+            }
         }
         return map;
     }
