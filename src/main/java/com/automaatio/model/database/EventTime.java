@@ -42,7 +42,6 @@ public class EventTime {
         this.weekday = weekday;
     }
 
-
     public LocalDateTime getStartTime() {
         return startTime;
     }

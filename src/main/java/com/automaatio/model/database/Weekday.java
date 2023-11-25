@@ -61,13 +61,4 @@ public class Weekday {
     public String getName_ar() {
         return name_ar;
     }
-
-    @Override
-    public String toString() {
-        return name_en;
-    }
-
-    public void setName_en(String name_en) {
-        this.name_en = name_en;
-    }
 }
