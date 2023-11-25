@@ -29,6 +29,25 @@ public class UserDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    public User addAndReturnObject(Object object) {
+        User savedUser;
+
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+            savedUser = em.merge((User) object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+        return savedUser;
+    }
+
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
