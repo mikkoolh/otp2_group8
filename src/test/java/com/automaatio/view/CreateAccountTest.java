@@ -100,7 +100,7 @@ class CreateAccountTest {
         robot.clickOn(usernameField).write("jjj");
         assertEquals("Username must be at least 5 characters", usernameTooltip.getText());
         robot.clickOn(usernameField).write("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        assertEquals("Username must be at least 40 characters or less", usernameTooltip.getText());
+        assertEquals("Username must be 40 characters or less", usernameTooltip.getText());
 
         robot.clickOn(firstNameField).write(" ");
         assertEquals("Required field", firstNameTooltip.getText());
