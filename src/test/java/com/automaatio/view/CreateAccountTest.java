@@ -43,7 +43,7 @@ class CreateAccountTest {
         firstNameField = robot.lookup("#firstNameField").queryAs(TextField.class);
         lastNameField = robot.lookup("#lastNameField").queryAs(TextField.class);
         emailField = robot.lookup("#emailField").queryAs(TextField.class);
-        phoneField = robot.lookup("#phoneField").queryAs(TextField.class);
+        phoneField = robot.lookup("#phoneNumberField").queryAs(TextField.class);
         passwordField = robot.lookup(".password-field").queryAs(PasswordField.class);
 
         usernameTooltip = robot.lookup("#usernameTooltip").queryAs(Text.class);
