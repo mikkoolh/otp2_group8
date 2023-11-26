@@ -20,15 +20,14 @@ import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
 
 public class PassChangeTest extends ApplicationTest {
 
-    private User user = new User("testaaja", "Testaaja", "Test", "0505551122", "testi@testi.fi", "oldpassword", 20, 1);
+    //private User user = new User("testaaja", "Testaaja", "Test", "0505551122", "testi@testi.fi", "oldpassword", 20, 1);
     UserDAO userDAO = new UserDAO();
-    ProfileController profileController;
     CacheSingleton cache = CacheSingleton.getInstance();
     @Override
     public void start(Stage stage) throws Exception {
         cache.setUser(userDAO.getObject("niknoss"));
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/user-profile.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ProfileController.class.getResource("/view/user-profile.fxml"));
         fxmlLoader.setResources(resourceBundle);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
@@ -39,6 +38,6 @@ public class PassChangeTest extends ApplicationTest {
         robot.clickOn("#oldpassField").write("salasana1");
         robot.clickOn("#newpassField").write("newpassword");
         robot.clickOn("#changeBtn");
-        verifyThat("#profileErrorText", hasText("Salasana vaihdettu"));
+        verifyThat("#profileErrorText", hasText("Password succesfully changed"));
     }
 }
