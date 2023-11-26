@@ -13,9 +13,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
 
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
+    private final CacheSingleton cache = CacheSingleton.getInstance();
+
     @Start
     private void start(Stage stage) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
@@ -28,7 +32,22 @@ class CreateAccountTest {
 
     @Test
     void createAccount(FxRobot robot) {
-        robot.clickOn("#usernameField").write("testuser");
-        robot.clickOn("#firstNameField").write("name");
+        robot.clickOn("#usernameField").write("jdoe");
+        verifyThat("#usernameTooltip", hasText("Username must be at least 5 characters"));
+        robot.write("12");
+        verifyThat("#usernameTooltip", hasText("Username available"));
+
+        robot.clickOn("#firstNameField").write("John");
+        robot.clickOn("#lastNameField").write("Doe");
+        robot.clickOn("#emailField").write("john.doe@test.com");
+        robot.clickOn("#phoneNumberField").write("123456789");
+
+        robot.clickOn(".password-field").write("secret");
+        verifyThat("#passwordTooltip", hasText("Password must be at least 8 characters"));
+        robot.write("pw");
+        verifyThat("#passwordTooltip", hasText("Password must include at least one letter and a number"));
+        robot.write("1");
+
+        robot.clickOn("#saveButton");
     }
 }
