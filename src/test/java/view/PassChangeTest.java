@@ -6,6 +6,7 @@ import com.automaatio.model.database.UserDAO;
 import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import org.testfx.framework.junit5.Start;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
 
@@ -42,6 +44,7 @@ public class PassChangeTest extends ApplicationTest {
         robot.clickOn("#oldpassField").write("newpassword");
         robot.clickOn("#newpassField").write("salasana1");
         robot.clickOn("#changeBtn");
-        verifyThat("#profileErrorText.text", hasText("Password incorrect"));
+        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
+        assertEquals("Password incorrect", profileErrorText.getText());
     }
 }
