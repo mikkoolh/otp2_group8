@@ -125,14 +125,14 @@ public class FormInputValidator {
                     "passwordMaxLengthTemplate"
             ));
             return false;
-        } else if (!input.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{0," + PASSWORD_MAX_LENGTH +"}$")) {
-            errorField.setText(resourceBundle.getString("passwordFormatTxt"));
-            return false;
         } else if (includesSpaces(input)) {
             errorField.setText(compoundMessageCreator.create(
                     new Object[] { resourceBundle.getString("passwordTxt") },
                     "inputCannotContainSpacesTemplate"
             ));
+            return false;
+        } else if (!input.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{0," + PASSWORD_MAX_LENGTH +"}$")) {
+            errorField.setText(resourceBundle.getString("passwordFormatTxt"));
             return false;
         }
         errorField.setText("");
