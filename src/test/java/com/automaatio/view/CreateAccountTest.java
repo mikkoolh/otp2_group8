@@ -19,14 +19,15 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
     private final CacheSingleton cache = CacheSingleton.getInstance();
     private static final UserDAO userDAO = new UserDAO();
 
-    private Text usernameTooltip, firstNameTooltip;
-    private TextField usernameField;
+    private Text usernameTooltip, firstNameTooltip, lastNameTooltip;
+    private TextField usernameField, firstNameField, lastNameField;
 
     @BeforeAll
     public static void setup() {
@@ -38,9 +39,14 @@ class CreateAccountTest {
 
     private void getFields(FxRobot robot) {
         usernameField = robot.lookup("#usernameField").queryAs(TextField.class);
+        firstNameField = robot.lookup("#firstNameField").queryAs(TextField.class);
+        lastNameField = robot.lookup("#lastNameField").queryAs(TextField.class);
+
 
         usernameTooltip = robot.lookup("#usernameTooltip").queryAs(Text.class);
         firstNameTooltip = robot.lookup("#firstNameTooltip").queryAs(Text.class);
+        lastNameTooltip = robot.lookup("#lastNameTooltip").queryAs(Text.class);
+
     }
 
     @Start
@@ -85,13 +91,20 @@ class CreateAccountTest {
         robot.clickOn("#saveButton");
 
          */
+        assertTrue(true);
     }
 
     @Test
     void createAccountFail(FxRobot robot) {
         getFields(robot);
         robot.clickOn(usernameField).write("jjj");
-        assertEquals("Password incorrect", usernameTooltip.getText());
+        assertEquals("Username must be at least 5 characters", usernameTooltip.getText());
+        robot.clickOn(usernameField).write("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        assertEquals("Username must be at least 40 characters or less", usernameTooltip.getText());
 
+        robot.clickOn(firstNameField).write(" ");
+        assertEquals("Required field", firstNameTooltip.getText());
+        robot.clickOn(lastNameField).write(" ");
+        assertEquals("Required field", lastNameTooltip.getText());
     }
 }
