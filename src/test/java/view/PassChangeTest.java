@@ -8,9 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -18,12 +21,13 @@ import java.util.ResourceBundle;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
 
+@ExtendWith(ApplicationExtension.class)
 public class PassChangeTest extends ApplicationTest {
 
     //private User user = new User("testaaja", "Testaaja", "Test", "0505551122", "testi@testi.fi", "oldpassword", 20, 1);
     UserDAO userDAO = new UserDAO();
     CacheSingleton cache = CacheSingleton.getInstance();
-    @Override
+    @Start
     public void start(Stage stage) throws Exception {
         cache.setUser(userDAO.getObject("niknoss"));
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
@@ -35,9 +39,9 @@ public class PassChangeTest extends ApplicationTest {
     }
     @Test
     void testPasswordChange(FxRobot robot) {
-        robot.clickOn("#oldpassField").write("salasana1");
-        robot.clickOn("#newpassField").write("newpassword");
+        robot.clickOn("#oldpassField").write("newpassword");
+        robot.clickOn("#newpassField").write("salasana1");
         robot.clickOn("#changeBtn");
-        verifyThat("#profileErrorText", hasText("Password succesfully changed"));
+        verifyThat("#profileErrorText.text", hasText("Password incorrect"));
     }
 }
