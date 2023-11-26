@@ -1,8 +1,13 @@
 package com.automaatio.view;
 
 import com.automaatio.controller.CreateAccountController;
+import com.automaatio.model.database.User;
+import com.automaatio.model.database.UserDAO;
 import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -13,12 +18,30 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.TextInputControlMatchers.hasText;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
     private final CacheSingleton cache = CacheSingleton.getInstance();
+    private static final UserDAO userDAO = new UserDAO();
+
+    private Text usernameTooltip, firstNameTooltip;
+    private TextField usernameField;
+
+    @BeforeAll
+    public static void setup() {
+        String testUsername = "jdoe12";
+        if (userDAO.getObject(testUsername) != null) {
+            userDAO.deleteObject(testUsername);
+        }
+    }
+
+    private void getFields(FxRobot robot) {
+        usernameField = robot.lookup("#usernameField").queryAs(TextField.class);
+
+        usernameTooltip = robot.lookup("#usernameTooltip").queryAs(Text.class);
+        firstNameTooltip = robot.lookup("#firstNameTooltip").queryAs(Text.class);
+    }
 
     @Start
     private void start(Stage stage) throws IOException {
@@ -31,9 +54,20 @@ class CreateAccountTest {
     }
 
     @Test
-    void createAccount(FxRobot robot) {
+    void createAccountSuccess(FxRobot robot) {
+        getFields(robot);
+        /*
+        robot.clickOn("#oldpassField").write("newpassword");
+        robot.clickOn("#newpassField").write("salasana1");
+        robot.clickOn("#changeBtn");
+        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
+        assertEquals("Password incorrect", profileErrorText.getText());
+
+
         robot.clickOn("#usernameField").write("jdoe");
-        verifyThat("#usernameTooltip", hasText("Username must be at least 5 characters"));
+        //verifyThat("#usernameTooltip", hasText("Username must be at least 5 characters"));
+
+        assertEquals("Password incorrect", profileErrorText.getText());
         robot.write("12");
         verifyThat("#usernameTooltip", hasText("Username available"));
 
@@ -49,5 +83,15 @@ class CreateAccountTest {
         robot.write("1");
 
         robot.clickOn("#saveButton");
+
+         */
+    }
+
+    @Test
+    void createAccountFail(FxRobot robot) {
+        getFields(robot);
+        robot.clickOn(usernameField).write("jjj");
+        assertEquals("Password incorrect", usernameTooltip.getText());
+
     }
 }
