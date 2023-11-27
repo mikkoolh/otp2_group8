@@ -9,6 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -20,6 +21,8 @@ import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Controller for the user profile
@@ -28,7 +31,7 @@ import java.io.IOException;
  * 8.9.2023
  */
 
-public class ProfileController {
+public class ProfileController implements Initializable, IController{
 
     private Timeline notificationTimeline;
 
@@ -53,9 +56,11 @@ public class ProfileController {
     private String loggedInUsername = user.getUsername();
     private String loggedInName = user.getFirstName();
     private LocaleSelector localeSelector = new LocaleSelector();
+    private ResourceBundle resourceBundle;
 
     @FXML
-    private void initialize() {
+    public void initialize(URL location, ResourceBundle resources) {
+        resourceBundle = resources;
         usernameText.setText(loggedInUsername);
         fnameField.setText(loggedInName);
         lnameField.setText(user.getLastName());
@@ -72,7 +77,7 @@ public class ProfileController {
         String newPass = newpassField.getText();
 
         if (newPass.isEmpty() || newPass.length() < 8) {
-            profileErrorText.setText("Salasana ei kelpaa!");
+            profileErrorText.setText(resourceBundle.getString("newPassEmpty"));
             return;
         }
 
@@ -84,7 +89,7 @@ public class ProfileController {
             oldpassField.clear();
             newpassField.clear();
 
-            profileErrorText.setText("Salasana vaihdettu");
+            profileErrorText.setText(resourceBundle.getString("passChangedText"));
             System.out.println("Salasana vaihdettu");
 
             if (notificationTimeline != null) {
@@ -98,7 +103,7 @@ public class ProfileController {
             notificationTimeline.play();
         } else {
             System.out.println("Salasana väärin");
-            profileErrorText.setText("Salasana väärin!");
+            profileErrorText.setText(resourceBundle.getString("wrongPasswordTxt"));
 
             if (notificationTimeline != null) {
                 notificationTimeline.stop();
@@ -123,5 +128,9 @@ public class ProfileController {
             System.out.println("Ongelma hinnan päivittämisessä.");
         }
 
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
