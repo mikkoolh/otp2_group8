@@ -32,7 +32,7 @@ import java.util.*;
  * @author Nikita Nossenko
  * @author Matleena Kankaanpää
  *
- * 1.10.2023
+ * 27.11.2023
  */
 
 public class RoutineController implements Initializable {
@@ -188,6 +188,10 @@ public class RoutineController implements Initializable {
         Button cancelButton = (new CancelIconCreator()).create();
         Button deleteButton = (new DeleteIconCreator()).create();
 
+        editButton.getStyleClass().add("edit-icon-button");
+        saveButton.getStyleClass().add("save-icon-button");
+        deleteButton.getStyleClass().add("delete-icon-button");
+
         // Automation toggle
         ToggleSwitch toggle = getToggleSwitch(routine);
 
@@ -285,7 +289,7 @@ public class RoutineController implements Initializable {
                 timeContainer.getChildren().add(clockTimes);
                 routineRowButtons.getChildren().remove(saveButton);
                 routineRowButtons.getChildren().add(editButton);
-                errorHandler.hideErrorMessage(errorMessageField);
+                errorHandler.showErrorMessage(resourceBundle.getString("updateRoutineSuccessTxt"), errorMessageField);
             } else {
                 System.out.println("up8 failed");
                 errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
@@ -347,6 +351,7 @@ public class RoutineController implements Initializable {
                     "confirmDeleteRoutineTemplate"
             ));
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText(resourceBundle.getString("deleteBtnTxt"));
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).getStyleClass().add("confirm-delete-button");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText(resourceBundle.getString("cancelBtnTxt"));
 
             // Respond to user input
@@ -355,6 +360,7 @@ public class RoutineController implements Initializable {
                     routineDAO.deleteObject(routineToDelete.getRoutineID());
                     errorHandler.hideErrorMessage(errorMessageField);
                     loadRoutines();
+                    errorHandler.showErrorMessage(resourceBundle.getString("deleteRoutineSuccessTxt"), errorMessageField);
                 } catch(Exception e) {
                     e.printStackTrace();
                     errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
@@ -413,6 +419,7 @@ public class RoutineController implements Initializable {
                     routineDAO.addObject(routine);
                     System.out.println("saved routine");
                     loadRoutines();
+                    errorHandler.showErrorMessage(resourceBundle.getString("createRoutineSuccessTxt"), errorMessageField);
                     hideForm();
                 } catch (Exception e) {
                     e.printStackTrace();

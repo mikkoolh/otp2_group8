@@ -118,7 +118,6 @@ class CreateAccountTest {
         assertEquals("Password cannot contain spaces", passwordTooltip.getText());
         robot.write("1111111111111111111111111111111111111111");
         assertEquals("Password must be 50 characters or less", passwordTooltip.getText());
-        // click save btn
     }
 
     @Test

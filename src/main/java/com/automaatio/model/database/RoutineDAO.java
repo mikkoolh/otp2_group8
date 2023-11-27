@@ -30,6 +30,26 @@ public class RoutineDAO implements IDAO {
         }
     }
 
+    public Routine addAndReturnObject(Object object) {
+        Routine savedRoutine;
+
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+            savedRoutine = em.merge((Routine) object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+        return savedRoutine;
+    }
+
+
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
