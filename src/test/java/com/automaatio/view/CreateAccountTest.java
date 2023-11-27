@@ -141,7 +141,7 @@ class CreateAccountTest {
         assertEquals("Password must include at least one letter and a number", passwordTooltip.getText());
         robot.write("1 1");
         assertEquals("Password cannot contain spaces", passwordTooltip.getText());
-        robot.write("111111111111111111111111111111111111");
+        robot.write("1111111111111111111111111111111111111111");
         assertEquals("Password must be 50 characters or less", passwordTooltip.getText());
     }
 
