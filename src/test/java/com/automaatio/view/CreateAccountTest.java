@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
     private static final UserDAO userDAO = new UserDAO();
-    private Text usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip;
+    private Text usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip, errorMessage;
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField, passwordField;
     private static final String testUser1 = "testuser-mk-1", testUser2 = "testuser-mk-2";
 
@@ -50,6 +50,7 @@ class CreateAccountTest {
         emailField = robot.lookup("#emailField").queryAs(TextField.class);
         phoneField = robot.lookup("#phoneNumberField").queryAs(TextField.class);
         passwordField = robot.lookup(".password-field").queryAs(PasswordField.class);
+        errorMessage = robot.lookup("#createAccountErrorText").queryAs(Text.class);
 
         usernameTooltip = robot.lookup("#usernameTooltip").queryAs(Text.class);
         firstNameTooltip = robot.lookup("#firstNameTooltip").queryAs(Text.class);
@@ -80,6 +81,7 @@ class CreateAccountTest {
         robot.clickOn("#phoneNumberField").write("123456789");
         robot.clickOn(".password-field").write("secretpw1");
         robot.clickOn("#saveButton");
+
     }
 
     @Test
