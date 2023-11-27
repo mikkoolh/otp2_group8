@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,15 +27,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CreateAccountTest {
     private final CacheSingleton cache = CacheSingleton.getInstance();
     private static final UserDAO userDAO = new UserDAO();
-
     private Text usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip;
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField, passwordField;
+    private static final String testUser1 = "testuser-mk-1", testUser2 = "testuser-mk-2";
 
     @BeforeAll
     public static void setup() {
-        String testUsername = "jdoe12";
-        if (userDAO.getObject(testUsername) != null) {
-            userDAO.deleteObject(testUsername);
+        // Delete user testuser1 if exists
+        if (userDAO.getObject(testUser1) != null) {
+            userDAO.deleteObject(testUser1);
+        }
+        
+        // Create testuser2 if doesn't exist
+        if (userDAO.getObject(testUser2) == null) {
+            userDAO.addObject(new User(testUser2, "", "", "", "", "", 0, 1));
         }
     }
 
@@ -104,13 +110,14 @@ class CreateAccountTest {
         getFields(robot);
         robot.clickOn(usernameField).write("jjj");
         assertEquals("Username must be at least 5 characters", usernameTooltip.getText());
-        robot.clickOn(usernameField).write("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        robot.write("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         assertEquals("Username must be 40 characters or less", usernameTooltip.getText());
-        robot.clickOn(usernameField).write("j j");
+        robot.write("j j");
         assertEquals("Username cannot contain spaces", usernameTooltip.getText());
 
         robot.clickOn(firstNameField).write(" ");
         assertEquals("Required field", firstNameTooltip.getText());
+
         robot.clickOn(lastNameField).write(" ");
         assertEquals("Required field", lastNameTooltip.getText());
 
@@ -122,11 +129,23 @@ class CreateAccountTest {
 
         robot.clickOn(passwordField).write("s");
         assertEquals("Password must be at least 5 characters", passwordTooltip.getText());
-        robot.clickOn(passwordField).write("ssssssss");
+        robot.write("ssssssss");
         assertEquals("Password must include at least one letter and a number", passwordTooltip.getText());
-        robot.clickOn(passwordField).write("1 1");
+        robot.write("1 1");
         assertEquals("Password cannot contain spaces", passwordTooltip.getText());
-        robot.clickOn(passwordField).write("111111111111111111111111111111111111");
+        robot.write("111111111111111111111111111111111111");
         assertEquals("Password must be 50 characters or less", passwordTooltip.getText());
+    }
+
+    @Test
+    void createDuplicateAccountFail(FxRobot robot) {
+        robot.clickOn(usernameField).write(testUser2);
+        assertEquals("Username already taken", usernameTooltip.getText());
+    }
+
+    @AfterAll
+    static void endTests() {
+        userDAO.deleteObject(testUser1);
+        userDAO.deleteObject(testUser2);
     }
 }
