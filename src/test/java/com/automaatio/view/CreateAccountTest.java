@@ -118,18 +118,22 @@ class CreateAccountTest {
         getFields(robot);
         robot.clickOn(usernameField).write("jjj");
         assertEquals("Username must be at least 5 characters", usernameTooltip.getText());
-        robot.write("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        robot.write("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
         assertEquals("Username must be 40 characters or less", usernameTooltip.getText());
         robot.write("j j");
         assertEquals("Username cannot contain spaces", usernameTooltip.getText());
 
         robot.clickOn(firstNameField).write(" ");
         assertEquals("Required field", firstNameTooltip.getText());
+        robot.clickOn(firstNameField).write("ttttttttttttttttttttttttttttttttttttttttt");
+        assertEquals("First name must be 40 characters or less", firstNameTooltip.getText());
 
         robot.clickOn(lastNameField).write(" ");
         assertEquals("Required field", lastNameTooltip.getText());
+        robot.clickOn(lastNameField).write("ttttttttttttttttttttttttttttttttttttttttt");
+        assertEquals("First name must be 40 characters or less", lastNameTooltip.getText());
 
-        robot.clickOn(emailField).write("john@doe..fi");
+        robot.clickOn(emailField).write("john.doe@test..fi");
         assertEquals("Invalid email address", emailTooltip.getText());
 
         robot.clickOn(phoneField).write("1234");
@@ -143,6 +147,7 @@ class CreateAccountTest {
         assertEquals("Password cannot contain spaces", passwordTooltip.getText());
         robot.write("1111111111111111111111111111111111111111");
         assertEquals("Password must be 50 characters or less", passwordTooltip.getText());
+        // click save btn
     }
 
     @Test
