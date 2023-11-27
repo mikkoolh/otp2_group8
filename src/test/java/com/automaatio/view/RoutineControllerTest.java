@@ -65,7 +65,6 @@ class RoutineControllerTest {
         User user = cache.getUser();
         testDeviceGroup = deviceGroupDAO.addAndReturnObject(new DeviceGroup("TestGroup", user));
         testDevice = deviceDAO.addAndReturnObject(new Device(0, "Roomba", "0", testDeviceGroup, cache.getUser().getUsername()));
-        System.out.println("dev " + testDevice.getDeviceID());
         cache.setDevice(testDevice);
     }
 
@@ -74,20 +73,16 @@ class RoutineControllerTest {
     }
 
     private static void setupRoutines() {
-        System.out.println("curret locale: " + (new CurrentLocale()).getCurrentLocale());
         WeekdayDAO  weekdayDAO = new WeekdayDAO();
         EventTimeDAO eventTimeDAO = new EventTimeDAO();
         RoutineDAO routineDAO = new RoutineDAO();
         List<Weekday> weekdays = weekdayDAO.getAll();
-        Weekday friday = weekdays.get(4);
-        Weekday sunday = weekdays.get(6);
-        System.out.println("weekdays " + friday + sunday);
         EventTime routine1Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 14, 00),
-                LocalDateTime.of(2023, 11, 27, 14, 10), friday));
+                LocalDateTime.of(2023, 11, 27, 14, 10), weekdays.get(4)));
         EventTime routine2Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 14, 00),
-                LocalDateTime.of(2023, 11, 27, 16, 10), sunday));
+                LocalDateTime.of(2023, 11, 27, 16, 10), weekdays.get(6)));
         routine1 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine1Time, true));
-        routine2 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine1Time, true));
+        routine2 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine2Time, true));
     }
 
     @Start
