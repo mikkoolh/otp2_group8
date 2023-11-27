@@ -17,6 +17,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.Locale;
 import java.util.Random;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
-public class PassChangeTest extends ApplicationTest {
+public class ProfilePicTest extends ApplicationTest {
     static UserDAO userDAO = new UserDAO();
     @BeforeAll
     static void setup() {
@@ -50,41 +51,24 @@ public class PassChangeTest extends ApplicationTest {
     @Start
     public void start(Stage stage) throws Exception {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
-        FXMLLoader fxmlLoader = new FXMLLoader(ProfileController.class.getResource("/view/user-profile.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ProfileController.class.getResource("/view/menu/profile.fxml"));
         fxmlLoader.setResources(resourceBundle);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
     }
-    @Test
-    void testPasswordChange(FxRobot robot) {
-        robot.clickOn("#oldpassField").write("oldpassword");
-        robot.clickOn("#newpassField").write("newpassword");
-        robot.clickOn("#changeBtn");
-        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
-        assertEquals("Password succesfully changed", profileErrorText.getText());
-    }
-    @Test
-    void testWrongPasswordBeforeChange(FxRobot robot) {
-        robot.clickOn("#oldpassField").write("wrongpassword");
-        robot.clickOn("#newpassField").write("newpassword");
-        robot.clickOn("#changeBtn");
-        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
-        assertEquals("Password incorrect", profileErrorText.getText());
-    }
 
     @Test
-    void testShortNewPassword(FxRobot robot) {
-        Random random = new Random();
-        int rand = random.nextInt(8);
+    void TestPicChange(FxRobot robot) {
+        User user = CacheSingleton.getInstance().getUser();
+        assertEquals(0, user.getSelectedPicture(), "Test user's selected picture should be 0 by default");
+        robot.clickOn("#picBtn");
+        robot.clickOn("#anime");
+        robot.clickOn("#saveBtn");
+        WaitForAsyncUtils.waitForFxEvents(3000);
 
-        StringBuilder newpass = new StringBuilder();
-        newpass.append("n".repeat(rand));
-
-        robot.clickOn("#oldpassField").write("oldpassword");
-        robot.clickOn("#newpassField").write(newpass.toString());
-        robot.clickOn("#changeBtn");
-        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
-        assertEquals("Password empty or too short", profileErrorText.getText());
+        User updatedUser = userDAO.getObject(user.getUsername());
+        System.out.println("Käyttäjän tiedot: " + updatedUser.getUsername() + ", käyttäjän valittu kuvaID: " + updatedUser.getSelectedPicture());
+        assertEquals(3, updatedUser.getSelectedPicture(), "Test user's selected picture should be 3 after selecting 3rd pic option");
     }
 }
