@@ -20,9 +20,14 @@ import java.util.ResourceBundle;
 import static java.lang.Thread.sleep;
 
 @ExtendWith(ApplicationExtension.class)
-public class AddNewRoomTest {
-    private DeviceGroupDAO deviceGroupDAO;
+public class addAndDeleteNewDeviceTest {
     private static UserDAO userDAO = new UserDAO();
+    private static DeviceDAO deviceDAO = new DeviceDAO();
+
+    @AfterEach
+    void tearDownEach() {
+        deviceDAO.deleteDevicesByUsername("testuser");
+    }
 
     @BeforeAll
     static void setup() {
@@ -40,22 +45,12 @@ public class AddNewRoomTest {
         }
     }
 
-    @BeforeEach
-    void setUpEach() {
-        deviceGroupDAO = new DeviceGroupDAO();
-    }
-
-    @AfterEach
-    void tearDownEach() {
-        deviceGroupDAO.deleteGroupsByUsername("testuser");
-    }
-
     @Start
     private void start(Stage stage) throws IOException {
-        URL url = GraphicalUI.class.getResource("/view/menu/rooms.fxml");
+        URL url = GraphicalUI.class.getResource("/view/menu/devices.fxml");
         System.out.println("FXML URL: " + url);
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
-        FXMLLoader fxmlLoader = new FXMLLoader(GraphicalUI.class.getResource("/view/menu/rooms.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(GraphicalUI.class.getResource("/view/menu/devices.fxml"));
         fxmlLoader.setResources(resourceBundle);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
@@ -64,13 +59,13 @@ public class AddNewRoomTest {
 
     @Test
     void test(FxRobot robot) throws InterruptedException {
-        robot.clickOn("#newRoomTextField").write("testroom");
-        robot.clickOn("#addBtn");
+        robot.clickOn("#deviceNameField").write("test device");
+        robot.clickOn("#addButton");
 
         sleep(2000);
 
         User user = userDAO.getObject("testuser");
-        DeviceGroup addedRoom = deviceGroupDAO.findRoomByName("testroom", user);
-        Assertions.assertNotNull(addedRoom, "Huonetta 'testroom' ei löydy tietokannasta");
+        Device testDevice = deviceDAO.getObject("test device");
+        Assertions.assertNotNull(testDevice, "Laitetta 'test device' ei löydy tietokannasta");
     }
 }
