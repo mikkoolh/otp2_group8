@@ -3,7 +3,6 @@ package com.automaatio.view;
 import com.automaatio.controller.CreateAccountController;
 import com.automaatio.model.database.User;
 import com.automaatio.model.database.UserDAO;
-import com.automaatio.utils.CacheSingleton;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
-    private final CacheSingleton cache = CacheSingleton.getInstance();
     private static final UserDAO userDAO = new UserDAO();
     private Text usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip;
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField, passwordField;
@@ -37,17 +35,11 @@ class CreateAccountTest {
         // Delete user testuser1 if exists
         if (userDAO.getObject(testUser1) != null) {
             userDAO.deleteObject(testUser1);
-            System.out.println("testuser1 exists");
-        } else {
-            System.out.println("testuser1 doesnt exist");
         }
         
         // Create testuser2 if doesn't exist
         if (userDAO.getObject(testUser2) == null) {
-            System.out.println("testuser-mk-2 doesnt exist");
             userDAO.addObject(new User(testUser2, "", "", "", "", "", 0, 1));
-        } else {
-            System.out.println("testuser2 exists");
         }
     }
 
@@ -155,6 +147,7 @@ class CreateAccountTest {
 
     @Test
     void createDuplicateAccountFail(FxRobot robot) {
+        getFields(robot);
         robot.clickOn(usernameField).write(testUser2);
         assertEquals("Username already taken", usernameTooltip.getText());
     }
