@@ -26,7 +26,7 @@
                     <Font name="Copperplate Gothic Bold" size="24.0" />
                 </font>
             </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="98.0" prefHeight="540.0" text="%menuProfileTitleTxt">
+            <TitledPane fx:id="profileAccordion" animated="false" layoutX="10.0" layoutY="98.0" prefHeight="540.0" text="%menuProfileTitleTxt">
                 <fx:include source="menu/profile.fxml" />
                 <font>
                     <Font name="Copperplate Gothic Bold" size="24.0" />

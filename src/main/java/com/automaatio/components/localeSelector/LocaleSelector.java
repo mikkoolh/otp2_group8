@@ -42,6 +42,7 @@ public class LocaleSelector {
 
     public LocaleSelector() {
         languagesCBox = new ComboBox<LocaleItem>();
+        languagesCBox.setId("languageBox");
         fetchImages();
         if (loggedIn) {
             fetchLocale(cache.getUser().getUsername());

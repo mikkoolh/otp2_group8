@@ -29,6 +29,25 @@ public class UserDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    public User addAndReturnObject(Object object) {
+        User savedUser;
+
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+            savedUser = em.merge((User) object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+        return savedUser;
+    }
+
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -48,7 +67,26 @@ public class UserDAO implements IDAO {
         } finally {
             em.close();
         }
+    }
 
+    public void deleteObject(String username) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        em.getTransaction().begin();
+        try {
+            User user = em.find(User.class, username);
+            if (user != null) {
+                em.remove(user);
+                System.out.println("User " + username + " deleted");
+            } else {
+                throw new IllegalArgumentException("User with username  " + username + " was not found");
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
     }
 
     @Override

@@ -46,7 +46,7 @@
                   <Font name="Copperplate Gothic Bold" size="16.0" />
                </font>
             </Text>
-                      <Button mnemonicParsing="false" onAction="#openProfile" prefHeight="33.0" prefWidth="124.0" styleClass="button-secondary" text="%editProfileBtnTxt" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                      <Button fx:id="editProfAccordion" mnemonicParsing="false" onAction="#openProfile" prefHeight="33.0" prefWidth="124.0" styleClass="button-secondary" text="%editProfileBtnTxt" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                           <font>
                               <Font name="Copperplate Gothic Bold" size="14.0" />
                           </font>
