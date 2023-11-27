@@ -434,7 +434,9 @@ public class RoutineController implements Initializable {
 
         // Weekday checkboxes
         for (Weekday weekday : weekdayDAO.getAll()) {
-            weekdayCheckBoxes.put(weekday, new CheckBox(localizer.localizeWeekday(weekday)));
+            CheckBox checkBox = new CheckBox(localizer.localizeWeekday(weekday));
+            checkBox.getStyleClass().add("weekday-checkbox");
+            weekdayCheckBoxes.put(weekday, checkBox);
         }
         VBox weekdaysVBox = new VBox();
         weekdaysVBox.getChildren().addAll(weekdayCheckBoxes.values());

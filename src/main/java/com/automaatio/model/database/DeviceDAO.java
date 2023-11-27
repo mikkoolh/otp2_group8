@@ -33,6 +33,25 @@ public class DeviceDAO implements IDAO {
         }
     }
 
+    public Device addAndReturnObject(Object object) {
+        Device savedDevice;
+
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+            savedDevice = em.merge((Device) object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+        return savedDevice;
+    }
+
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();

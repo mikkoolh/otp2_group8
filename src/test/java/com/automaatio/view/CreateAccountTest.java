@@ -72,45 +72,14 @@ class CreateAccountTest {
     @Test
     void createAccountSuccess(FxRobot robot) {
         getFields(robot);
-
-
-        List<User> users = userDAO.getAll();
-
-        System.out.println("users in db:");
-        for (User u : users) {
-            System.out.println(u.getUsername());
-        }
-        System.out.println("----");
-        /*
-        robot.clickOn("#oldpassField").write("newpassword");
-        robot.clickOn("#newpassField").write("salasana1");
-        robot.clickOn("#changeBtn");
-        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
-        assertEquals("Password incorrect", profileErrorText.getText());
-
-
-        robot.clickOn("#usernameField").write("jdoe");
-        //verifyThat("#usernameTooltip", hasText("Username must be at least 5 characters"));
-
-        assertEquals("Password incorrect", profileErrorText.getText());
-        robot.write("12");
-        verifyThat("#usernameTooltip", hasText("Username available"));
-
+        robot.clickOn("#usernameField").write(testUser1);
+        assertEquals("Username available", usernameTooltip.getText());
         robot.clickOn("#firstNameField").write("John");
         robot.clickOn("#lastNameField").write("Doe");
         robot.clickOn("#emailField").write("john.doe@test.com");
         robot.clickOn("#phoneNumberField").write("123456789");
-
-        robot.clickOn(".password-field").write("secret");
-        verifyThat("#passwordTooltip", hasText("Password must be at least 8 characters"));
-        robot.write("pw");
-        verifyThat("#passwordTooltip", hasText("Password must include at least one letter and a number"));
-        robot.write("1");
-
+        robot.clickOn(".password-field").write("secretpw1");
         robot.clickOn("#saveButton");
-
-         */
-        assertTrue(true);
     }
 
     @Test
