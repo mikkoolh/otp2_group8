@@ -1,12 +1,11 @@
 package view;
 import com.automaatio.model.database.*;
 import com.automaatio.utils.CacheSingleton;
-import com.automaatio.view.GraphicalUI;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Labeled;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -48,8 +47,12 @@ public class ChangeDeviceLocationTest {
             cache.setUser(user);
         }
 
-        deviceGroupDAO.addObject(new DeviceGroup("test room", cache.getUser()));
+        DeviceGroup testRoom = new DeviceGroup("test room", cache.getUser());
+        cache.setRoom(testRoom);
+        deviceGroupDAO.addObject(testRoom);
+
         Device testDevice = new Device(0, "test device", "012", null, "testuser");
+        cache.setDevice(testDevice);
         deviceDAO.addObject(testDevice);
     }
 
@@ -104,10 +107,33 @@ public class ChangeDeviceLocationTest {
             }
         });
         WaitForAsyncUtils.waitForFxEvents();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
-        robot.clickOn("#usageData").write("2");
-        //ComboBox deviceGroupComboBox = robot.lookup("#deviceGroup").queryComboBox();
-        //robot.clickOn(deviceGroupComboBox);
+        ComboBox<?> deviceGroupComboBox = robot.lookup("#deviceGroup").queryComboBox();
+        robot.clickOn(deviceGroupComboBox);
+        WaitForAsyncUtils.waitForFxEvents();
+
+        try {
+            WaitForAsyncUtils.waitForFxEvents();
+            Node item = robot.lookup(".list-cell").match(node ->
+                    node instanceof Labeled &&
+                            ((Labeled) node).getText() != null &&
+                            ((Labeled) node).getText().equals("test room")
+            ).query();
+
+            if (item != null) {
+                robot.clickOn(item);
+                deviceDAO.updateDeviceGroup(cache.getDevice().getDeviceID(), cache.getRoom().getDeviceGroupId());
+                cache.getDevice().setDeviceGroup(deviceGroupDAO.getObject(cache.getRoom().getDeviceGroupId()));
+            } else {
+                System.out.println("There is no room named 'test room'");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        WaitForAsyncUtils.waitForFxEvents();
+
+        Assertions.assertEquals("test room", cache.getDevice().getDeviceGroup().toString(), "Device group should be test room");
     }
 }
