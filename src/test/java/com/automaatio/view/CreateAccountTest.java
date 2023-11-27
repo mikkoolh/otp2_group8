@@ -18,6 +18,7 @@ import org.testfx.framework.junit5.Start;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,11 +37,17 @@ class CreateAccountTest {
         // Delete user testuser1 if exists
         if (userDAO.getObject(testUser1) != null) {
             userDAO.deleteObject(testUser1);
+            System.out.println("testuser1 exists");
+        } else {
+            System.out.println("testuser1 doesnt exist");
         }
         
         // Create testuser2 if doesn't exist
         if (userDAO.getObject(testUser2) == null) {
+            System.out.println("testuser-mk-2 doesnt exist");
             userDAO.addObject(new User(testUser2, "", "", "", "", "", 0, 1));
+        } else {
+            System.out.println("testuser2 exists");
         }
     }
 
@@ -73,6 +80,15 @@ class CreateAccountTest {
     @Test
     void createAccountSuccess(FxRobot robot) {
         getFields(robot);
+
+
+        List<User> users = userDAO.getAll();
+
+        System.out.println("users in db:");
+        for (User u : users) {
+            System.out.println(u.getUsername());
+        }
+        System.out.println("----");
         /*
         robot.clickOn("#oldpassField").write("newpassword");
         robot.clickOn("#newpassField").write("salasana1");
@@ -128,7 +144,7 @@ class CreateAccountTest {
         assertEquals("Invalid phone number", phoneTooltip.getText());
 
         robot.clickOn(passwordField).write("s");
-        assertEquals("Password must be at least 5 characters", passwordTooltip.getText());
+        assertEquals("Password must be at least 8 characters", passwordTooltip.getText());
         robot.write("ssssssss");
         assertEquals("Password must include at least one letter and a number", passwordTooltip.getText());
         robot.write("1 1");
@@ -145,7 +161,12 @@ class CreateAccountTest {
 
     @AfterAll
     static void endTests() {
-        userDAO.deleteObject(testUser1);
-        userDAO.deleteObject(testUser2);
+        if (userDAO.getObject(testUser1) != null) {
+            userDAO.deleteObject(testUser1);
+        }
+
+        if (userDAO.getObject(testUser2) != null) {
+            userDAO.deleteObject(testUser2);
+        }
     }
 }
