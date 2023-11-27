@@ -51,6 +51,27 @@ public class UserDAO implements IDAO {
 
     }
 
+    public void deleteObjectByUserame(String username) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        em.getTransaction().begin();
+        try {
+            User user = em.find(User.class, username);
+            if (user != null) {
+                em.remove(user);
+                System.out.println("User " + username + " deleted");
+            } else {
+                throw new IllegalArgumentException("User with id  " + username + " was not found");
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+
+    }
+
     @Override
     public Object getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
