@@ -64,7 +64,6 @@ public class addAndDeleteNewDeviceTest {
 
         sleep(2000);
 
-        User user = userDAO.getObject("testuser");
         Device testDevice = deviceDAO.getObject("test device");
         Assertions.assertNotNull(testDevice, "Laitetta 'test device' ei löydy tietokannasta");
     }
