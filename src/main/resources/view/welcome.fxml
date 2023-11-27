@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="880.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.automaatio.controller.mainpage.WelcomeController">
     <children>
-                <Text layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%homeScreenWelcomeTxt" textAlignment="CENTER" wrappingWidth="880.0" AnchorPane.topAnchor="41.5078125">
+                <Text fx:id="welcomeMain" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%homeScreenWelcomeTxt" textAlignment="CENTER" wrappingWidth="880.0" AnchorPane.topAnchor="41.5078125">
                         <font>
                             <Font name="Copperplate Gothic Bold" size="48.0" />
                         </font>

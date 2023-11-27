@@ -195,4 +195,59 @@ public class DeviceGroupDAO implements IDAO {
             em.remove(deviceGroup);
         }
     }
+
+    /**
+     * Finds a device group by its name and user.
+     * @param roomName The name of the device group (room).
+     * @param user The user to whom the device group belongs.
+     * @return The found DeviceGroup object or null if not found.
+     */
+    public DeviceGroup findRoomByName(String roomName, User user) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<DeviceGroup> query = em.createQuery(
+                    "SELECT dg FROM DeviceGroup dg WHERE dg.name = :name AND dg.user = :userObj", DeviceGroup.class);
+            query.setParameter("name", roomName);
+            query.setParameter("userObj", user);
+            List<DeviceGroup> result = query.getResultList();
+            em.getTransaction().commit();
+            if (!result.isEmpty()) {
+                return result.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return null;
+    }
+
+    /**
+     * Deletes all device groups associated with a specific username.
+     * @param username The username of the user whose device groups are to be deleted.
+     */
+    public void deleteGroupsByUsername(String username) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+
+            TypedQuery<DeviceGroup> query = em.createQuery(
+                    "SELECT dg FROM DeviceGroup dg WHERE dg.user.username = :username", DeviceGroup.class);
+            query.setParameter("username", username);
+            List<DeviceGroup> groups = query.getResultList();
+
+            for (DeviceGroup group : groups) {
+                deleteGroupWithoutTransaction(em, group.getDeviceGroupId());
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
 }
