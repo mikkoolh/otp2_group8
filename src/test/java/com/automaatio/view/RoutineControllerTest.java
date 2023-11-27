@@ -70,9 +70,9 @@ class RoutineControllerTest {
         RoutineDAO routineDAO = new RoutineDAO();
         List<Weekday> weekdays = new WeekdayDAO().getAll();
         EventTime routine1Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 14, 00),
-                LocalDateTime.of(2023, 11, 27, 14, 10), weekdays.get(4)));
-        EventTime routine2Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 14, 00),
-                LocalDateTime.of(2023, 11, 27, 16, 10), weekdays.get(6)));
+                LocalDateTime.of(2023, 11, 27, 16, 10), weekdays.get(4)));
+        EventTime routine2Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 21, 06),
+                LocalDateTime.of(2023, 11, 27, 21, 36), weekdays.get(6)));
         routine1 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine1Time, true));
         routine2 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine2Time, true));
     }
