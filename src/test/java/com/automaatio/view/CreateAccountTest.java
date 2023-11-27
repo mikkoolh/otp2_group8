@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
     private static final UserDAO userDAO = new UserDAO();
-    private Text usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip;
+    private Text usernameTooltip, firstNameTooltip, lastNameTooltip, emailTooltip, phoneTooltip, passwordTooltip, statusMessage;
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField, passwordField;
     private static final String testUser1 = "testuser-mk-1", testUser2 = "testuser-mk-2";
 
@@ -50,6 +50,7 @@ class CreateAccountTest {
         emailField = robot.lookup("#emailField").queryAs(TextField.class);
         phoneField = robot.lookup("#phoneNumberField").queryAs(TextField.class);
         passwordField = robot.lookup(".password-field").queryAs(PasswordField.class);
+        statusMessage = robot.lookup("#createAccountErrorText").queryAs(Text.class);
 
         usernameTooltip = robot.lookup("#usernameTooltip").queryAs(Text.class);
         firstNameTooltip = robot.lookup("#firstNameTooltip").queryAs(Text.class);
@@ -72,45 +73,15 @@ class CreateAccountTest {
     @Test
     void createAccountSuccess(FxRobot robot) {
         getFields(robot);
-
-
-        List<User> users = userDAO.getAll();
-
-        System.out.println("users in db:");
-        for (User u : users) {
-            System.out.println(u.getUsername());
-        }
-        System.out.println("----");
-        /*
-        robot.clickOn("#oldpassField").write("newpassword");
-        robot.clickOn("#newpassField").write("salasana1");
-        robot.clickOn("#changeBtn");
-        Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
-        assertEquals("Password incorrect", profileErrorText.getText());
-
-
-        robot.clickOn("#usernameField").write("jdoe");
-        //verifyThat("#usernameTooltip", hasText("Username must be at least 5 characters"));
-
-        assertEquals("Password incorrect", profileErrorText.getText());
-        robot.write("12");
-        verifyThat("#usernameTooltip", hasText("Username available"));
-
+        robot.clickOn("#usernameField").write(testUser1);
+        assertEquals("Username available", usernameTooltip.getText());
         robot.clickOn("#firstNameField").write("John");
         robot.clickOn("#lastNameField").write("Doe");
         robot.clickOn("#emailField").write("john.doe@test.com");
         robot.clickOn("#phoneNumberField").write("123456789");
-
-        robot.clickOn(".password-field").write("secret");
-        verifyThat("#passwordTooltip", hasText("Password must be at least 8 characters"));
-        robot.write("pw");
-        verifyThat("#passwordTooltip", hasText("Password must include at least one letter and a number"));
-        robot.write("1");
-
+        robot.clickOn(".password-field").write("secretpw1");
         robot.clickOn("#saveButton");
-
-         */
-        assertTrue(true);
+        assertEquals("Account created successfully", statusMessage.getText());
     }
 
     @Test
@@ -131,7 +102,7 @@ class CreateAccountTest {
         robot.clickOn(lastNameField).write(" ");
         assertEquals("Required field", lastNameTooltip.getText());
         robot.clickOn(lastNameField).write("ttttttttttttttttttttttttttttttttttttttttt");
-        assertEquals("First name must be 40 characters or less", lastNameTooltip.getText());
+        assertEquals("Last name must be 40 characters or less", lastNameTooltip.getText());
 
         robot.clickOn(emailField).write("john.doe@test..fi");
         assertEquals("Invalid email address", emailTooltip.getText());
@@ -147,7 +118,6 @@ class CreateAccountTest {
         assertEquals("Password cannot contain spaces", passwordTooltip.getText());
         robot.write("1111111111111111111111111111111111111111");
         assertEquals("Password must be 50 characters or less", passwordTooltip.getText());
-        // click save btn
     }
 
     @Test
