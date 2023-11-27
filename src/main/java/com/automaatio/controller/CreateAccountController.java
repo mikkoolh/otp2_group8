@@ -84,7 +84,7 @@ public class CreateAccountController {
         System.out.println(user);
 
         if (saveUser(user)) {
-            createAccountErrorText.setText("Account created successfully"); // transl.
+            createAccountErrorText.setText(resourceBundle.getString("createAccountSuccessTxt"));
             nav.openLoginPage(event);
         }
     }

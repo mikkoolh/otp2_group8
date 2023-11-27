@@ -3,17 +3,13 @@ package com.automaatio.view;
 import com.automaatio.controller.mainpage.RoutineController;
 import com.automaatio.model.database.*;
 import com.automaatio.utils.CacheSingleton;
-import com.automaatio.utils.CurrentLocale;
 import com.dlsc.gemsfx.TimePicker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.text.Text;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -22,15 +18,12 @@ import org.testfx.framework.junit5.Start;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
-
 class RoutineControllerTest {
     private static final CacheSingleton cache = CacheSingleton.getInstance();
     private static final UserDAO userDAO = new UserDAO();
@@ -73,14 +66,13 @@ class RoutineControllerTest {
     }
 
     private static void setupRoutines() {
-        WeekdayDAO  weekdayDAO = new WeekdayDAO();
         EventTimeDAO eventTimeDAO = new EventTimeDAO();
         RoutineDAO routineDAO = new RoutineDAO();
-        List<Weekday> weekdays = weekdayDAO.getAll();
+        List<Weekday> weekdays = new WeekdayDAO().getAll();
         EventTime routine1Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 14, 00),
-                LocalDateTime.of(2023, 11, 27, 14, 10), weekdays.get(4)));
-        EventTime routine2Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 14, 00),
-                LocalDateTime.of(2023, 11, 27, 16, 10), weekdays.get(6)));
+                LocalDateTime.of(2023, 11, 27, 16, 10), weekdays.get(4)));
+        EventTime routine2Time = eventTimeDAO.addAndReturnObject(new EventTime(LocalDateTime.of(2023, 11, 27, 21, 06),
+                LocalDateTime.of(2023, 11, 27, 21, 36), weekdays.get(6)));
         routine1 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine1Time, true));
         routine2 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine2Time, true));
     }
