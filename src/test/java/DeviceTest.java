@@ -1,43 +1,55 @@
-import com.automaatio.model.database.Device;
+import com.automaatio.model.database.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DeviceTest {
 
-    /*
-    @Test
-    public void testDeviceConstructor() {
-        // luodaan ryhmä
-      /*  DeviceGroup group1 = new DeviceGroup("Testiryhmä");
+    private Device device;
+    private DeviceGroup deviceGroup;
 
-        // Luodaan laite
-        Device device = new Device(100L, "TestiLaite", "Malli1", group1);
-
-        // Tarkistetaan arvot
-        assertTrue(device.isOnOff());
-        assertTrue(device.isAutomation());
-        assertEquals(100L, device.getUsageData());
-        assertEquals("Name should be 'TestiLaite'", device.getName(), "TestiLaite");
-        assertEquals("Model should be 'Malli1'", device.getModelCode(), "Malli1");
-    }*/
+    @BeforeEach
+    void setUp() {
+        deviceGroup = new DeviceGroup("living room", new User());
+        device = new Device(10, "device", "123", deviceGroup, "user");
+    }
 
     @Test
-    public void testDeviceGettersAndSetters() {
-        // Luodaan laite
-        Device device = new Device();
-
-        // Use setters to set the values
-        device.switchOnOff();
-        device.setUsageData(200L);
-        device.setName("EriLaite");
-        device.setModelCode("Malli2");
-
-        // Use getters to retrieve the values and check them
-        assertTrue(device.isOnOff());
+    void testDeviceGetters() {
+        assertEquals(10, device.getUsageData());
+        assertEquals("device", device.getName());
+        assertEquals("123", device.getModelCode());
+        assertEquals(deviceGroup, device.getDeviceGroup());
+        assertEquals("user", device.getUserName());
+        assertFalse(device.isOnOff());
         assertFalse(device.isAutomation());
-        assertEquals(200L, device.getUsageData());
-        assertEquals("EriLaite", device.getName(), "Name should be 'EriLaite'");
-        assertEquals("Malli2", device.getModelCode(), "Model should be 'Malli2'");
+    }
+
+    @Test
+    void testSwitchOnOff() {
+        assertFalse(device.isOnOff());
+        device.switchOnOff();
+        assertTrue(device.isOnOff());
+        device.switchOnOff();
+        assertFalse(device.isOnOff());
+    }
+
+    @Test
+    void testSetters() {
+        device.setUsageData(20);
+        assertEquals(20, device.getUsageData());
+
+        device.setName("new device");
+        assertEquals("new device", device.getName());
+
+        device.setModelCode("234");
+        assertEquals("234", device.getModelCode());
+
+        DeviceGroup newGroup = new DeviceGroup("new room", new User());
+        device.setDeviceGroup(newGroup);
+        assertEquals(newGroup, device.getDeviceGroup());
+
+        device.setAutomation(true);
+        assertTrue(device.isAutomation());
     }
 }

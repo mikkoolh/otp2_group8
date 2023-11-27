@@ -74,10 +74,28 @@ public class DeviceDAO implements IDAO {
         }
     }
 
+    /**
+     * Fetches a device by its name
+     * @param name Name of the device
+     * @return Device object or null if not found
+     */
     @Override
-    public Object getObject(String s) {
-        System.out.println("Method not in use in this class");
-        return null;
+    public Device getObject(String name) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Device> query = em.createQuery(
+                    "SELECT d FROM Device d WHERE d.name = :name", Device.class);
+            query.setParameter("name", name);
+            Device device = query.getSingleResult();
+            em.getTransaction().commit();
+            return device;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
     /**
@@ -290,5 +308,29 @@ public class DeviceDAO implements IDAO {
         }
         em.getTransaction().commit();
         em.close();
+    }
+
+    /**
+     * Deletes all devices associated with a specific username.
+     * @param username The username of the user whose devices should be deleted.
+     */
+    public void deleteDevicesByUsername(String username) {
+        EntityManager em = MysqlDBJpaConn.getInstance();
+        em.getTransaction().begin();
+        try {
+            Query query = em.createQuery("DELETE FROM Device d WHERE d.userName = :username");
+            query.setParameter("username", username);
+
+            int count = query.executeUpdate();
+            System.out.println("Deleted " + count + " devices");
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.out.println("Error deleting devices from " + username);
+            throw e;
+        } finally {
+            em.close();
+        }
     }
 }
