@@ -185,6 +185,9 @@
                          <groupId>org.apache.maven.plugins</groupId>
                          <artifactId>maven-surefire-plugin</artifactId>
                          <version>3.2.2</version>
+                         <configuration>
+                                  <headless>true</headless>
+                         </configuration>
                  </plugin>
         </plugins>
     </build>
