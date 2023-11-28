@@ -34,15 +34,4 @@ public abstract class AbstractTestFX extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
     }
-
-    @Override
-    public void init() throws Exception {
-        Platform.setImplicitExit(false);
-        FxToolkit.registerPrimaryStage();
-    }
-    
-    @Override
-    public void destroy() {
-        FxToolkit.cleanupStages();
-    }
 }
