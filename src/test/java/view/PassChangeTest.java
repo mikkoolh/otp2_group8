@@ -24,9 +24,24 @@ import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/**
+ * The {@code PassChangeTest} class contains TestFX-based UI tests for
+ * the password change functionality in the application. It uses {@link FxRobot} to
+ * simulate user interactions with the UI.
+ *
+ * This test class is designed to ensure that the functionality for changing a user's
+ * password works as expected. It includes tests for successful password change,
+ * incorrect current password, and validation of new password length.
+ */
 @ExtendWith(ApplicationExtension.class)
 public class PassChangeTest extends ApplicationTest {
     static UserDAO userDAO = new UserDAO();
+
+    /**
+     * Setup method to prepare the testing environment. It ensures a test user is
+     * available and sets up the necessary environment in the {@link CacheSingleton}.
+     */
     @BeforeAll
     static void setup() {
         CacheSingleton cache = CacheSingleton.getInstance();
@@ -43,10 +58,23 @@ public class PassChangeTest extends ApplicationTest {
             cache.setUser(user);
         }
     }
+
+    /**
+     * Teardown method to clean up after all tests. It removes the test user from
+     * the database to ensure a clean state for subsequent tests.
+     */
     @AfterAll
     static void teardown() {
         userDAO.deleteObjectByUserame("testaaja");
     }
+
+    /**
+     * Initializes the JavaFX environment for the test. This method is called
+     * before each test execution to set up the UI components.
+     *
+     * @param stage The primary stage for this application.
+     * @throws Exception if there is an error during setup.
+     */
     @Start
     public void start(Stage stage) throws Exception {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
@@ -56,6 +84,13 @@ public class PassChangeTest extends ApplicationTest {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Test method to verify successful password change. It simulates user
+     * interactions for changing the password and asserts the success message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void testPasswordChange(FxRobot robot) {
         robot.clickOn("#oldpassField").write("oldpassword");
@@ -64,6 +99,14 @@ public class PassChangeTest extends ApplicationTest {
         Text profileErrorText = robot.lookup("#profileErrorText").queryAs(Text.class);
         assertEquals("Password succesfully changed", profileErrorText.getText());
     }
+
+    /**
+     * Test method to verify behavior when the incorrect current password is entered.
+     * It simulates user interactions for changing the password with an incorrect
+     * current password and asserts the error message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void testWrongPasswordBeforeChange(FxRobot robot) {
         robot.clickOn("#oldpassField").write("wrongpassword");
@@ -73,6 +116,13 @@ public class PassChangeTest extends ApplicationTest {
         assertEquals("Password incorrect", profileErrorText.getText());
     }
 
+    /**
+     * Test method to verify validation of new password length. It simulates user
+     * interactions for changing the password with a short new password and asserts
+     * the error message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void testShortNewPassword(FxRobot robot) {
         Random random = new Random();

@@ -23,6 +23,15 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * The {@code CreateAccountTest} class contains TestFX-based UI tests for
+ * the account creation functionality in the application. It uses {@link FxRobot} to
+ * simulate user interactions with the UI.
+ *
+ * This test class is designed to ensure that the functionality for creating a new user account
+ * works as expected. It includes tests for successful account creation, validation of user input,
+ * and handling of duplicate account creation attempts.
+ */
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
     private static final UserDAO userDAO = new UserDAO();
@@ -30,6 +39,10 @@ class CreateAccountTest {
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField, passwordField;
     private static final String testUser1 = "testuser-mk-1", testUser2 = "testuser-mk-2";
 
+    /**
+     * Setup method to prepare the testing environment. It ensures that test users are
+     * properly set up or removed as needed.
+     */
     @BeforeAll
     public static void setup() {
         // Delete user testuser1 if exists
@@ -60,6 +73,13 @@ class CreateAccountTest {
         passwordTooltip = robot.lookup("#passwordTooltip").queryAs(Text.class);
     }
 
+    /**
+     * Initializes the JavaFX environment for the test. This method is called
+     * before each test execution to set up the UI components.
+     *
+     * @param stage The primary stage for this application.
+     * @throws IOException if there is an error during setup.
+     */
     @Start
     private void start(Stage stage) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
@@ -70,6 +90,12 @@ class CreateAccountTest {
         stage.show();
     }
 
+    /**
+     * Test method to verify successful account creation. It simulates user
+     * interactions for creating an account and asserts the success message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void createAccountSuccess(FxRobot robot) {
         getFields(robot);
@@ -84,6 +110,12 @@ class CreateAccountTest {
         assertEquals("Account created successfully", statusMessage.getText());
     }
 
+    /**
+     * Test method to verify account creation failure due to invalid input. It simulates user
+     * interactions with various invalid inputs and asserts the appropriate error messages.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void createAccountFail(FxRobot robot) {
         getFields(robot);
@@ -120,6 +152,13 @@ class CreateAccountTest {
         assertEquals("Password must be 50 characters or less", passwordTooltip.getText());
     }
 
+    /**
+     * Test method to verify failure when attempting to create an account with a username
+     * that already exists. It simulates user interactions for creating a duplicate account
+     * and asserts the error message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void createDuplicateAccountFail(FxRobot robot) {
         getFields(robot);
@@ -127,12 +166,15 @@ class CreateAccountTest {
         assertEquals("Username already taken", usernameTooltip.getText());
     }
 
+    /**
+     * Teardown method to clean up after all tests. It removes any test users created
+     * during the tests to ensure a clean state for subsequent tests.
+     */
     @AfterAll
     static void endTests() {
         if (userDAO.getObject(testUser1) != null) {
             userDAO.deleteObject(testUser1);
         }
-
         if (userDAO.getObject(testUser2) != null) {
             userDAO.deleteObject(testUser2);
         }

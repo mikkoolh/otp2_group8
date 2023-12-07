@@ -24,22 +24,36 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
 
-
+/**
+ * The {@code LocaleSelector} class provides functionality to create and manage a
+ * ComboBox for selecting locales. It is designed to allow users to switch between
+ * different languages and regions, represented by flags and language names.
+ * <p>
+ * This class handles the creation of the ComboBox, populating it with {@link LocaleItem}
+ * objects, and managing the actions to be taken when a new locale is selected. It also
+ * supports updating the user interface and user preferences based on the selected locale.
+ * </p>
+ *
+ * @version 1.0
+ * @since 7.10.2023
+ */
 public class LocaleSelector {
     private ComboBox<LocaleItem> languagesCBox;
-    private Image us, fi, ru, un, sa;
+    private Image us, fi, ru, sa;
     private final String lang_US = CountryNames.lang_US.toString(), lang_FI = CountryNames.lang_FI.toString(), lang_RU = CountryNames.lang_RU.toString(), lang_SA = CountryNames.lang_SA.toString();
     private NavigationUtil navigationUtil = new NavigationUtil();
     private Locale userLocale;
-
     private final int SIZE = 30, idx_FI = 0, idx_US = 1, idx_RU = 2, idx_SA = 3;
     private final UserDAO userDAO = new UserDAO();
-
     private CacheSingleton cache = CacheSingleton.getInstance();
-
     private final boolean loggedIn = cache.getUser() != null;
     private final String pathUSFlag = "/images/263-united-states-of-america.png", pathFIFlag = "/images/125-finland.png", pathRUFlag = "/images/248-russia.png", pathSAFlag = "/images/133-saudi-arabia.png";
 
+    /**
+     * Constructs a {@code LocaleSelector} and initializes its components.
+     * It fetches images for the flags, sets the initial locale based on user
+     * preferences or a temporary cache, and configures the ComboBox.
+     */
     public LocaleSelector() {
         languagesCBox = new ComboBox<LocaleItem>();
         languagesCBox.setId("languageBox");
@@ -51,6 +65,11 @@ public class LocaleSelector {
         }
     }
 
+    /**
+     * Gets the ComboBox configured with locale options.
+     *
+     * @return The configured {@link ComboBox} of {@link LocaleItem}.
+     */
     public ComboBox<LocaleItem> getComboBox() {
 
         List<LocaleItem> localesList = getLocalesList();
@@ -97,6 +116,9 @@ public class LocaleSelector {
         return languagesCBox;
     }
 
+    /**
+     * Fetches and sets the initial value of the ComboBox based on the user's locale.
+     */
     private void setInitialValue() {
         List<LocaleItem> temp = getLocalesList();
         if (userLocale.toString().equals("fi_FI")) {
@@ -110,10 +132,13 @@ public class LocaleSelector {
         } else {
             System.out.println("not valid initial value");
         }
-
     }
 
-
+    /**
+     * Generates a list of {@link LocaleItem} objects representing available locales.
+     *
+     * @return A list of {@link LocaleItem} objects.
+     */
     private List<LocaleItem> getLocalesList() {
         List<LocaleItem> temp = new ArrayList<>();
         temp.add(idx_FI, new LocaleItem(fi, lang_FI));
@@ -123,6 +148,9 @@ public class LocaleSelector {
         return temp;
     }
 
+    /**
+     * Sets the cell factory for the ComboBox to customize the display of items.
+     */
     private void setCellFactory() {
         languagesCBox.setCellFactory(param -> new ListCell<LocaleItem>() {
             private final Label label = new Label();
@@ -145,6 +173,9 @@ public class LocaleSelector {
         });
     }
 
+    /**
+     * Fetches images for the flags used in the locale selection.
+     */
     private void fetchImages() {
         us = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathUSFlag)));
         fi = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathFIFlag)));
@@ -152,11 +183,21 @@ public class LocaleSelector {
         sa = new Image(Objects.requireNonNull(getClass().getResourceAsStream(pathSAFlag)));
     }
 
+    /**
+     * Fetches the user's locale from the database based on the username.
+     *
+     * @param username The username of the user.
+     */
     private void fetchLocale(String username) {
         userLocale = userDAO.getLocale(username);
         System.out.println(userLocale);
     }
 
+    /**
+     * Updates the user interface to reflect the newly selected language.
+     *
+     * @throws IOException If there is an error loading the new language resources.
+     */
     private void showNewLang() throws IOException {
         if (loggedIn) {
             try {
@@ -176,7 +217,6 @@ public class LocaleSelector {
             scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
             stage.setScene(scene);
             stage.show();
-
         }
     }
 }

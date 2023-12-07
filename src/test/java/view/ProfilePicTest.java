@@ -25,9 +25,23 @@ import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The {@code ProfilePicTest} class contains TestFX-based UI tests for
+ * the profile picture change functionality in the application. It uses {@link FxRobot} to
+ * simulate user interactions with the UI.
+ *
+ * This test class is designed to ensure that the functionality for changing a user's
+ * profile picture works as expected. It includes tests for verifying the default profile
+ * picture and changing to a new profile picture.
+ */
 @ExtendWith(ApplicationExtension.class)
 public class ProfilePicTest extends ApplicationTest {
     static UserDAO userDAO = new UserDAO();
+
+    /**
+     * Setup method to prepare the testing environment. It ensures a test user is
+     * available and sets up the necessary environment in the {@link CacheSingleton}.
+     */
     @BeforeAll
     static void setup() {
         CacheSingleton cache = CacheSingleton.getInstance();
@@ -44,10 +58,23 @@ public class ProfilePicTest extends ApplicationTest {
             cache.setUser(user);
         }
     }
+
+    /**
+     * Teardown method to clean up after all tests. It removes the test user from
+     * the database to ensure a clean state for subsequent tests.
+     */
     @AfterAll
     static void teardown() {
         userDAO.deleteObjectByUserame("testaaja");
     }
+
+    /**
+     * Initializes the JavaFX environment for the test. This method is called
+     * before each test execution to set up the UI components.
+     *
+     * @param stage The primary stage for this application.
+     * @throws Exception if there is an error during setup.
+     */
     @Start
     public void start(Stage stage) throws Exception {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
@@ -58,6 +85,13 @@ public class ProfilePicTest extends ApplicationTest {
         stage.show();
     }
 
+    /**
+     * Test method to verify the functionality of changing the profile picture.
+     * It simulates user interactions for selecting and saving a new profile picture
+     * and asserts the change in the user's profile picture.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void TestPicChange(FxRobot robot) {
         User user = CacheSingleton.getInstance().getUser();

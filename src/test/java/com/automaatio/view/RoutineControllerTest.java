@@ -23,6 +23,15 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The {@code RoutineControllerTest} class contains TestFX-based UI tests for
+ * the routine management functionality in the application. It uses {@link FxRobot} to
+ * simulate user interactions with the UI.
+ * <p>
+ * This test class is designed to ensure that the functionality for creating, editing,
+ * and deleting routines works as expected. It includes tests for adding a new routine,
+ * editing an existing routine, and deleting a routine.
+ */
 @ExtendWith(ApplicationExtension.class)
 class RoutineControllerTest {
     private static final CacheSingleton cache = CacheSingleton.getInstance();
@@ -30,7 +39,6 @@ class RoutineControllerTest {
     private static final DeviceDAO deviceDAO = new DeviceDAO();
     private static final DeviceGroupDAO deviceGroupDAO = new DeviceGroupDAO();
     private Label statusMessage;
-
     private static User testUser;
     private static Device testDevice;
     private static DeviceGroup testDeviceGroup;
@@ -45,7 +53,6 @@ class RoutineControllerTest {
         } else {
             testUser = userDAO.getObject(testUsername);
         }
-
         testUser.setLocale("en_US");
         cache.setUser(testUser);
     }
@@ -77,6 +84,14 @@ class RoutineControllerTest {
         routine2 = routineDAO.addAndReturnObject(new Routine(testUser, testDevice, null, routine2Time, true));
     }
 
+    /**
+     * Initializes the JavaFX environment for the test and sets up the necessary data
+     * for testing routines. This method is called before each test execution to set up
+     * the UI components and test data.
+     *
+     * @param stage The primary stage for this application.
+     * @throws IOException if there is an error during setup.
+     */
     @Start
     private void start(Stage stage) throws IOException {
         setupUser();
@@ -90,6 +105,12 @@ class RoutineControllerTest {
         stage.show();
     }
 
+    /**
+     * Test method to verify the functionality of editing a routine. It simulates user
+     * interactions for modifying an existing routine and asserts the success message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void editRoutineTest(FxRobot robot) {
         getFields(robot);
@@ -116,6 +137,12 @@ class RoutineControllerTest {
         assertEquals("Routine updated successfully", statusMessage.getText());
     }
 
+    /**
+     * Test method to verify the functionality of deleting a routine. It simulates user
+     * interactions for removing an existing routine and asserts the success message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void deleteRoutineTest(FxRobot robot) {
         getFields(robot);
@@ -127,6 +154,12 @@ class RoutineControllerTest {
         assertEquals("Routine deleted successfully", statusMessage.getText());
     }
 
+    /**
+     * Test method to verify the functionality of adding a new routine. It simulates user
+     * interactions for creating a new routine and asserts the success message.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     */
     @Test
     void addRoutineTest(FxRobot robot) {
         getFields(robot);
@@ -148,6 +181,10 @@ class RoutineControllerTest {
         assertEquals("Routine saved successfully", statusMessage.getText());
     }
 
+    /**
+     * Teardown method to clean up after all tests. It removes any test data created
+     * during the tests to ensure a clean state for subsequent tests.
+     */
     @AfterAll
     static void endTest() {
         if (userDAO.getObject(testUser.getUsername()) != null) {

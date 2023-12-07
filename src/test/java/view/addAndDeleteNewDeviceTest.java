@@ -19,16 +19,33 @@ import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * The {@code addAndDeleteNewDeviceTest} class contains TestFX-based UI tests for
+ * adding and deleting a new device in the application. It uses {@link FxRobot} to
+ * simulate user interactions with the UI.
+ *
+ * This test class is designed to ensure that the functionality for adding a new device
+ * works as expected and that the device is correctly added to the database. It also
+ * includes setup and teardown methods to prepare and clean up the testing environment.
+ */
 @ExtendWith(ApplicationExtension.class)
 public class addAndDeleteNewDeviceTest {
     private static UserDAO userDAO = new UserDAO();
     private static DeviceDAO deviceDAO = new DeviceDAO();
 
+    /**
+     * Teardown method to clean up after each test. It removes any devices added
+     * by the test user to ensure a clean state for subsequent tests.
+     */
     @AfterEach
     void tearDownEach() {
         deviceDAO.deleteDevicesByUsername("testuser");
     }
 
+    /**
+     * Setup method to prepare the testing environment. It ensures a test user is
+     * available and sets up the necessary environment in the {@link CacheSingleton}.
+     */
     @BeforeAll
     static void setup() {
         CacheSingleton cache = CacheSingleton.getInstance();
@@ -45,6 +62,13 @@ public class addAndDeleteNewDeviceTest {
         }
     }
 
+    /**
+     * Initializes the JavaFX environment for the test. This method is called
+     * before each test execution to set up the UI components.
+     *
+     * @param stage The primary stage for this application.
+     * @throws IOException if loading the FXML file fails.
+     */
     @Start
     private void start(Stage stage) throws IOException {
         URL url = GraphicalUI.class.getResource("/view/menu/devices.fxml");
@@ -57,6 +81,14 @@ public class addAndDeleteNewDeviceTest {
         stage.show();
     }
 
+    /**
+     * Test method to verify the addition of a new device. It simulates user
+     * interactions for adding a device and asserts that the device is correctly
+     * added to the database.
+     *
+     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     * @throws InterruptedException if the thread sleep is interrupted.
+     */
     @Test
     void test(FxRobot robot) throws InterruptedException {
         robot.clickOn("#deviceNameField").write("test device");

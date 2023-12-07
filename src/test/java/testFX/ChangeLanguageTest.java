@@ -19,7 +19,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * The {@code ChangeLanguageTest} class extends {@code AbstractTestFX} and contains TestFX-based UI tests
+ * for the language change functionality in the application. It uses {@link FxRobot} to simulate user
+ * interactions with the UI.
+ *
+ * This test class is designed to ensure that the functionality for changing the application's language
+ * works as expected. It includes tests for changing the language to English, Finnish, Russian, and Arabic.
+ */
 public class ChangeLanguageTest extends AbstractTestFX {
     final private String username = "testFX", passwd = "testfx123", userFieldId = "#usernameField",
             passwdFld = ".password-field", loginBtnId = "#loginButton", welcomeTxtId = "#welcomeMain",
@@ -32,12 +39,17 @@ public class ChangeLanguageTest extends AbstractTestFX {
     private Label userLabel;
     private TitledPane profPane;
     private ComboBox langBox;
-
     private TextInputControl passwdField;
-
     private Button loginBtn, editProfBtn;
 
-
+    /**
+     * Test method to verify the functionality of changing the application's language to English.
+     * It simulates user interactions for selecting English from the language dropdown and asserts
+     * the success of the language change.
+     *
+     * @param robo The {@link FxRobot} instance used to simulate user interactions.
+     * @throws InterruptedException if the thread sleep is interrupted.
+     */
     @Test
     void changeLangToEng(FxRobot robo) throws InterruptedException {
         getLoginFields(robo);
@@ -46,6 +58,14 @@ public class ChangeLanguageTest extends AbstractTestFX {
         changeLangTo(robo, eng);
     }
 
+    /**
+     * Test method to verify the functionality of changing the application's language to Finnish.
+     * It simulates user interactions for selecting Finnish from the language dropdown and asserts
+     * the success of the language change.
+     *
+     * @param robo The {@link FxRobot} instance used to simulate user interactions.
+     * @throws InterruptedException if the thread sleep is interrupted.
+     */
     @Test
     void changeLangToFin(FxRobot robo) throws InterruptedException {
         getLoginFields(robo);
@@ -54,6 +74,14 @@ public class ChangeLanguageTest extends AbstractTestFX {
         changeLangTo(robo, fin);
     }
 
+    /**
+     * Test method to verify the functionality of changing the application's language to Russian.
+     * It simulates user interactions for selecting Russian from the language dropdown and asserts
+     * the success of the language change.
+     *
+     * @param robo The {@link FxRobot} instance used to simulate user interactions.
+     * @throws InterruptedException if the thread sleep is interrupted.
+     */
     @Test
     void changeLangToRus(FxRobot robo) throws InterruptedException {
         getLoginFields(robo);
@@ -62,7 +90,14 @@ public class ChangeLanguageTest extends AbstractTestFX {
         changeLangTo(robo, rus);
     }
 
-
+    /**
+     * Test method to verify the functionality of changing the application's language to Arabic.
+     * It simulates user interactions for selecting Arabic from the language dropdown and asserts
+     * the success of the language change.
+     *
+     * @param robo The {@link FxRobot} instance used to simulate user interactions.
+     * @throws InterruptedException if the thread sleep is interrupted.
+     */
     @Test
     void changeLangToAr(FxRobot robo) throws InterruptedException {
         getLoginFields(robo);
@@ -70,7 +105,6 @@ public class ChangeLanguageTest extends AbstractTestFX {
         goToProfile(robo);
         changeLangTo(robo, ar);
     }
-
 
     private void getLoginFields(FxRobot robot) {
         userField = robot.lookup(userFieldId).queryAs(TextField.class);

@@ -7,13 +7,31 @@ import javafx.scene.layout.GridPane;
 import java.util.ResourceBundle;
 
 /**
- * @author Matleena Kankaanpää
- * 7.10.2023
+ * @autohr Matleena Kankaanpää
  *
- * 2x2 grid component containing two time pickers and labels
+ * The {@code TimeSelectorGrid} class provides functionality to create a 2x2 grid layout
+ * containing two {@link TimePicker} components and their corresponding labels. This
+ * component is useful for scenarios where a user needs to select both a start and an
+ * end time.
+ *
+ * The grid layout arranges the time pickers and their labels in a user-friendly manner,
+ * making it clear which picker is for the start time and which is for the end time.
  */
-
 public class TimeSelectorGrid {
+
+    /**
+     * Creates a {@link GridPane} containing two {@link TimePicker} components and their
+     * respective labels for start and end times.
+     * <p>
+     * The method takes two {@link TimePicker} instances for start and end times and
+     * arranges them in a grid with labels indicating their purpose. The labels are
+     * localized based on the user's locale.
+     * </p>
+     *
+     * @param startTime The {@link TimePicker} for selecting the start time.
+     * @param endTime The {@link TimePicker} for selecting the end time.
+     * @return A {@link GridPane} with the configured time pickers and labels.
+     */
     public GridPane create(TimePicker startTime, TimePicker endTime) {
         BundleLoader bundleLoader = new BundleLoader();
         ResourceBundle resourceBundle = bundleLoader.loadResourceByUsersLocale();
