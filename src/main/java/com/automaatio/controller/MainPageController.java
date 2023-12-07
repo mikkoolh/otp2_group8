@@ -17,17 +17,24 @@ import java.util.ResourceBundle;
 
 
 /**
- * Controller for the app dashboard
- * @author Mikko Hänninen 19.9.2023
+ * Controller for the application dashboard.
+ * Manages the initialization of the main and menu panes, setting up the user interface.
  *
+ * @author Mikko Hänninen
+ * @since 19.9.2023
  */
-
 public class MainPageController implements Initializable {
     @FXML
     private Pane mainPane, menuPane;
     private CacheSingleton cache = CacheSingleton.getInstance();
     private BundleLoader bundleLoader = new BundleLoader();
-
+    /**
+     * Initializes the controller after FXML loading.
+     * Sets up the main and menu panes with the appropriate content based on the user's locale.
+     *
+     * @param location The URL location of the FXML file.
+     * @param resources The ResourceBundle containing localized resources.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ResourceBundle resourceBundle = resources;
@@ -36,7 +43,11 @@ public class MainPageController implements Initializable {
         setMainPane(resourceBundle);
         setMenuPane(resourceBundle);
     }
-
+    /**
+     * Sets up the menu pane with content loaded from the "main-menu.fxml" file.
+     *
+     * @param bundle The ResourceBundle containing localized resources.
+     */
     public void setMenuPane(ResourceBundle bundle){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main-menu.fxml"));
@@ -47,7 +58,11 @@ public class MainPageController implements Initializable {
             System.out.println(e);
         }
     }
-
+    /**
+     * Sets up the main pane with content loaded from the "welcome.fxml" file.
+     *
+     * @param bundle The ResourceBundle containing localized resources.
+     */
     public void setMainPane(ResourceBundle bundle){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/welcome.fxml"));

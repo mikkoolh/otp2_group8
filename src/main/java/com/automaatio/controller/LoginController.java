@@ -24,11 +24,12 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
- * Controller for the login form
+ * Controller for the login form.
+ * Manages user login, authentication, and navigation between login and account creation.
+ *
  * @author Matleena Kankaanpää
- * 8.9.2023
+ * @since 8.9.2023
  */
-
 public class LoginController {
     @FXML
     private Text loginErrorText;
@@ -50,12 +51,18 @@ public class LoginController {
     private final NavigationUtil nav;
     private final UserDAO userDAO;
     private ResourceBundle resourceBundle;
-
+    /**
+     * Default constructor.
+     * Initializes navigation utilities and UserDAO.
+     */
     public LoginController() {
         nav = new NavigationUtil();
         userDAO = new UserDAO();
     }
-
+    /**
+     * Initializes the controller after FXML loading.
+     * Configures input fields, buttons, and event listeners.
+     */
     @FXML
     private void initialize() {
         cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/login.fxml")));
@@ -101,8 +108,12 @@ public class LoginController {
     }
 
     /**
-     * @param event
-     * @throws IOException
+     * Handles the login button click event.
+     * Validates user credentials, performs login, and navigates to the main page on success.
+     * Displays appropriate error messages for invalid inputs or authentication failures.
+     *
+     * @param event The ActionEvent triggered by the login button click.
+     * @throws IOException If an I/O error occurs during the navigation to the main page.
      */
     @FXML
     protected void onLoginClick(ActionEvent event) throws IOException {
@@ -143,7 +154,13 @@ public class LoginController {
             loginErrorText.setText(resourceBundle.getString("tryAgainTxt"));
         }
     }
-
+    /**
+     * Handles the create account button click event.
+     * Navigates to the account creation page.
+     *
+     * @param event The ActionEvent triggered by the create account button click.
+     * @throws IOException If an I/O error occurs during the navigation to the account creation page.
+     */
     @FXML
     protected void onCreateAccountClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/create-account.fxml"));
@@ -155,9 +172,8 @@ public class LoginController {
         stage.show();
     }
 
-    /*
-    Disables the login button and clears the error message
-    when both fields are empty
+    /**
+     * Disables the login button and clears the error message when both fields are empty.
      */
     private void updateUI() {
         boolean clickable = (!usernameField.getText().trim().isEmpty())

@@ -20,7 +20,11 @@ import java.util.ResourceBundle;
 
 
 /**
+ * Controller for managing a room's details, devices, and interactions.
+ * This class handles the user interface and logic associated with a specific room.
+ *
  * @author Elmo Erla
+ * @version 1.0
  */
 public class RoomController implements Initializable, IController {
     @FXML
@@ -37,7 +41,19 @@ public class RoomController implements Initializable, IController {
     private DeviceDAO deviceDAO = new DeviceDAO();
     private CreateVBoxColumn deviceRow = new CreateVBoxColumn();
 
+    /**
+     * Default constructor for RoomController.
+     */
     public RoomController() {}
+
+    /**
+     * Initializes the RoomController.
+     * This method is automatically called by JavaFX after the FXML file is loaded.
+     * It sets up initial values and configurations for the room page.
+     *
+     * @param location  The URL of the FXML file.
+     * @param resources The ResourceBundle containing localized resources.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CacheSingleton cache = CacheSingleton.getInstance();
@@ -59,6 +75,9 @@ public class RoomController implements Initializable, IController {
         showDevices();
     }
 
+    /**
+     * Populates the device dropdown with devices not currently assigned to the room.
+     */
     private void populateDevicesDropdown() {
         String currentUser = cache.getUser().getUsername();
         List<Device> devices = deviceGroupDAO.getDevicesNotInGroup(cache.getRoom().getDeviceGroupId(), currentUser);
@@ -93,7 +112,9 @@ public class RoomController implements Initializable, IController {
             }
         });
     }
-
+    /**
+     * Displays the list of devices associated with the current room.
+     */
     public void showDevices() {
         devicesVBox.getChildren().clear();
         List<Device> devices = deviceGroupDAO.getDevicesByRoom(cache.getRoom());
@@ -101,7 +122,10 @@ public class RoomController implements Initializable, IController {
             devicesVBox.getChildren().add(deviceRow.create(device, devicesVBox, new DevicesClick()));
         }
     }
-
+    /**
+     * Handles the deletion of the current room.
+     * Displays a confirmation dialog and deletes the room along with its associated devices.
+     */
     @FXML
     public void deleteRoom() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
