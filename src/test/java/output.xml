@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.10.12 on linux)" generated="20231031 09:44:35.430" rpa="false" schemaversion="4">
+<suite id="s1" name="Test" source="/home/nicknoss/Desktop/otp2_group8/src/test/java/test.robot">
+<test id="s1-t1" name="Open App" line="6">
+<kw name="Run" library="OS">
+<arg>Main</arg>
+<doc>Runs the given command in the system and returns the output.</doc>
+<msg timestamp="20231031 09:44:35.497" level="INFO">Running command 'Main 2&gt;&amp;1'.</msg>
+<status status="PASS" starttime="20231031 09:44:35.497" endtime="20231031 09:44:35.498"/>
+</kw>
+<status status="PASS" starttime="20231031 09:44:35.497" endtime="20231031 09:44:35.498"/>
+</test>
+<status status="PASS" starttime="20231031 09:44:35.430" endtime="20231031 09:44:35.498"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20231031 09:44:35.491" level="ERROR">Error in file '/home/nicknoss/Desktop/otp2_group8/src/test/java/test.robot' on line 2: Getting keyword names from library 'Remote' failed: Calling dynamic method 'get_keyword_names' failed: Connecting remote server at http://127.0.1.1:8270 failed: &lt;Fault 0: 'Failed to invoke method get_keyword_names in class org.robotframework.remoteserver.servlet.ServerMethods: java.lang.RuntimeException'&gt;</msg>
+</errors>
+</robot>

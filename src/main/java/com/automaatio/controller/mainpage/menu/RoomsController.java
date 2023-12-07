@@ -16,6 +16,16 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * The RoomsController class is responsible for managing the "Rooms" menu in the HomeAutomation application's main page.
+ * It implements the Initializable interface to handle initialization of the controller and the Menu interface to define menu-related functionality.
+ * The controller is associated with an FXML file representing the UI for managing rooms.
+ * Users can view existing rooms, add new rooms, and interact with room-related functionalities.
+ * The class utilizes the CreateVBoxColumn component for dynamically creating and managing VBox columns.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
+ */
 public class RoomsController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
     @FXML
@@ -27,11 +37,20 @@ public class RoomsController implements Initializable, Menu {
 
     private DeviceGroupDAO deviceGroupDAO = new DeviceGroupDAO();
 
+    /**
+     * Initializes the controller and calls the show() method to populate the VBox with room rows.
+     *
+     * @param location  The URL location of the FXML file.
+     * @param resources The ResourceBundle containing localized resources.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         show();
     }
 
+    /**
+     * Populates the VBox with room rows fetched from the database.
+     */
     public void show() {
         roomsVBox.getChildren().clear();
         List<DeviceGroup> deviceGroups = deviceGroupDAO.getRoomsByUser(cache.getUser());
@@ -40,6 +59,10 @@ public class RoomsController implements Initializable, Menu {
         }
     }
 
+    /**
+     * Handles the click action when the "Add Room" button is clicked.
+     * Creates a new room with the specified name, adds it to the database, and updates the UI to reflect the changes.
+     */
     @FXML
     private void onAddGroupClick() {
         String deviceGroupName = newRoomTextField.getText();

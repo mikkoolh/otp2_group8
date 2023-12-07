@@ -23,11 +23,13 @@ import javafx.scene.text.Text;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * Controller for the registration form
+ * Controller for the registration form.
+ * Manages user input, validation, and registration process.
+ *
  * @author Matleena Kankaanpää
- * 19.9.2023
+ * @version 1.0
+ * @since 19.9.2023
  */
-
 public class CreateAccountController {
     private final NavigationUtil nav;
     private final FormInputValidator validator;
@@ -46,6 +48,10 @@ public class CreateAccountController {
     private GridPane formGrid;
     private final ResourceBundle resourceBundle;
 
+    /**
+     * Default constructor.
+     * Initializes navigation utilities, input validator, and UserDAO.
+     */
     public CreateAccountController() {
         nav = new NavigationUtil();
         validator = new FormInputValidator();
@@ -89,7 +95,11 @@ public class CreateAccountController {
         }
     }
 
-    // Creates a new user into the database when the save button is clicked
+    /**
+     * Creates a new user into the database when the save button is clicked
+     * @param user
+     * @return true or false depending of succession of user profile creation.
+     */
     private boolean saveUser(User user) {
         try {
             userDAO.addObject(user);
@@ -101,7 +111,10 @@ public class CreateAccountController {
             return false;
         }
     }
-
+    /**
+     * Initializes the controller after FXML loading.
+     * Configures input fields, tooltips, and event listeners.
+     */
     @FXML
     private void initialize() {
         cache.setCurrentLoader(new FXMLLoader(getClass().getResource("/view/create-account.fxml")));
@@ -182,7 +195,9 @@ public class CreateAccountController {
         });
     }
 
-    // Enables/disables the save button depending on whether all fields pass validation
+    /**
+     * Enables/disables the save button depending on whether all fields pass validation.
+     */
     private void toggleButton() {
         getFieldValues();
 
@@ -195,7 +210,9 @@ public class CreateAccountController {
 
         saveButton.setDisable(!inputOk);
     }
-
+    /**
+     * Gets values from input fields and updates corresponding variables.
+     */
     private void getFieldValues(){
         firstName = firstNameField.getText().trim();
         lastName = lastNameField.getText().trim();

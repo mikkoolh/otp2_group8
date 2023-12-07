@@ -27,19 +27,21 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * Controller for the routines listing
+ * Controller for the routines listing.
+ * Manages the interaction and functionality of routines displayed in the UI.
  *
- * @author Nikita Nossenko
- * @author Matleena Kankaanpää
- *
- * 27.11.2023
+ * @author Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
+ * @since 27.11.2023
  */
-
 public class RoutineController implements Initializable {
 
     @FXML
     private TextArea routineNameField;
 
+    /**
+     * Default constructor for RoutineController.
+     */
     public RoutineController() {}
 
     CacheSingleton cache = CacheSingleton.getInstance();
@@ -85,7 +87,12 @@ public class RoutineController implements Initializable {
     private ResourceBundle resourceBundle;
     private CompoundMessageCreator compoundMessageCreator;
     private LocalizationTool localizer;
-
+    /**
+     * Initializes the controller.
+     *
+     * @param location   The location used to resolve relative paths for the root object.
+     * @param resources  The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         VBox.setVgrow(routineVBox, Priority.ALWAYS);
@@ -112,7 +119,9 @@ public class RoutineController implements Initializable {
         routineScrollPane.setStyle("-fx-background-color:transparent;");
         hideForm();
     }
-
+    /**
+     * Loads routines from the database and displays them in the UI.
+     */
     private void loadRoutines() {
         routineVBox.getChildren().clear();
         errorHandler.hideErrorMessage(errorMessageField);
@@ -175,7 +184,12 @@ public class RoutineController implements Initializable {
             }
         }
     }
-
+    /**
+     * Creates an HBox representing a single routine entry in the UI.
+     *
+     * @param routine The Routine object to display.
+     * @return An HBox representing the routine entry.
+     */
     private HBox createRoutineRow(Routine routine) {
         Label startTime = new Label(util.getFormattedTime(routine.getEventTime().getStartTime()));
         Label endTime = new Label(util.getFormattedTime(routine.getEventTime().getEndTime()));
@@ -305,13 +319,20 @@ public class RoutineController implements Initializable {
         routineRow.setAlignment(Pos.CENTER_RIGHT);
         return routineRow;
     }
-
-    // Fetches routines from the database
+    /**
+     * Fetches routines from the database.
+     *
+     * @return List of Routine objects.
+     */
     private List<Routine> fetchRoutines() {
         return routineDAO.getRoutinesByDeviceId(ID);
     }
 
-    // Creates a toggle switch with an event handler to change the state of the current routine
+    /**
+     * Creates a toggle switch with an event handler to change the state of the current routine
+     *
+     * @return automation status of a routine.
+     */
     private ToggleSwitch getToggleSwitch(Routine routine) {
         ToggleSwitch toggle = new ToggleSwitch();
         toggle.setSelected(routine.getAutomated());
@@ -324,13 +345,19 @@ public class RoutineController implements Initializable {
         toggleSwitches.put(routine, toggle);
         return toggle;
     }
-
+    /**
+     * Toggles the automation state of all routines.
+     *
+     * @param actionEvent The ActionEvent triggering this method.
+     */
     @FXML
     public void automateAll(ActionEvent actionEvent) {
         System.out.println("automate all");
     }
 
-    // Shows a confirmation popup when the "Delete routine" button is clicked
+    /**
+     * Shows a confirmation popup when the "Delete routine" button is clicked.
+     */
     private final EventHandler<ActionEvent> deleteRoutine = new EventHandler<>() {
         public void handle(ActionEvent event) {
             Routine routineToDelete = deleteButtons.get((Button) event.getTarget());
@@ -368,7 +395,9 @@ public class RoutineController implements Initializable {
             }
         }
     };
-
+    /**
+     * Hides the routine input form in the UI.
+     */
     @FXML
     private void hideForm() {
         addRoutineForm.setVisible(false);
@@ -376,7 +405,9 @@ public class RoutineController implements Initializable {
         addRoutineButton.setVisible(true);
         noRoutinesText.setVisible(noRoutinesToShow);
     }
-
+    /**
+     * Displays the routine input form in the UI.
+     */
     @FXML
     private void showForm() {
         addRoutineForm.setVisible(true);
@@ -389,7 +420,9 @@ public class RoutineController implements Initializable {
             checkBox.setSelected(false);
         }
     }
-
+    /**
+     * Handles the process of saving a new routine based on user input.
+     */
     @FXML
     private void handleSaveRoutine() {
 
@@ -428,7 +461,9 @@ public class RoutineController implements Initializable {
             }
         }
     }
-
+    /**
+     * Initializes the routine input form in the UI.
+     */
     private void initializeForm() {
         addRoutineForm.setPadding(new Insets(10));
         addRoutineForm.setStyle("-fx-border-color: black; -fx-border-radius: 10;");
@@ -480,7 +515,9 @@ public class RoutineController implements Initializable {
             });
         }
     }
-
+    /**
+     * Deletes all routines for the current device.
+     */
     @FXML
     private void deleteAll() {
         try {
@@ -506,7 +543,9 @@ public class RoutineController implements Initializable {
             errorHandler.showErrorMessage(resourceBundle.getString("generalErrorTxt"), errorMessageField);
         }
     }
-
+    /**
+     * Displays an error message in case of a failure to load routines.
+     */
     private void displayErrorText() {
         errorHandler.showErrorMessage(resourceBundle.getString("routinesLoadErrorTxt"), errorMessageField);
         noRoutinesText.setVisible(false); // Don't display both disclaimers
@@ -526,8 +565,10 @@ public class RoutineController implements Initializable {
 
         return timeInputOk;
     }
-
-    // Returns true if at least one checkbox is selected
+    /**
+     * Method for Weekday selection validation.
+     * @return true if at least one checkbox is selected
+     */
     private boolean validateWeekdaySelection() {
         validateTimeInput(startTimePicker, endTimePicker);
         for (Map.Entry<Weekday, CheckBox> set : weekdayCheckBoxes.entrySet()) {
@@ -540,7 +581,9 @@ public class RoutineController implements Initializable {
         return false;
     }
 
-    // Controls the clickability of the save button depending on input validations
+    /**
+     * Controls the clickability of the save button depending on input validations
+     */
     private void checkSaveButtonState() {
         boolean weekdaySelectionOk = validateWeekdaySelection();
         boolean timeInputOk = validateTimeInput(startTimePicker, endTimePicker);

@@ -23,6 +23,17 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+/**
+ * The ProfileController class is responsible for managing the user profile display and interactions in the HomeAutomation application.
+ * It implements the Initializable interface to handle initialization of the controller and the Menu interface to define menu-related functionality.
+ * The controller is associated with an FXML file representing the UI for user profile information.
+ * Users can view their username, name, selected profile picture, and electricity price information.
+ * The class provides methods for updating the displayed profile picture and opening the user profile page.
+ * It also allows users to log out and change their profile picture by invoking a popup window.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
+ */
 public class ProfileController implements Initializable, Menu {
     private final CacheSingleton cache = CacheSingleton.getInstance();
     private final Pane mainPane;
@@ -44,10 +55,20 @@ public class ProfileController implements Initializable, Menu {
 
     private int selectedPic = cache.getUser().getSelectedPicture();
 
+    /**
+     * Constructor for the ProfileController.
+     * Initializes the mainPane with the instance from the cache.
+     */
     public ProfileController() {
         mainPane = cache.getMainPane();
     }
 
+    /**
+     * Initializes the controller and sets the resourceBundle.
+     *
+     * @param location  The URL location of the FXML file.
+     * @param resources The ResourceBundle containing localized resources.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         resourceBundle = resources;
@@ -55,11 +76,19 @@ public class ProfileController implements Initializable, Menu {
         loadProfilePic();
     }
 
+    /**
+     * Updates the selected profile picture and loads it.
+     *
+     * @param selectedPic The identifier for the selected profile picture.
+     */
     public void updateProfilePic(int selectedPic) {
         this.selectedPic = selectedPic;
         loadProfilePic();
     }
 
+    /**
+     * Loads and displays the profile picture based on the selected picture identifier.
+     */
     private void loadProfilePic() {
         String imagePath;
 
@@ -91,6 +120,9 @@ public class ProfileController implements Initializable, Menu {
         profileView.setImage(image);
     }
 
+    /**
+     * Displays the user profile information.
+     */
     @Override
     public void show() {
         usernameTXT.setText(username);
@@ -105,7 +137,9 @@ public class ProfileController implements Initializable, Menu {
         }
 
     }
-
+    /**
+     * Opens the user profile page.
+     */
     public void openProfile() {
         System.out.println("open profile");
         try {
@@ -121,6 +155,13 @@ public class ProfileController implements Initializable, Menu {
         }
     }
 
+    /**
+     * Handles the click action when the "Logout" button is clicked.
+     * Logs out the user and navigates to the login page.
+     *
+     * @param event The ActionEvent triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     @FXML
     private void onLogoutClick(ActionEvent event) throws IOException {
         cache.setUser(null);
@@ -129,6 +170,13 @@ public class ProfileController implements Initializable, Menu {
         nav.openLoginPage(event);
     }
 
+    /**
+     * Handles the click action when the "Change Picture" button is clicked.
+     * Opens a popup window for selecting a new profile picture.
+     *
+     * @param event The ActionEvent triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     @FXML
     protected void onBtnClick(ActionEvent event) throws IOException {
 
@@ -151,5 +199,4 @@ public class ProfileController implements Initializable, Menu {
 
         loadProfilePic();
     }
-
 }

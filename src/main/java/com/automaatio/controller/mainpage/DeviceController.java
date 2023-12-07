@@ -18,8 +18,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * @author Elmo Erla
+ * Controller class for managing devices in the main page.
+ * This class implements the Initializable and IController interfaces.
  *
+ * @author Elmo Erla
+ * @version 1.0
  */
 public class DeviceController implements Initializable, IController {
 
@@ -42,9 +45,16 @@ public class DeviceController implements Initializable, IController {
     private Button changeAutomationButton;
 
     private Device device = CacheSingleton.getInstance().getDevice();
-
+    /**
+     * Default constructor for DeviceController.
+     */
     public DeviceController() {}
-
+    /**
+     * Initializes the controller.
+     *
+     * @param location   The location used to resolve relative paths for the root object.
+     * @param resources  The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         deviceNameField.setText(device.getName());
@@ -72,7 +82,9 @@ public class DeviceController implements Initializable, IController {
             }
         });
     }
-
+    /**
+     * Populates the device group ComboBox with rooms retrieved from the database.
+     */
     private void populateDeviceGroupComboBox() {
         List<DeviceGroup> rooms = deviceGroupDAO.getRoomsByUser(cache.getUser());
         deviceGroup.getItems().addAll(rooms);
@@ -90,21 +102,27 @@ public class DeviceController implements Initializable, IController {
             };
         });
     }
-
+    /**
+     * Handles the action of changing the device name.
+     */
     @FXML
     private void changeDeviceName() {
         String newName = deviceNameField.getText();
         device.setName(newName);
         deviceDAO.updateDevice(device.getDeviceID(), newName);
     }
-
+    /**
+     * Handles the action of changing the model code of the device.
+     */
     @FXML
     private void changeModelCode() {
         String newModelCode = modelCode.getText();
         device.setModelCode(newModelCode);
         deviceDAO.updateModelCode(device.getDeviceID(), newModelCode);
     }
-
+    /**
+     * Handles the action of changing the automation settings of the device.
+     */
     public void changeAutomation() {
         deviceDAO.updateAutomation(device.getDeviceID());
     }

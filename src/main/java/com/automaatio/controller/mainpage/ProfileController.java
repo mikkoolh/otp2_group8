@@ -25,12 +25,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Controller for the user profile
- * @author Matleena Kankaanpää
- * @author Nikita Nossenko
- * 8.9.2023
+ * Controller for the user profile.
+ * Manages the user interface and logic associated with the user profile page.
+ *
+ * This class implements the Initializable and IController interfaces for JavaFX controllers.
+ * It handles user interactions, such as updating user information and changing passwords.
+ *
+ * @author Matleena Kankaanpää, Nikita Nossenko
+ * @version 1.0
+ * @since 8.9.2023
  */
-
 public class ProfileController implements Initializable, IController{
 
     private Timeline notificationTimeline;
@@ -58,6 +62,14 @@ public class ProfileController implements Initializable, IController{
     private LocaleSelector localeSelector = new LocaleSelector();
     private ResourceBundle resourceBundle;
 
+    /**
+     * Initializes the user profile controller.
+     * This method is called automatically by JavaFX after the FXML file is loaded.
+     * It sets up initial values and configurations for the profile page.
+     *
+     * @param location  The URL of the FXML file.
+     * @param resources The ResourceBundle containing localized resources.
+     */
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         resourceBundle = resources;
@@ -71,6 +83,11 @@ public class ProfileController implements Initializable, IController{
         languageGrid.add(localeSelector.getComboBox(),2,0);
     }
 
+    /**
+     * Handles the "Change Password" button click event.
+     * Checks the old password, validates the new password, and updates the password if valid.
+     * Displays appropriate error messages and notifications.
+     */
     @FXML
     private void onChangePasswordClick() {
         String oldPass = oldpassField.getText();
@@ -116,7 +133,11 @@ public class ProfileController implements Initializable, IController{
             notificationTimeline.play();
         }
     }
-
+    /**
+     * Handles the "Save Maximum Value" button click event.
+     * Retrieves the entered price limit, updates the user's maximum price,
+     * and updates the corresponding UI components.
+     */
     @FXML
     public void onMaxValueSave(){
         double price = Double.parseDouble(priceLimit.getText());
@@ -129,7 +150,12 @@ public class ProfileController implements Initializable, IController{
         }
 
     }
-
+    /**
+     * Sets the current user for the profile controller.
+     * Used to update the user information displayed on the profile page.
+     *
+     * @param user The User object representing the current user.
+     */
     public void setUser(User user) {
         this.user = user;
     }
