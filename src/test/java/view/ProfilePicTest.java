@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * @author Nikita Nossenko
+ *
  * The {@code ProfilePicTest} class contains TestFX-based UI tests for
  * the profile picture change functionality in the application. It uses {@link FxRobot} to
  * simulate user interactions with the UI.

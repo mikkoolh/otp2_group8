@@ -4,10 +4,24 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * @author Mikko Hänninen
+ *
+ * The {@code FormInputValidatorTest} class contains unit tests for the {@link FormInputValidator} class.
+ * It evaluates the functionality and behavior of input validation methods for various form fields.
+ *
+ * This test class ensures that the {@code FormInputValidator} correctly validates different types of input,
+ * such as usernames, first names, last names, email addresses, phone numbers, and passwords, according to
+ * specific validation rules.
+ */
 public class FormInputValidatorTest {
     private final FormInputValidator validator = new FormInputValidator();
     private final Text testField = new Text();
 
+    /**
+     * Tests the username validation method of the {@link FormInputValidator} class.
+     * It verifies that the method correctly validates usernames based on specific rules.
+     */
     @Test
     public void testUsernameValidation() {
         assertFalse(validator.validateUsername("", testField), "Username can't be blank");
@@ -16,6 +30,10 @@ public class FormInputValidatorTest {
         assertTrue(validator.validateUsername("username", testField));
     }
 
+    /**
+     * Tests the first name validation method of the {@link FormInputValidator} class.
+     * It verifies that the method correctly validates first names based on specific rules.
+     */
     @Test
     public void testFirstNameValidation() {
         assertFalse(validator.validateFirstName("", testField), "First name can't be blank");
@@ -23,6 +41,10 @@ public class FormInputValidatorTest {
         assertTrue(validator.validateFirstName("Jane", testField));
     }
 
+    /**
+     * Tests the last name validation method of the {@link FormInputValidator} class.
+     * It verifies that the method correctly validates last names based on specific rules.
+     */
     @Test
     public void testLastNameValidation() {
         assertFalse(validator.validateLastName("", testField), "Last name can't be blank");
@@ -30,6 +52,10 @@ public class FormInputValidatorTest {
         assertTrue(validator.validateLastName("Doe", testField));
     }
 
+    /**
+     * Tests the email validation method of the {@link FormInputValidator} class.
+     * It verifies that the method correctly validates email addresses based on specific rules.
+     */
     @Test
     public void testEmailValidation() {
         assertFalse(validator.validateEmail("", testField), "Email can't be blank");
@@ -37,6 +63,10 @@ public class FormInputValidatorTest {
         assertTrue(validator.validateEmail("example@email.com", testField));
     }
 
+    /**
+     * Tests the phone number validation method of the {@link FormInputValidator} class.
+     * It verifies that the method correctly validates phone numbers based on specific rules.
+     */
     @Test
     public void testPhoneValidation() {
         assertFalse(validator.validatePhoneNumber("", testField), "Phone number can't be blank");
@@ -46,6 +76,10 @@ public class FormInputValidatorTest {
         assertTrue(validator.validatePhoneNumber("040-1234567", testField));
     }
 
+    /**
+     * Tests the password validation method of the {@link FormInputValidator} class.
+     * It verifies that the method correctly validates passwords based on specific rules.
+     */
     @Test
     public void testPasswordValidation() {
         assertFalse(validator.validatePassword("", testField), "Password can't be blank");

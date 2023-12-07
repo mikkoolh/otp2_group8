@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 import static java.lang.Thread.sleep;
 
 /**
+ * @author Elmo Erla
+ *
  * The {@code addAndDeleteNewDeviceTest} class contains TestFX-based UI tests for
  * adding and deleting a new device in the application. It uses {@link FxRobot} to
  * simulate user interactions with the UI.

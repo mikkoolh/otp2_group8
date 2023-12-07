@@ -16,6 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Elmo Erla
+ *
+ * The {@code CurrentLocaleTest} class contains unit tests for the {@link CurrentLocale} class.
+ * It evaluates the functionality of retrieving the current locale, both in temporary and user-specific contexts.
+ *
+ * This test class uses Mockito to mock dependencies like {@link CacheSingleton} and {@link User}, allowing
+ * for isolated testing of the {@code CurrentLocale} class. It ensures that the correct locale is returned
+ * based on different scenarios, such as when a user is set or not.
+ */
 public class CurrentLocaleTest {
     @Mock
     private CacheSingleton cache;
@@ -23,6 +33,10 @@ public class CurrentLocaleTest {
     private User mockUser;
     private CurrentLocale currentLocale;
 
+    /**
+     * Sets up the test environment before each test. This includes initializing mocks
+     * and setting up the {@link CurrentLocale} instance.
+     */
     @BeforeEach
     void setUp() {
         cache = CacheSingleton.getInstance();
@@ -32,6 +46,10 @@ public class CurrentLocaleTest {
         when(cache.getUser()).thenReturn(mockUser);
     }
 
+    /**
+     * Tests the {@code getCurrentLocale} method when the temporary locale is set.
+     * It verifies that the correct locale is returned based on the temporary settings.
+     */
     @Test
     void testGetTempLocale() {
         Locale testLocale = new Locale("en", "US");
@@ -39,6 +57,10 @@ public class CurrentLocaleTest {
         assertEquals(testLocale, result);
     }
 
+    /**
+     * Tests the {@code getCurrentLocale} method to ensure it does not incorrectly return
+     * a non-set locale. It verifies that the returned locale is not equal to an unintended value.
+     */
     @Test
     void testGetTempLocale2() {
         Locale testLocale = new Locale("ru", "RU");
@@ -46,6 +68,10 @@ public class CurrentLocaleTest {
         assertNotEquals(testLocale, result, "Should not be same values");
     }
 
+    /**
+     * Tests the {@code getCurrentLocale} method when a user is set in the cache.
+     * It verifies that the correct locale is returned based on the user's settings.
+     */
     @Test
     void testGetLocaleWithUser() {
         cache.setUser(mockUser);
