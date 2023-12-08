@@ -3,50 +3,32 @@ package com.automaatio.model.database;
 import jakarta.persistence.*;
 
 /**
- * Author: Nikita Nossenko
- * Author: Mikko Hänninen
- * Author: Elmo Erla
- * 
  * This class represents a Device entity that is stored in the database.
+ *
+ * @author Nikita Nossenko, Mikko Hänninen, Elmo Erla
+ * @version 1.0
  */
 @Entity
 @Table(name = "device")
 public class Device {
-    /**
-     * The unique identifier for the device.
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "deviceID")
     private int deviceID;
 
-    /**
-     * Indicates whether the device is currently on or off.
-     */
     @Column(name = "onOff")
     private boolean onOff;
 
-    /**
-     * Indicates whether the device is set for automation.
-     */
     @Column(name = "automation")
     private boolean automation;
 
-    /**
-     * The usage data associated with the device.
-     */
     @Column(name = "usageData")
     private long usageData;
 
-    /**
-     * The name of the device.
-     */
     @Column(name = "name")
     private String name;
 
-    /**
-     * The model code of the device.
-     */
     @Column(name = "modelCode")
     private String modelCode;
 
@@ -58,7 +40,7 @@ public class Device {
     private DeviceGroup deviceGroup;
 
     /**
-     * Default constructor for creating a new Device instance.
+     * Default constructor for creating a new Device instance
      */
     public Device() {}
 
