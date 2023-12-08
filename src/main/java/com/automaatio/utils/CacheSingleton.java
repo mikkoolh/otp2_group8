@@ -6,23 +6,17 @@ import com.automaatio.model.database.User;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.layout.Pane;
-
 import java.util.Locale;
 
 public class CacheSingleton {
-
     private static CacheSingleton instance;
     private DeviceGroup room;
     private User user;
     private Device device;
     private Locale tempLocale = new Locale("en", "US");
-
     private FXMLLoader currentLoader;
-
     private Pane mainPane, menuPane;
-
     private NodeOrientation nodeOrientation;
-
 
     private CacheSingleton() {
     }

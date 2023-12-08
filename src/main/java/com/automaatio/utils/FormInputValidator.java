@@ -17,6 +17,9 @@ public class FormInputValidator {
     private final ResourceBundle resourceBundle;
     private final CompoundMessageCreator compoundMessageCreator;
 
+    /**
+     * Class constructor
+     */
     public FormInputValidator() {
         resourceBundle = ResourceBundle.getBundle("TextResources", (new CurrentLocale().getCurrentLocale()));
         compoundMessageCreator = new CompoundMessageCreator();
