@@ -5,10 +5,23 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Functions for localization.
+ * The LocalizationTool class provides utility methods for localization processes.
+ *
+ * @auhor Matleena Kankaanpää
+ * @version 1.0
  */
 
 public class LocalizationTool {
+
+    /**
+     * Receives a Weekday object as argument. Translations of the weekday name are
+     * stored in the Weekday object's fields. The method uses an instance of CurrentLocale
+     * to check which locale is currently selected in the application, and returns the name
+     * of the weekday in the corresponding language.
+     *
+     * @param weekday A Weekday object
+     * @return The name of the weekday in the current locale
+     */
     public String localizeWeekday(Weekday weekday) {
         Locale currentLocale = (new CurrentLocale()).getCurrentLocale();
 
@@ -26,8 +39,11 @@ public class LocalizationTool {
     }
 
     /**
-     * Rearranges a list of weekdays according to the currently selected language
-     * @param initialList List of weekdays in a default order
+     * Rearranges a list of weekdays according to the currently selected language.
+     * The method uses an instance of CurrentLocale to check the current locale
+     * of the application.
+     *
+     * @param initialList List of weekdays in the default order
      * @return Mon-Sun if the current language is Finnish/Russian, Sun-Sat if English/Arabic
      */
     public List<Weekday> sortWeekdays(List<Weekday> initialList) {
@@ -35,14 +51,11 @@ public class LocalizationTool {
 
         if (currentLocale.toString().equals("ar_SA") || currentLocale.toString().equals("en_US")) {
             List<Weekday> sortedList = new java.util.ArrayList<>(List.copyOf(initialList));
-            System.out.println("ar/en");
             Weekday sunday = sortedList.remove(6);
             sortedList.add(0, sunday);
             System.out.println(sortedList);
             return sortedList;
         }
-
-        System.out.println("fi/ru");
         return initialList;
     }
 }
