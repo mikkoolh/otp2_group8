@@ -17,6 +17,7 @@ public class BundleLoader {
     /**
      * Fetches the currently logged in user from the cache, then fetches the user's
      * selected locale from the database and returns the corresponding ResourceBundle.
+     *
      * @return The ResourceBundle corresponding to the user's selected locale
      */
     public ResourceBundle loadResourceByUsersLocale() {
