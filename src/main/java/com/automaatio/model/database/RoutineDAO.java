@@ -7,14 +7,20 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author Matleena Kankaanpää
- * 26.9.2023
+ * The RoutineDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the Routine entity.
  *
- * DAO for Routine class
+ * @author Matleena Kankaanpää
+ * @version 1.0 26.9.2023
  */
 
 public class RoutineDAO implements IDAO {
 
+    /**
+     * Adds a new routine to the database.
+     *
+     * @param object A new routine
+     */
     @Override
     public void addObject(Object object) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -30,6 +36,12 @@ public class RoutineDAO implements IDAO {
         }
     }
 
+    /**
+     * Adds a new routine to the database and returns it.
+     *
+     * @param object    A new routine
+     * @return          The new routine that was added to the database
+     */
     public Routine addAndReturnObject(Object object) {
         Routine savedRoutine;
 
@@ -49,7 +61,11 @@ public class RoutineDAO implements IDAO {
         return savedRoutine;
     }
 
-
+    /**
+     * Deletes a routine from the database.
+     *
+     * @param id    The id of the routine to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -71,7 +87,12 @@ public class RoutineDAO implements IDAO {
         }
     }
 
-
+    /**
+     * Fetches a routine by its ID
+     *
+     * @param id    ID of the routine
+     * @return      Routine object
+     */
     @Override
     public Object getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -89,6 +110,9 @@ public class RoutineDAO implements IDAO {
 
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public Object getObject(String s) {
         System.out.println("Not in use for this class");
@@ -119,8 +143,8 @@ public class RoutineDAO implements IDAO {
     /**
      * Fetches routines by device ID
      *
-     * @param deviceId The ID of the device
-     * @return A list of Routine objects for the specified device
+     * @param deviceId  The ID of the device associated with the routines
+     * @return          A list of Routine objects for the specified device
      */
     public List<Routine> getRoutinesByDeviceId(int deviceId) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -140,8 +164,11 @@ public class RoutineDAO implements IDAO {
     }
 
     /**
-     * @param id        ID of the routine
-     * @param automated Boolean indicating whether the routine is automatized or not
+     * Updates the automations setting of the routine. If automation was previously enabled,
+     * it will be disabled. If automation was disabled, it will be enabled.
+     *
+     * @param id        ID of the routine to be updated
+     * @param automated Boolean indicating whether the routine is automated or not
      */
     public void toggleOnOff(int id, boolean automated) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -160,28 +187,12 @@ public class RoutineDAO implements IDAO {
         }
     }
 
-    public void setAutomated(int id, boolean setTo) {
-        EntityManager em = MysqlDBJpaConn.getInstance();
-        em.getTransaction().begin();
-
-        try {
-            Routine routine = em.find(Routine.class, id);
-            routine.setAutomated(setTo);
-            System.out.println("updated routine");
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw e;
-        } finally {
-            em.close();
-        }
-    }
-
     /**
      * Updates the time of a routine
-     * @param routineId
-     * @param newTime
-     * @param automated
+     *
+     * @param routineId     ID of the routine to be updated
+     * @param newTime       A new event time
+     * @param automated     Boolean indicating whether automation will be enabled for the routine or not
      */
     public void updateTime(int routineId, EventTime newTime, boolean automated) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -205,10 +216,10 @@ public class RoutineDAO implements IDAO {
     }
 
     /**
-     * Delete all routines for a device by a certain user
+     * Delete all routines for a specific device by a specific user
      *
-     * @param device
-     * @param user
+     * @param device    A device for which to delete routines
+     * @param user      A user whose routines to delete
      */
     public void deleteByDeviceAndUser(Device device, User user) {
         EntityManager em = MysqlDBJpaConn.getInstance();

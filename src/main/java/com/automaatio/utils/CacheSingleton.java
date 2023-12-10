@@ -174,7 +174,7 @@ public class CacheSingleton {
 
     /**
      * Sets an FXMLLoader object as the current FXMLLoader in the cache
-     * 
+     *
      * @param currentLoader An FXMLLoader to be stored in the cache as the current loader
      */
     public void setCurrentLoader(FXMLLoader currentLoader) {

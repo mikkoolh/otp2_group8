@@ -4,13 +4,20 @@ import java.util.List;
 import jakarta.persistence.*;
 
 /**
- * DAO for EventTime
+ * The EventTimeDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the EventTime entity.
+ *
  * @author Matleena Kankaanpää
- * 28.9.2023
+ * @version 1.0 28.9.2023
  */
 
 public class EventTimeDAO implements IDAO {
 
+    /**
+     * Adds a new event time object to the database
+     *
+     * @param object A new event time to be added
+     */
     @Override
     public void addObject(Object object) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -28,6 +35,12 @@ public class EventTimeDAO implements IDAO {
         }
     }
 
+    /**
+     * Adds a new event time object to the database and returns it.
+     *
+     * @param object    A new event time object
+     * @return          The new event time object that was added to the database
+     */
     public EventTime addAndReturnObject(Object object) {
         EventTime savedEventTime;
 
@@ -47,6 +60,11 @@ public class EventTimeDAO implements IDAO {
         return savedEventTime;
     }
 
+    /**
+     * Deletes an event time from the database
+     *
+     * @param id    The id of the event time to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -69,6 +87,12 @@ public class EventTimeDAO implements IDAO {
 
     }
 
+    /**
+     * Fetches an event time object from the database by ID
+     *
+     * @param id    The id of the event time object to be fetched
+     * @return      An event time object with the specified ID, or null if not found
+     */
     @Override
     public Object getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -87,6 +111,9 @@ public class EventTimeDAO implements IDAO {
         }
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public Object getObject(String s) {
         System.out.println("Method not in use in this class");
@@ -94,8 +121,9 @@ public class EventTimeDAO implements IDAO {
     }
 
     /**
-     * Fetches all events
-     * @return A list of EventTime objects
+     * Fetches all event times from the database
+     *
+     * @return      A list of EventTime objects
      */
     public List<EventTime> getAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -110,6 +138,9 @@ public class EventTimeDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes all event times from the database
+     */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         try {

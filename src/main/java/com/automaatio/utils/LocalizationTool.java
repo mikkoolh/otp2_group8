@@ -25,6 +25,9 @@ public class LocalizationTool {
     public String localizeWeekday(Weekday weekday) {
         Locale currentLocale = (new CurrentLocale()).getCurrentLocale();
 
+        if (weekday == null)
+            System.out.println("weekday null");
+
         switch (currentLocale.toString()) {
             case "fi_FI":
                 return weekday.getName_fi();
@@ -33,6 +36,7 @@ public class LocalizationTool {
             case "ar_SA":
                 return weekday.getName_ar();
             case "en_US":
+                return weekday.getName_en();
             default:
                 return weekday.getName_en();
         }

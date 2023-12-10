@@ -67,7 +67,7 @@ public class ProfilePicTest extends ApplicationTest {
      */
     @AfterAll
     static void teardown() {
-        userDAO.deleteObjectByUserame("testaaja");
+        userDAO.deleteObject("testaaja");
     }
 
     /**

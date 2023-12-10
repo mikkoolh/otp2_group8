@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author Mikko Hänninen
- * 03.09.2023
+ * The EventTime class represents an EventTime entity that is stored in the database.
  *
- * Class for EventTime Table
+ * @author Mikko Hänninen
+ * @version 1.0 03.09.2023
  */
 
 @Entity
@@ -34,26 +34,52 @@ public class EventTime {
     @Column(name = "history_events")
     private List<HistoryEvents> historyEvents;
 
+    /**
+     * Parameterless default constructor
+     */
     public EventTime() {}
 
+    /**
+     * Parameterized constructor
+     *
+     * @param startTime     The starting time of the event
+     * @param endTime       The ending time of the event
+     * @param weekday       The weekday the event takes place on
+     */
     public EventTime(LocalDateTime startTime, LocalDateTime endTime, Weekday weekday) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.weekday = weekday;
     }
 
+    /**
+     * Returns the starting time of the event
+     * @return A LocalDateTime object containing the starting time
+     */
     public LocalDateTime getStartTime() {
         return startTime;
     }
 
+    /**
+     * Returns the ending time of the event
+     * @return A LocalDateTime object containing the ending time
+     */
     public LocalDateTime getEndTime() {
         return endTime;
     }
 
+    /**
+     * Returns the weekday the event takes place on
+     * @return The weekday of the event
+     */
     public Weekday getWeekday() {
         return weekday;
     }
 
+    /**
+     * Returns the weekday and starting time information of the event as a String
+     * @return A string describing the weekday and starting time of the event
+     */
     @Override
     public String toString() {
         return weekday.toString() +", " + startTime;

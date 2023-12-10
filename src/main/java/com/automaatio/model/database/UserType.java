@@ -3,9 +3,10 @@ package com.automaatio.model.database;
 import jakarta.persistence.*;
 
 /**
- * @author Nikita Nossenko
+ * The UserType class represents a UserType entity that is stored in the database.
  *
- * This class represents a UserType entity that is stored in the database.
+ * @author Nikita Nossenko
+ * @version 1.0
  */
 
 @Entity
@@ -39,14 +40,10 @@ public class UserType {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    /**
+     * Returns the user type description
+     * @return The user type description
+     */
     @Override
     public String toString() {
         return description;

@@ -5,18 +5,19 @@ import java.util.List;
 import jakarta.persistence.*;
 
 /**
- * DAO for Device Feature
+ * The FeatureDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the Feature entity.
  *
  * @author Matleena Kankaanpää
- * 8.9.2023
+ * @version 1.0 8.9.2023
  */
 
 public class FeatureDAO implements IDAO {
 
     /**
-     * Adds a new feature
+     * Adds a new feature to the database.
      *
-     * @param feature A new feature
+     * @param feature   A new feature to be added
      */
     public void addObject(Object feature) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -34,6 +35,11 @@ public class FeatureDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes a feature from the database.
+     *
+     * @param id    The ID of the object to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -58,10 +64,10 @@ public class FeatureDAO implements IDAO {
     }
 
     /**
-     * Fetches a feature
+     * Fetches a feature by ID.
      *
-     * @param id ID of the feature
-     * @return Feature object
+     * @param id    ID of the feature
+     * @return      Feature object with the specified ID, or null if not found
      */
     public Feature getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -80,6 +86,9 @@ public class FeatureDAO implements IDAO {
         }
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public Object getObject(String s) {
         System.out.println("Not in use for this class");
@@ -87,7 +96,7 @@ public class FeatureDAO implements IDAO {
     }
 
     /**
-     * Fetches all features
+     * Fetches all features from the database.
      *
      * @return A list of Feature objects
      */
@@ -104,6 +113,9 @@ public class FeatureDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes all features from the database.
+     */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         try {

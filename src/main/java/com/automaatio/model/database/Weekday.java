@@ -2,11 +2,10 @@ package com.automaatio.model.database;
 import jakarta.persistence.*;
 
 /**
- * @author Mikko Hänninen
- * @author Elmo Erla
- * 11.09.2023
+ * The Weekday class represents a Weekday entity that is stored in the database.
  *
- * Weekday-table for EventTime
+ * @author Mikko Hänninen, Elmo Erla
+ * @version 1.0 11.09.2023
  */
 
 @Entity
@@ -30,10 +29,18 @@ public class Weekday {
     @Column
     private String name_ar;
 
+    /**
+     * Parameterless default constructor
+     */
     public Weekday() {}
 
     /**
-     * Parametrized constructor
+     * Parameterized constructor
+     *
+     * @param name_en   The English name of the weekday
+     * @param name_fi   The Finnish name of the weekday
+     * @param name_ru   The Russian name of the weekday
+     * @param name_ar   The Arabic name of the weekday
      */
     public Weekday(String name_en, String name_fi, String name_ru, String name_ar) {
         this.name_en = name_en;
@@ -42,22 +49,42 @@ public class Weekday {
         this.name_ar = name_ar;
     }
 
+    /**
+     * Returns the id of the weekday
+     * @return The id of the weekday
+     */
     public int getWeekdayId() {
         return weekdayId;
     }
 
+    /**
+     * Returns the English name of the weekday
+     * @return The English name of the weekday
+     */
     public String getName_en() {
         return name_en;
     }
 
+    /**
+     * Returns the Finnish name of the weekday
+     * @return The Finnish name of the weekday
+     */
     public String getName_fi() {
         return name_fi;
     }
 
+    /**
+     * Returns the Russian name of the weekday
+     * @return The Russian name of the weekday
+     */
     public String getName_ru() {
         return name_ru;
     }
 
+    /**
+     * Returns the Arabic name of the weekday
+     * @return The Arabic name of the weekday
+     */
     public String getName_ar() {
         return name_ar;
     }

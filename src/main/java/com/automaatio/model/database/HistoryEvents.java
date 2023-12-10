@@ -2,6 +2,13 @@ package com.automaatio.model.database;
 
 import jakarta.persistence.*;
 
+/**
+ * The HistoryEvents class represents a HistoryEvents entity that is stored in the database.
+ *
+ * @author Nikita Nossenko, Mikko Hänninen, Elmo Erla, Matleena Kankaanpää
+ * @version 1.0
+ */
+
 @Entity
 @Table(name = "history_events")
 public class HistoryEvents {
@@ -27,22 +34,62 @@ public class HistoryEvents {
     @JoinColumn(name = "feature_id")
     private Feature feature;
 
+    /**
+     * Parameterless default constructor
+     */
+    public HistoryEvents() {}
+
+    /**
+     * Parameterized constructor
+     *
+     * @param eventTime The time the event takes place
+     * @param username  The user associated with the event
+     * @param device    The device associated with the event
+     * @param feature   The feature associated with the event
+     */
+    public HistoryEvents(EventTime eventTime, User username, Device device, Feature feature) {
+        this.eventTime = eventTime;
+        this.username = username;
+        this.device = device;
+        this.feature = feature;
+    }
+
+    /**
+     * Returns the user associated with the event
+     * @return The user associated with the event
+     */
     public User getUser() {
         return username;
     }
 
+    /**
+     * Sets a user for the event
+     * @param user A user to be associated with the event
+     */
     public void setUser(User user) {
         username = user;
     }
 
+    /**
+     * Returns the device associated with the event
+     * @return The device associated with the event
+     */
     public Device getDevice() {
         return device;
     }
 
+    /**
+     * Sets a device for the event
+     * @param device A device to be associated with the event
+     */
     public void setDevice(Device device) {
         this.device = device;
     }
 
+    /**
+     * Returns a string containing event information
+     * @return A string containing the event id
+     */
     @Override
     public String toString() {
         return "HistoryEvent=" + eventId;
