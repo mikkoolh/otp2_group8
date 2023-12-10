@@ -4,18 +4,22 @@ import javafx.scene.text.Text;
 import java.util.ResourceBundle;
 
 /**
- * User input validation
+ * The FormInputValidator class provides methods for validating user input.
+ *
  * @author Matleena Kankaanpää
+ * @version 1.0
  * 8.9.2023
  */
 
 public class FormInputValidator {
     private final Integer USERNAME_MIN_LENGTH, PASSWORD_MIN_LENGTH,
             USERNAME_MAX_LENGTH, PASSWORD_MAX_LENGTH, FIRSTNAME_MAX_LENGTH, LASTNAME_MAX_LENGTH, PHONE_MIN_LENGTH, PHONE_MAX_LENGTH;
-
     private final ResourceBundle resourceBundle;
     private final CompoundMessageCreator compoundMessageCreator;
 
+    /**
+     * Class constructor
+     */
     public FormInputValidator() {
         resourceBundle = ResourceBundle.getBundle("TextResources", (new CurrentLocale().getCurrentLocale()));
         compoundMessageCreator = new CompoundMessageCreator();
@@ -28,6 +32,17 @@ public class FormInputValidator {
         this.PHONE_MIN_LENGTH = 7;
         this.PHONE_MAX_LENGTH = 15;
     }
+
+    /**
+     * Checks if the user input is a valid username of adequate length. The method calls the
+     * UserDAO to check if the username ia already found in the database. If the username
+     * isn't valid or available, an appropriate error message is displayed in the text
+     * field provided as argument.
+     *
+     * @param input The text entered into the username field by the user
+     * @param errorField The field where an error message is displayed if necessary
+     * @return True if the input is a valid username, false if not
+     */
     public boolean validateUsername(String input, Text errorField) {
         if (input.isEmpty()) {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
@@ -54,6 +69,14 @@ public class FormInputValidator {
         return true;
     }
 
+    /**
+     * Checks if the first name input is blank or too long. If invalid,
+     * an appropriate error message is displayed in the text field provided as argument.
+     *
+     * @param input The text entered into the first name field by the user
+     * @param errorField The field where an error message is displayed if necessary
+     * @return True if the input is a valid first name, false if not
+     */
     public boolean validateFirstName(String input, Text errorField) {
         if (input.isEmpty()) {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
@@ -69,6 +92,14 @@ public class FormInputValidator {
         return true;
     }
 
+    /**
+     * Checks if the last name input is blank or too long. If invalid,
+     * an appropriate error message is displayed in the text field provided as argument.
+     *
+     * @param input The text entered into the last name field by the user
+     * @param errorField The field where an error message is displayed if necessary
+     * @return True if the input is a valid last name, false if not
+     */
     public boolean validateLastName(String input, Text errorField) {
         if (input.isEmpty()) {
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
@@ -84,6 +115,15 @@ public class FormInputValidator {
         return true;
     }
 
+    /**
+     * Checks if the user input is a valid email address. If the email address
+     * is formatted incorrectly, an appropriate error message is displayed
+     * in the text field provided as argument.
+     *
+     * @param input The text entered into the email field by the user
+     * @param errorField The field where an error message is displayed if necessary
+     * @return True if the input is a valid email address, false if not
+     */
     public boolean validateEmail(String input, Text errorField) {
         if (input.isEmpty()){
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
@@ -97,6 +137,15 @@ public class FormInputValidator {
         return true;
     }
 
+    /**
+     * Checks if the user input is a valid phone number. If the phone number
+     * is formatted incorrectly, an appropriate error message is displayed
+     * in the text field provided as argument.
+     *
+     * @param input The text entered into the phone number field by the user
+     * @param errorField The field where an error message is displayed if necessary
+     * @return True if the input is a valid phone number, false if not
+     */
     public boolean validatePhoneNumber(String input, Text errorField) {
         if (input.isEmpty()){
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
@@ -109,6 +158,15 @@ public class FormInputValidator {
         return true;
     }
 
+    /**
+     * Checks if the password input is within the required length range, contains
+     * at least one letter and number, and doesn't contain spaces. If invalid,
+     * an appropriate error message is displayed in the text field provided as argument.
+     *
+     * @param input The text entered into the password field by the user
+     * @param errorField The field where an error message is displayed if necessary
+     * @return True if the input is a valid password, false if not
+     */
     public boolean validatePassword(String input, Text errorField) {
         if (input.isEmpty()){
             errorField.setText(resourceBundle.getString("requiredFieldTxt"));
@@ -139,6 +197,11 @@ public class FormInputValidator {
         return true;
     }
 
+    /**
+     * Checks if a string includes spaces
+     * @param s The string to check for spaces
+     * @return True if the string includes spaces, false if not
+     */
     public Boolean includesSpaces(String s) {
         return !s.trim().replaceAll("\\s", "").equals(s);
     }

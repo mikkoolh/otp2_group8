@@ -7,15 +7,18 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Author Nikita Nossenko
- * Author Elmo Erla
+ * The DeviceDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the Device entity.
  *
- * DAO for Device
+ * @author Nikita Nossenko, Elmo Erla
+ * @version 1.0
  */
+
 public class DeviceDAO implements IDAO {
 
     /**
-     * Adds a new device
+     * Adds a new device to the database.
+     *
      * @param device A new device
      */
     @Override
@@ -33,6 +36,12 @@ public class DeviceDAO implements IDAO {
         }
     }
 
+    /**
+     * Adds a new device to the database and returns it.
+     *
+     * @param object    A new device
+     * @return          The new device that was added to the database
+     */
     public Device addAndReturnObject(Object object) {
         Device savedDevice;
 
@@ -52,6 +61,11 @@ public class DeviceDAO implements IDAO {
         return savedDevice;
     }
 
+    /**
+     * Deletes a device from the database.
+     *
+     * @param id    The id of the device to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -75,8 +89,9 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Fetches a device by its ID
-     * @param id ID of the device
-     * @return Device object
+     *
+     * @param id    ID of the device
+     * @return      Device object
      */
     public Device getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -95,8 +110,9 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Fetches a device by its name
-     * @param name Name of the device
-     * @return Device object or null if not found
+     *
+     * @param name  The name of the device
+     * @return      Device object or null if not found
      */
     @Override
     public Device getObject(String name) {
@@ -119,7 +135,8 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Fetches all devices
-     * @return A list of Device objects
+     *
+     * @return      A list of Device objects
      */
     public List<Device> getAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -137,6 +154,11 @@ public class DeviceDAO implements IDAO {
         }
     }
 
+    /**
+     * Fetches all devices where automation is enabled
+     *
+     * @return      A list of devices where automation is enabled
+     */
     public List<Device> getAutoDevices() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -153,6 +175,12 @@ public class DeviceDAO implements IDAO {
         }
     }
 
+    /**
+     * Fetches all devices associated with a specific user
+     *
+     * @param userName      The username of the user whose devices will be fetched
+     * @return              A list of devices associated with the user or null of not found
+     */
     public List<Device> getDevicesByUserName(String userName) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -170,6 +198,9 @@ public class DeviceDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes all devices from the database
+     */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -188,8 +219,8 @@ public class DeviceDAO implements IDAO {
     /**
      * Deletes a device with a specific ID from the database.
      *
-     * @param id The ID of the device to be deleted.
-     * @throws IllegalArgumentException If a device with the given ID is not found.
+     * @param id                        The ID of the device to be deleted.
+     * @throws IllegalArgumentException Exception that will be thrown if a device with the given ID is not found.
      */
     public void deleteDevice(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -212,8 +243,9 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Updates the name of a device.
-     * @param deviceId The ID of the device to update.
-     * @param newName The new name for the device.
+     *
+     * @param deviceId  The ID of the device to update.
+     * @param newName   The new name for the device.
      */
     public void updateDevice(int deviceId, String newName) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -230,8 +262,9 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Updates the model code of a device.
-     * @param deviceId The ID of the device to update.
-     * @param newModelCode The new model code for the device
+     *
+     * @param deviceId         The ID of the device to update.
+     * @param newModelCode      The new model code for the device
      */
     public void updateModelCode(int deviceId, String newModelCode) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -247,8 +280,9 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Updates the deviceGroupId of a device.
-     * @param deviceId The ID of the device to update.
-     * @param newDeviceGroupId The new deviceGroupId for the device.
+     *
+     * @param deviceId          The ID of the device to update.
+     * @param newDeviceGroupId  The new deviceGroupId for the device.
      */
     public void updateDeviceGroup(int deviceId, int newDeviceGroupId) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -272,6 +306,12 @@ public class DeviceDAO implements IDAO {
         em.close();
     }
 
+    /**
+     * Updates the state of the device. If the device was previously on, it will be turned off.
+     * If the device was off, it will be turned on.
+     *
+     * @param deviceId  The ID of the device to update
+     */
     public void updateDeviceOnOff(int deviceId){
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -291,9 +331,10 @@ public class DeviceDAO implements IDAO {
     }
 
     /**
-     * Updates the usageData of a device.
-     * @param deviceId The ID of the device to update.
-     * @param newUsageData The new usageData for the device.
+     * Updates the usage data of a device.
+     *
+     * @param deviceId      The ID of the device to update.
+     * @param newUsageData  The new usage data for the device.
      */
     public void updateUsageData(int deviceId, long newUsageData) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -309,6 +350,12 @@ public class DeviceDAO implements IDAO {
         em.close();
     }
 
+    /**
+     * Updates the automation setting of the device. If automation was previously enabled, it will be disabled.
+     * If automation was disabled, it will be enabled.
+     *
+     * @param deviceID  The ID of the device to update
+     */
     public void updateAutomation(int deviceID) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -331,7 +378,8 @@ public class DeviceDAO implements IDAO {
 
     /**
      * Deletes all devices associated with a specific username.
-     * @param username The username of the user whose devices should be deleted.
+     *
+     * @param username  The username of the user whose devices should be deleted.
      */
     public void deleteDevicesByUsername(String username) {
         EntityManager em = MysqlDBJpaConn.getInstance();

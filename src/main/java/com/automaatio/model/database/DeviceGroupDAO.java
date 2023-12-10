@@ -7,17 +7,20 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
+
 /**
- * DAO for Device Group
- * @author Matleena Kankaanpää
- * @author Elmo Erla
- * 10.9.2023
+ * The DeviceGroupDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the DeviceGroup entity.
+ *
+ * @author Matleena Kankaanpää, Elmo Erla
+ * @version 1.0 10.9.2023
  */
 
 public class DeviceGroupDAO implements IDAO {
 
     /**
-     * Adds a new device group
+     * Adds a new device group.
+     *
      * @param deviceGroup A new device group
      */
     public void addObject(Object deviceGroup) {
@@ -28,6 +31,12 @@ public class DeviceGroupDAO implements IDAO {
         }
     }
 
+    /**
+     * Adds a new device group to the database and returns it.
+     *
+     * @param object    A new device group
+     * @return          The new device group that was added to the database
+     */
     public DeviceGroup addAndReturnObject(Object object) {
         DeviceGroup savedDeviceGroup;
 
@@ -47,6 +56,11 @@ public class DeviceGroupDAO implements IDAO {
         return savedDeviceGroup;
     }
 
+    /**
+     * Deletes a device group from the database.
+     *
+     * @param id    The id of the device group to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -69,9 +83,10 @@ public class DeviceGroupDAO implements IDAO {
     }
 
     /**
-     * Fetches a device group
-     * @param id ID of the device group
-     * @return Device Group object
+     * Fetches a device group by ID.
+     *
+     * @param id    ID of the device group
+     * @return      Device Group object
      */
     public DeviceGroup getObject(int id) {
         try (EntityManager em = MysqlDBJpaConn.getInstance()) {
@@ -82,6 +97,9 @@ public class DeviceGroupDAO implements IDAO {
         }
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public Object getObject(String s) {
         System.out.println("Method not in use in this class");
@@ -90,7 +108,8 @@ public class DeviceGroupDAO implements IDAO {
 
     /**
      * Fetches all device groups
-     * @return A list of Device Group objects
+     *
+     * @return  A list of Device Group objects
      */
     public List<DeviceGroup> getAll() {
         try (EntityManager em = MysqlDBJpaConn.getInstance()) {
@@ -102,6 +121,9 @@ public class DeviceGroupDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes all device groups from the database
+     */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -116,6 +138,12 @@ public class DeviceGroupDAO implements IDAO {
         System.out.println("Poistettu " + deletedCount + " ryhmää.");
     }
 
+    /**
+     * Fetches all device groups associated with a specific user.
+     *
+     * @param user  The user associated with the device groups to fetch
+     * @return      A list of device groups associated with the user
+     */
     public List<DeviceGroup> getRoomsByUser(User user) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -127,6 +155,11 @@ public class DeviceGroupDAO implements IDAO {
         return deviceGroups;
     }
 
+    /**
+     * Fetches all devices in a specific device group (room)
+     * @param deviceGroup   A device group
+     * @return              All devices in the device group
+     */
     public List<Device> getDevicesByRoom(DeviceGroup deviceGroup) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -139,9 +172,10 @@ public class DeviceGroupDAO implements IDAO {
     }
 
     /**
-     * Removes a device from a specific device group
-     * @param deviceGroup The device group from which the device should be removed
-     * @param device The device to be removed
+     * Removes a device from a specific device group.
+     *
+     * @param deviceGroup   The device group from which the device should be removed
+     * @param device        The device to be removed
      */
     public void removeDeviceFromGroup(DeviceGroup deviceGroup, Device device) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -151,6 +185,13 @@ public class DeviceGroupDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Fetches all devices of a specific user that are not in a specific device group.
+     *
+     * @param groupId   The ID of the device group to exclude
+     * @param user      The user whose devices will be fetched
+     * @return          A list of all devices belonging to the user that are not in the specified device group
+     */
     public List<Device> getDevicesNotInGroup(int groupId, String user) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -167,7 +208,8 @@ public class DeviceGroupDAO implements IDAO {
     }
 
     /**
-     * Deletes a specific device group
+     * Deletes a specific device group.
+     *
      * @param deviceGroupId ID of the device group to be deleted
      */
     public void deleteGroup(int deviceGroupId) {
@@ -178,14 +220,14 @@ public class DeviceGroupDAO implements IDAO {
         }
     }
 
-    public List<Device> getDevicesByRoomWithoutTransaction(EntityManager em, DeviceGroup deviceGroup) {
+    private List<Device> getDevicesByRoomWithoutTransaction(EntityManager em, DeviceGroup deviceGroup) {
         TypedQuery<Device> query = em.createQuery(
                 "SELECT d FROM Device d WHERE d.deviceGroup = :deviceGroupObj", Device.class);
         query.setParameter("deviceGroupObj", deviceGroup);
         return query.getResultList();
     }
 
-    public void deleteGroupWithoutTransaction(EntityManager em, int deviceGroupId) {
+    private void deleteGroupWithoutTransaction(EntityManager em, int deviceGroupId) {
         DeviceGroup deviceGroup = em.find(DeviceGroup.class, deviceGroupId);
         if (deviceGroup != null) {
             for (Device device : getDevicesByRoomWithoutTransaction(em, deviceGroup)) {
@@ -198,9 +240,10 @@ public class DeviceGroupDAO implements IDAO {
 
     /**
      * Finds a device group by its name and user.
-     * @param roomName The name of the device group (room).
-     * @param user The user to whom the device group belongs.
-     * @return The found DeviceGroup object or null if not found.
+     *
+     * @param roomName  The name of the device group (room).
+     * @param user      The user to whom the device group belongs.
+     * @return          The found DeviceGroup object or null if not found.
      */
     public DeviceGroup findRoomByName(String roomName, User user) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -226,7 +269,8 @@ public class DeviceGroupDAO implements IDAO {
 
     /**
      * Deletes all device groups associated with a specific username.
-     * @param username The username of the user whose device groups are to be deleted.
+     *
+     * @param username  The username of the user whose device groups are to be deleted.
      */
     public void deleteGroupsByUsername(String username) {
         EntityManager em = MysqlDBJpaConn.getInstance();

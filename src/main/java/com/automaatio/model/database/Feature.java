@@ -1,12 +1,12 @@
 package com.automaatio.model.database;
 
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.persistence.*;
 
 /**
- * Device feature entity
+ * The Feature class represents a Feature entity that is stored in the database.
+ *
  * @author Matleena Kankaanpää
+ * @version 1.0
  * 8.9.2023
  */
 
@@ -42,11 +42,11 @@ public class Feature {
 
     /**
      * Parameterized constructor
-     * @param affectsOthers Boolean indicating whether the feature affects other devices
-     * @param isActive Boolean indicating whether the feature is currently in use
-     * @param adjustable Boolean indicating whether the feature is adjustable
-     * @param description Description of the feature
-     * @param timesUsed The amount of times the feature has been used
+     * @param affectsOthers     Boolean indicating whether the feature affects other devices
+     * @param isActive          Boolean indicating whether the feature is currently in use
+     * @param adjustable        Boolean indicating whether the feature is adjustable
+     * @param description       Description of the feature
+     * @param timesUsed         The amount of times the feature has been used
      */
     public Feature(boolean affectsOthers, boolean isActive, boolean adjustable, String description, int timesUsed) {
         this.affectsOthers = affectsOthers;
@@ -56,49 +56,10 @@ public class Feature {
         this.timesUsed = timesUsed;
     }
 
-    public void setFeatureId(int featureId) {
-        this.featureId = featureId;
-    }
-
-    public boolean getAffectsOthers() {
-        return this.affectsOthers;
-    }
-
-    public void setAffectsOthers(boolean affectsOthers) {
-        this.affectsOthers = affectsOthers;
-    }
-
-    public boolean getIsActive() {
-        return this.isActive;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public boolean getAdjustable() {
-        return this.adjustable;
-    }
-
-    public void setAdjustable(boolean adjustable) {
-        this.adjustable = adjustable;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getTimesUsed() {
-        return this.timesUsed;
-    }
-
-    public void setTimesUsed(int timesUsed) {
-        this.timesUsed = timesUsed;
-    }
+    /**
+     * Returns the description of the feature
+     * @return The description of the feature
+     */
     @Override
     public String toString() {
         return description;

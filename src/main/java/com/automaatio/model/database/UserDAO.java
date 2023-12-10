@@ -10,16 +10,18 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @author Mikko Hänninen
- * @author Nikita Nossenko
- * @author Matleena Kankaanpää
- * 15.9.2023
+ * The UserDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the User entity.
+ *
+ * @author Mikko Hänninen, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0 15.9.2023
  */
 
 public class UserDAO implements IDAO {
 
     /**
-     * Adds a new user
+     * Adds a new user to the database
+     *
      * @param user A new user
      */
     public void addObject(Object user) {
@@ -29,6 +31,12 @@ public class UserDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Adds a new user to the database and returns it.
+     *
+     * @param object    A new user
+     * @return          The new user that was added to the database
+     */
     public User addAndReturnObject(Object object) {
         User savedUser;
 
@@ -48,6 +56,9 @@ public class UserDAO implements IDAO {
         return savedUser;
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -69,27 +80,12 @@ public class UserDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes a user from the database.
+     *
+     * @param username    The username of the user to be deleted
+     */
     public void deleteObject(String username) {
-        EntityManager em = MysqlDBJpaConn.getInstance();
-        em.getTransaction().begin();
-        try {
-            User user = em.find(User.class, username);
-            if (user != null) {
-                em.remove(user);
-                System.out.println("User " + username + " deleted");
-            } else {
-                throw new IllegalArgumentException("User with username  " + username + " was not found");
-            }
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw e;
-        } finally {
-            em.close();
-        }
-    }
-
-    public void deleteObjectByUserame(String username) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
         try {
@@ -107,9 +103,11 @@ public class UserDAO implements IDAO {
         } finally {
             em.close();
         }
-
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public Object getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -127,9 +125,10 @@ public class UserDAO implements IDAO {
     }
 
     /**
-     * Fetches a user by username
-     * @param username Username
-     * @return User object
+     * Fetches a user by username.
+     *
+     * @param username  The username of the user to find
+     * @return          User object with the specified username or null if not found
      */
     public User getObject(String username) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -149,6 +148,13 @@ public class UserDAO implements IDAO {
         }
     }
 
+    /**
+     * Updates a user's password.
+     *
+     * @param username      The username of the user whose password to update
+     * @param oldPassword   The old hashed password
+     * @param newPassword   The new hashed password
+     */
     public void updatePassword(String username, String oldPassword, String newPassword) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -176,8 +182,9 @@ public class UserDAO implements IDAO {
     }
 
     /**
-     * Fetches all users
-     * @return A list of users
+     * Fetches all users from the database
+     *
+     * @return  A list of users
      */
     public List<User> getAll() {
         try (EntityManager em = MysqlDBJpaConn.getInstance()) {
@@ -190,7 +197,7 @@ public class UserDAO implements IDAO {
     }
 
     /**
-     * Deletes all users
+     * Deletes all users from the database
      */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -206,6 +213,12 @@ public class UserDAO implements IDAO {
         System.out.println("Poistettu " + deletedCount + " käyttäjää.");
     }
 
+    /**
+     * Updates the max electricity price set by the user
+     *
+     * @param price     A new max price
+     * @param username  The username of the user to update
+     */
     public void updateMaxPrice(double price, String username){
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -223,6 +236,12 @@ public class UserDAO implements IDAO {
         }
     }
 
+    /**
+     * Updates a user's profile picture.
+     *
+     * @param username          The username of the user to update
+     * @param selectedPictureId An integer identifying a new profile picture
+     */
     public void updatePicture(String username, int selectedPictureId) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -247,6 +266,12 @@ public class UserDAO implements IDAO {
         }
     }
 
+    /**
+     * Updates the user's selected locale.
+     *
+     * @param username  The username of the user to update
+     * @param locale    A new locale
+     */
     public void updateLocale(String username, Locale locale){
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -270,6 +295,13 @@ public class UserDAO implements IDAO {
             em.close();
         }
     }
+
+    /**
+     * Returns the user's selected locale
+     *
+     * @param username  The username of the user whose locale to fetch
+     * @return          The user's selected locale or null if the user was not found
+     */
     public Locale getLocale(String username) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -302,7 +334,6 @@ public class UserDAO implements IDAO {
             em.close();
         }
     }
-
 
     private TypedQuery<User> getUserQuery(EntityManager em, String username){
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);

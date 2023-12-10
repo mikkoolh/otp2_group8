@@ -8,10 +8,11 @@ import java.text.DateFormat;
 import java.util.*;
 
 /**
- * @author Matleena Kankaanpää
- * 30.9.2023
+ * The RoutineUtils class provides utility functions for sorting routines.
  *
- * Utility class for sorting routines
+ * @author Matleena Kankaanpää
+ * @version 1.0
+ * 30.9.2023
  */
 
 public class RoutineUtils {
@@ -35,7 +36,7 @@ public class RoutineUtils {
      * Checks if all routines in a list are automated
      *
      * @param routines A list of routines
-     * @return True if automation is enabled for each routine
+     * @return True if automation is enabled for each routine, otherwise false
      */
     public boolean allAutomated(List<Routine> routines) {
         for (Routine routine : routines) {
@@ -47,7 +48,10 @@ public class RoutineUtils {
     }
 
     /**
-     * Time formatter
+     * Time formatter. Converts the time portion of a LocalDateTime object into a String.
+     * Checks the current locale of the application with a CurrentLocale instance
+     * and localizes the time accordingly into 24 or 12-hour format.
+     *
      * @param time A LocalDateTime object
      * @return The time as a String in the current locale (HH:mm/hh:mm)
      */
@@ -60,10 +64,14 @@ public class RoutineUtils {
     }
 
     /**
-     * Sorts a list of routines into a HashMap with weekdays as keys
-     * @param weekdays
-     * @param routines
-     * @return
+     * Sorts a list of routines into a LinkedHashMap where the keys are the names
+     * of the weekdays and the values are lists of routines that take place on
+     * that weekday. Uses an instance of the LocalizationTool class to sort the
+     * weekdays into the right order depending on the current locale.
+     *
+     * @param weekdays A list of Weekday objects
+     * @param routines A list of routines
+     * @return A LinkedHashMap with weekday names as keys and lists of routines for each weekday as values
      */
     public LinkedHashMap<String, ArrayList<Routine>> getRoutinesByWeekday(List<Weekday> weekdays, List<Routine> routines) {
         LinkedHashMap<String, ArrayList<Routine>> map = new LinkedHashMap<>();
@@ -86,10 +94,11 @@ public class RoutineUtils {
     }
 
     /**
-     * Compares the values two LocalTime objects
+     * Compares the values two LocalTime objects and asserts if they're in order.
+     *
      * @param startTime Start time
      * @param endTime End time
-     * @return True if the end time is after the start time
+     * @return True if the start time is before the end time, otherwise false
      */
     public boolean compareTimes(LocalTime startTime, LocalTime endTime) {
         return endTime.isAfter(startTime);

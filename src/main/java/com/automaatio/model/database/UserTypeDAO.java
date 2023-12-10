@@ -7,16 +7,18 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 /**
- * @author Nikita Nossenko
+ * The UserTypeDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the UserType entity.
  *
- * DAO for UserType.
+ * @author Nikita Nossenko
+ * @version 1.0
  */
 
 public class UserTypeDAO implements IDAO {
 
     /**
-     * Adds a new User Type
-     * @param userType A new User Type
+     * Adds a new user type
+     * @param userType  A new user type
      */
     public void addObject(Object userType) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -25,6 +27,10 @@ public class UserTypeDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Deletes a user type from the database
+     * @param id    The ID of the user type to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -49,8 +55,9 @@ public class UserTypeDAO implements IDAO {
 
     /**
      * Fetches a User Type by its ID
-     * @param id ID of UserType
-     * @return UserType object
+     *
+     * @param id    ID of UserType
+     * @return      UserType object or null if not found
      */
     public UserType getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -60,6 +67,9 @@ public class UserTypeDAO implements IDAO {
         return userType;
     }
 
+    /**
+     * This method is not used in this class.
+     */
     @Override
     public Object getObject(String s) {
         System.out.println("Not in use for this class");
@@ -67,7 +77,8 @@ public class UserTypeDAO implements IDAO {
     }
 
     /**
-     * Fetches all User Types
+     * Fetches all User Types.
+     *
      * @return A list of UserType objects
      */
     public List<UserType> getAll() {
@@ -83,6 +94,9 @@ public class UserTypeDAO implements IDAO {
         }
     }
 
+    /**
+     * Deletes all user types from the database.
+     */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();

@@ -6,15 +6,21 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 /**
- * @author Mikko Hänninen
- * @author Elmo Erla
- * 11.09.2023
+ * The WeekdayDAO class represents a DAO (Data Access Object)
+ * for carrying out database operations related to the Weekday entity.
  *
- * DAO for Weekday.class
+ * @author Mikko Hänninen, Elmo Erla
+ * @version 1.0 11.09.2023
  */
+
 public class WeekdayDAO implements IDAO {
 
-      @Override
+    /**
+     * Adds a new weekday to the database.
+     *
+     * @param object A new weekday to be added
+     */
+    @Override
     public void addObject(Object object) {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
@@ -22,6 +28,11 @@ public class WeekdayDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Deletes a weekday from the database.
+     *
+     * @param id    The ID of the weekday to be deleted
+     */
     @Override
     public void deleteObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -43,6 +54,12 @@ public class WeekdayDAO implements IDAO {
         }
     }
 
+    /**
+     * Fetches a weekday by ID.
+     *
+     * @param id    The ID of the weekday to be fetched
+     * @return      Weekday with the specified ID or null if not found
+     */
     @Override
     public Object getObject(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -59,7 +76,8 @@ public class WeekdayDAO implements IDAO {
     }
 
     /**
-     * Fetches all weekdays
+     * Fetches all weekdays.
+     *
      * @return A list of Weekday objects
      */
     public List<Weekday> getAll() {
@@ -75,20 +93,11 @@ public class WeekdayDAO implements IDAO {
         }
     }
 
-    /**
-     * Updates an existing weekday
-     * @param weekday The weekday to update
-     */
-    public void updateWeekday(Weekday weekday) {
-        EntityManager em = MysqlDBJpaConn.getInstance();
-        em.getTransaction().begin();
-        em.merge(weekday);
-        em.getTransaction().commit();
-    }
 
     /**
-     * Deletes a weekday by its ID
-     * @param id ID of the weekday to delete
+     * Deletes a weekday from the database.
+     *
+     * @param id    ID of the weekday to delete
      */
     public void deleteWeekday(int id) {
         EntityManager em = MysqlDBJpaConn.getInstance();
@@ -101,6 +110,9 @@ public class WeekdayDAO implements IDAO {
         em.getTransaction().commit();
     }
 
+    /**
+     * Deletes all weekdays from the database.
+     */
     public void deleteAll() {
         EntityManager em = MysqlDBJpaConn.getInstance();
         em.getTransaction().begin();
