@@ -7,30 +7,22 @@ import javafx.scene.layout.GridPane;
 import java.util.ResourceBundle;
 
 /**
- * @autohr Matleena Kankaanpää
+ * The TimeSelectorGrid class is used to create a grid component
+ * including two TimePickers for selecting the start and end time
+ * of an event. The TimePicker component has been imported from the GemsFX library.
  *
- * The {@code TimeSelectorGrid} class provides functionality to create a 2x2 grid layout
- * containing two {@link TimePicker} components and their corresponding labels. This
- * component is useful for scenarios where a user needs to select both a start and an
- * end time.
- *
- * The grid layout arranges the time pickers and their labels in a user-friendly manner,
- * making it clear which picker is for the start time and which is for the end time.
+ * @author Matleena Kankaanpää
+ * @version 1.0
  */
+
 public class TimeSelectorGrid {
 
     /**
-     * Creates a {@link GridPane} containing two {@link TimePicker} components and their
-     * respective labels for start and end times.
-     * <p>
-     * The method takes two {@link TimePicker} instances for start and end times and
-     * arranges them in a grid with labels indicating their purpose. The labels are
-     * localized based on the user's locale.
-     * </p>
+     * Creates a GridPane with two time pickers and two corresponding labels.
      *
-     * @param startTime The {@link TimePicker} for selecting the start time.
-     * @param endTime The {@link TimePicker} for selecting the end time.
-     * @return A {@link GridPane} with the configured time pickers and labels.
+     * @param startTime     The TimePicker for selecting the start time
+     * @param endTime       The TimePicker for selecting the end time
+     * @return              A GridPane with two time pickers and two corresponding labels
      */
     public GridPane create(TimePicker startTime, TimePicker endTime) {
         BundleLoader bundleLoader = new BundleLoader();
