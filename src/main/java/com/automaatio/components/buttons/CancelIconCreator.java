@@ -3,23 +3,19 @@ package com.automaatio.components.buttons;
 import javafx.scene.control.Button;
 
 /**
+ * The CancelIconCreator class extends the IconCreator class
+ * to create an image button for cancelling actions.
+ *
  * @author Matleena Kankaanpää
- *
- * The {@code CancelIconCreator} class extends {@code IconCreator} to specifically create
- * a button designed for cancellation actions. This class provides a convenient way to
- * instantiate a button with a predefined cancel icon and tooltip text.
- *
- * The icon and tooltip text are defined internally within the method and are specific
- * to cancellation actions.
+ * @version 1.0
  */
+
 public class CancelIconCreator extends IconCreator {
 
     /**
-     * Creates a button with a cancel icon and tooltip text. This method leverages the
-     * {@code create} method of the superclass {@code IconCreator} by passing predefined
-     * parameters for a cancel button.
+     * Creates a button with a cancel icon and tooltip text.
      *
-     * @return A {@link Button} with a cancel icon and tooltip, ready for use in a UI.
+     * @return A button with a cancel icon and tooltip text
      */
     public Button create() {
         return super.create("images/cancel.png", resourceBundle.getString("cancelBtnTxt"));
