@@ -5,23 +5,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
 
 /**
- * The {@code SwitchablePasswordField} class provides a component that toggles between
- * a {@link TextField} and a {@link PasswordField}. This is particularly useful in
- * scenarios where a user might need to switch between viewing and hiding their password input.
+ * The SwitchablePasswordField class is used to create a password
+ * field with the functionality to switch between displaying the
+ * content of the field as either plain or hidden text.
  *
- * The class maintains both a text field and a password field, synchronizing their content.
- * The current field being displayed can be toggled, allowing the user to switch between
- * seeing the typed password as plain text or as masked characters.
+ * @author Matleena Kankaanpää
+ * @version 1.0
  */
+
 public class SwitchablePasswordField {
     private final TextField textField;
     private final PasswordField passwordField;
     private TextInputControl current;
 
     /**
-     * Constructs a new {@code SwitchablePasswordField} with a {@link TextField} and
-     * a {@link PasswordField}. The text property of both fields is bidirectionally bound,
-     * ensuring they display the same content.
+     * Class constructor
      */
     public SwitchablePasswordField() {
         textField = new TextField();
@@ -35,8 +33,8 @@ public class SwitchablePasswordField {
     }
 
     /**
-     * Toggles the visibility of the password between plain text and masked characters.
-     * Switches the current field from a {@link TextField} to a {@link PasswordField} or vice versa.
+     * Changes the field to a PasswordField if it was previously a TextField
+     * and vice versa.
      */
     public void toggle() {
         if (current == textField) {
@@ -47,10 +45,8 @@ public class SwitchablePasswordField {
     }
 
     /**
-     * Gets the current active field, which can be either a {@link TextField} or a {@link PasswordField},
-     * depending on the toggle state.
-     *
-     * @return The currently active {@link TextInputControl}, either the text field or the password field.
+     * Returns the field in its current state (TextField or PasswordField)
+     * @return      The current field
      */
     public TextInputControl getField() {
         return current;

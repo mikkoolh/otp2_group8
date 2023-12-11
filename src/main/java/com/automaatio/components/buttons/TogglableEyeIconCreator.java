@@ -2,32 +2,20 @@ package com.automaatio.components.buttons;
 
 import javafx.scene.control.Button;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 /**
+ * The TogglableEyeIconCreator class extends the TogglableIconCreator class
+ * to create a togglable button with an image of an open eye and an image of
+ * a closed eye that switch when the button is clicked.
+ *
  * @author Matleena Kankaanpää
- *
- * The {@code TogglableEyeIconCreator} class extends {@code TogglableIconCreator} to create
- * a specialized button that toggles between "hide" and "show" states, typically used in
- * conjunction with password fields. This class provides a convenient way to instantiate
- * a button with icons representing eye-open and eye-closed states, along with corresponding
- * tooltips.
- *
- * The button created by this class is designed to toggle its appearance and function
- * between showing and hiding password content.
+ * @version 1.0
  */
 
 public class TogglableEyeIconCreator extends TogglableIconCreator {
 
     /**
-     * Creates a togglable "hide/show" button with eye-open and eye-closed icons.
-     * The button toggles between these two states, changing its icon and tooltip
-     * accordingly. This button is typically used for controlling the visibility
-     * of password fields.
-     *
-     * @return A {@link Button} with togglable icons for "hide" and "show" actions,
-     * styled with a specific appearance.
+     * Creates a togglable button with an image of an open eye and an image of a closed eye
+     * @return      A togglable button with an image of an open eye and an image of a closed eye
      */
     public Button create() {
         super.create("images/eye-open.png", "images/eye-hidden.png",  resourceBundle.getString("showPasswordTxt"), resourceBundle.getString("hidePasswordTxt"));

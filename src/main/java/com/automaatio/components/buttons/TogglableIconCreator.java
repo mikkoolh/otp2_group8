@@ -6,21 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * The abstract TogglableIconCreator class is used for creating specific
+ * togglable buttons with alternating images and tooltip texts that
+ * swap when the button is clicked.
+ *
  * @author Matleena Kankaanpää
- *
- * The {@code TogglableIconCreator} class is responsible for creating a custom button
- * with two different image states. These states toggle upon each click on the button.
- * The class also supports tooltips for each state to provide additional information.
- *
- * This class is abstract and designed to be extended for specific implementations
- * where toggling icons on a button is required.
- *
+ * @version 1.0
  */
+
 public abstract class TogglableIconCreator {
     protected Button button;
     protected ImageView defaultView, altView;
@@ -28,14 +25,13 @@ public abstract class TogglableIconCreator {
     protected ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("fi", "FI"));
 
     /**
-     * Creates a button with two images and corresponding tooltips. The images and tooltips
-     * toggle when the button is clicked.
+     * Creates a togglable button with two alternate states, images and tooltip texts
      *
-     * @param defaultImage The URL of the image to be used as the default view.
-     * @param altImage The URL of the image to be used as the alternate view.
-     * @param defaultTooltipText The text for the tooltip in the default state.
-     * @param altTooltipText The text for the tooltip in the alternate state.
-     * @return A {@link Button} with the specified images and tooltips, ready for use in a UI.
+     * @param defaultImage          The default image to be displayed on the button
+     * @param altImage              An alternate image
+     * @param defaultTooltipText    The default tooltip text of the button
+     * @param altTooltipText        An alternate tooltip text
+     * @return                      A togglable button with two alternate states, images and tooltip texts
      */
     public Button create(String defaultImage, String altImage, String defaultTooltipText, String altTooltipText) {
         button = new Button();
