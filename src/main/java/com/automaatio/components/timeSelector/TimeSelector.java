@@ -12,33 +12,26 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 /**
- * The {@code TimeSelector} class encapsulates a {@link TimePicker} component
- * and provides additional configuration options and controls for time selection.
+ * The TimeSelector class is used to create a TimePicker component
+ * from the GemsFX library.
  *
- * This class creates a {@link TimePicker} instance and configures it with various
- * options like rollover, linking fields, full width, and a popup button. It also
- * includes a label to display the selected time.
+ * @author Matleena Kankaanpää
+ * @version 1.0
  */
+
 public class TimeSelector {
     private final TimePicker timePicker;
 
     /**
-     * Constructs a new {@code TimeSelector} and initializes the {@link TimePicker}
-     * with default settings.
+     * Class constructor
      */
     public TimeSelector() {
         this.timePicker = new TimePicker();
     }
 
     /**
-     * Configures and returns the {@link TimePicker} component with additional controls
-     * for customization and display.
-     * <p>
-     * This method adds checkboxes for various {@link TimePicker} properties, a button
-     * to show the time picker popup, and a label to display the selected time.
-     * </p>
-     *
-     * @return The configured {@link TimePicker} component.
+     * Creates a TimePicker component
+     * @return      A TimePicker component
      */
     public TimePicker getTimePicker() {
         CheckBox rollOverBox = new CheckBox("Rollover");
