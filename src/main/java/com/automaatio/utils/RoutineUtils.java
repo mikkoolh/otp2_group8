@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author Matleena Kankaanpää
  * @version 1.0
- * 30.9.2023
+ * @since 30.9.2023
  */
 
 public class RoutineUtils {

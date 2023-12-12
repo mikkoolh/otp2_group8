@@ -5,7 +5,6 @@ import com.automaatio.model.database.Device;
 import com.automaatio.model.database.DeviceDAO;
 import com.automaatio.utils.BundleLoader;
 import javafx.scene.control.ToggleButton;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -16,6 +15,9 @@ import java.util.ResourceBundle;
  *
  * The toggle button's appearance and text change dynamically based on the current
  * state of the device (on or off). It also updates the device's usage data upon toggling.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
  */
 public class ToggleButtonCreator implements IButton {
 

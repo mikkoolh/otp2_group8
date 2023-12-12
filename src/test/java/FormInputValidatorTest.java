@@ -5,14 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * @author Mikko Hänninen
- *
  * The {@code FormInputValidatorTest} class contains unit tests for the {@link FormInputValidator} class.
  * It evaluates the functionality and behavior of input validation methods for various form fields.
  *
  * This test class ensures that the {@code FormInputValidator} correctly validates different types of input,
  * such as usernames, first names, last names, email addresses, phone numbers, and passwords, according to
  * specific validation rules.
+ *
+ * @author Mikko Hänninen
+ * @version 1.0
  */
 public class FormInputValidatorTest {
     private final FormInputValidator validator = new FormInputValidator();

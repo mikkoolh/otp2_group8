@@ -17,14 +17,15 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author Elmo Erla
- *
  * The {@code CurrentLocaleTest} class contains unit tests for the {@link CurrentLocale} class.
  * It evaluates the functionality of retrieving the current locale, both in temporary and user-specific contexts.
  *
  * This test class uses Mockito to mock dependencies like {@link CacheSingleton} and {@link User}, allowing
  * for isolated testing of the {@code CurrentLocale} class. It ensures that the correct locale is returned
  * based on different scenarios, such as when a user is set or not.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 public class CurrentLocaleTest {
     @Mock

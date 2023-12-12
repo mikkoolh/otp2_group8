@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author Elmo Erla
- *
  * The {@code DeviceTest} class contains unit tests for the {@link Device} class.
  * It evaluates the functionality and behavior of {@code Device} objects, including
  * their getters, setters, and other methods.
@@ -13,6 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * This test class ensures that {@code Device} instances are correctly instantiated and
  * that their methods behave as expected, such as retrieving properties, toggling states,
  * and setting new values.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 public class DeviceTest {
 
