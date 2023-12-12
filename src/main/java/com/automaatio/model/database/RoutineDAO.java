@@ -11,7 +11,8 @@ import java.util.List;
  * for carrying out database operations related to the Routine entity.
  *
  * @author Matleena Kankaanpää
- * @version 1.0 26.9.2023
+ * @version 1.0
+ * @since 26.9.2023
  */
 
 public class RoutineDAO implements IDAO {

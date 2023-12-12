@@ -8,7 +8,8 @@ import java.util.List;
  * The EventTime class represents an EventTime entity that is stored in the database.
  *
  * @author Mikko Hänninen
- * @version 1.0 03.09.2023
+ * @version 1.0
+ * @since 03.09.2023
  */
 
 @Entity

@@ -10,7 +10,8 @@ import java.util.List;
  * for carrying out database operations related to the Weekday entity.
  *
  * @author Mikko Hänninen, Elmo Erla
- * @version 1.0 11.09.2023
+ * @version 1.0
+ * @since 11.09.2023
  */
 
 public class WeekdayDAO implements IDAO {

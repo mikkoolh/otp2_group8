@@ -14,7 +14,8 @@ import java.util.Locale;
  * for carrying out database operations related to the User entity.
  *
  * @author Mikko Hänninen, Nikita Nossenko, Matleena Kankaanpää
- * @version 1.0 15.9.2023
+ * @version 1.0
+ * @since 15.9.2023
  */
 
 public class UserDAO implements IDAO {

@@ -8,7 +8,8 @@ import java.util.Locale;
  * The User class represents a User entity that is stored in the database.
  *
  * @author Mikko Hänninen, Matleena Kankaanpää
- * @version 1.0 15.09.2023
+ * @version 1.0
+ * @since 15.09.2023
  */
 
 @Entity
