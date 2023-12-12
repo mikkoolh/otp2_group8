@@ -1,19 +1,21 @@
 import com.automaatio.model.database.*;
 import com.automaatio.utils.CacheSingleton;
-import com.automaatio.utils.LocalizationTool;
 import com.automaatio.utils.RoutineUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Unit tests for the RoutineUtils class
+ *
+ * @author Nikita Nossenko
+ * @version 1.0
+ */
 
 public class RoutineUtilsTest {
     private RoutineUtils routineUtils;
@@ -27,6 +29,10 @@ public class RoutineUtilsTest {
     @Mock
     private Feature mockFeature;
 
+    /**
+     * Setup actions to be run before each test.
+     * Creates an ArrayList of test routines with mock users, devices and features.
+     */
     @BeforeEach
     void setUp() {
         routineUtils = new RoutineUtils();
@@ -42,6 +48,10 @@ public class RoutineUtilsTest {
                 new Weekday()), true));
     }
 
+    /**
+     * Tests the sortByTime method of the RoutineUtils class.
+     * The method is expected to sort a given list of routines by time.
+     */
     @Test
     void testSortingByTime() {
         List<Routine> sortatutRutiinit = routineUtils.sortByTime(rutiinit);
@@ -50,6 +60,11 @@ public class RoutineUtilsTest {
         }
     }
 
+    /**
+     * Tests the allAutomated method of the RoutineUtils class.
+     * The method takes a list of routines as parameter and is expected
+     * to return True if automation is enabled for each routine on the list.
+     */
     @Test
     void testAutomaatio() {
         assertTrue(routineUtils.allAutomated(rutiinit));
@@ -59,6 +74,12 @@ public class RoutineUtilsTest {
         assertFalse(routineUtils.allAutomated(rutiinit));
     }
 
+    /**
+     * Tests the compareTimes method of the RoutineUtils class.
+     * The method takes two LocalTime objects as parameters and is
+     * expected to return True if the value of the first object is
+     * earlier than that of the second.
+     */
     @Test
     void testCompareTimes() {
         LocalTime startTime = LocalTime.of(22, 0);
@@ -70,27 +91,4 @@ public class RoutineUtilsTest {
 
         assertFalse(routineUtils.compareTimes(startTime, endTime));
     }
-
-    // TODO: Viikonpäivätesti
-    /*@Test
-    void testRoutinesByWeekday() {
-        List<Weekday> weekdays = new ArrayList<>();
-        weekdays.add(new Weekday("Mon", "ma", "пон", "الاثنين"));
-        weekdays.add(new Weekday("Tue", "ti", "вт", "يوم الثلاثاء"));
-
-        Map<String, ArrayList<Routine>> routinesByWeekday = routineUtils.getRoutinesByWeekday(weekdays, rutiinit);
-        assertNotNull(routinesByWeekday);
-
-        for (Weekday weekday : weekdays) {
-            String localizedName = new LocalizationTool().localizeWeekday(weekday);
-            assertTrue(routinesByWeekday.containsKey(localizedName));
-        }
-
-        for (Routine routine : rutiinit) {
-            String localizedName = new LocalizationTool().localizeWeekday(routine.getEventTime().getWeekday());
-            assertTrue(routinesByWeekday.get(localizedName).contains(routine));
-        }
-        Set<String> weekdayNames = routinesByWeekday.keySet();
-    }*/
-
 }

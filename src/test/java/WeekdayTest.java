@@ -3,12 +3,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test for the Weekday class
+ * Unit tests for the Weekday class
+ *
  * @author Matleena Kankaanpää
- * 25.11.2023
+ * @version 1.0 25.11.2023
  */
 
 public class WeekdayTest {
+
+    /**
+     * Tests the constructor, getters and setters
+     */
     @Test
     public void testWeekdayConstructorAndGetters() {
         Weekday weekday = new Weekday("Friday", "perjantai", "пятница", "جمعة");

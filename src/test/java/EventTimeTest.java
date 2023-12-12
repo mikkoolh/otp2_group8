@@ -6,22 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * @author Matkeela Kankaanpää
+ * Unit tests for the EventTime class
  *
- * The {@code EventTimeTest} class contains unit tests for the {@link EventTime} class.
- * It evaluates the functionality and behavior of {@code EventTime} objects, focusing on
- * their constructors and getter methods.
- *
- * This test class ensures that {@code EventTime} instances are correctly instantiated with
- * the provided start time, end time, and weekday, and that their properties are accurately
- * retrieved.
+ * @author Matleena Kankaanpää
+ * @version 1.0
  */
 public class EventTimeTest {
 
     /**
-     * Tests the constructor and getter methods of the {@link EventTime} class.
-     * It verifies that the {@code EventTime} object is correctly instantiated with the provided
-     * start time, end time, and weekday, and that these properties are accurately retrieved.
+     * Tests the constructor, getters and setters
      */
     @Test
     public void testEventTimeConstructorAndGetters() {

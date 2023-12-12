@@ -4,13 +4,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test for the User class
+ * Unit tests for the User class
+ *
  * @author Matleena Kankaanpää
- * 15.9.2023
+ * @version 1.0 15.9.2023
  */
 
 public class UserTest {
 
+    /**
+     * Tests the constructor
+     */
     @Test
     public void testUserConstructor() {
         User user = new User("muumipeikko", "Muumi", "Peikko", "040-1234567", "muumi.peikko@muumilaakso.fi", "salaisuus", 30, 2);
@@ -23,6 +27,9 @@ public class UserTest {
         assertEquals("salaisuus", user.getPassword(), "Password should be 'salaisuus'");
     }
 
+    /**
+     * Tests the getters and setters
+     */
     @Test
     public void testUserGettersAndSetters() {
         User user = new User();
