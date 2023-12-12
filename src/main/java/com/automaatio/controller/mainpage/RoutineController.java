@@ -106,7 +106,6 @@ public class RoutineController implements Initializable {
 
         try {
             routines = util.sortByTime(fetchRoutines()); // Sort fetched routines by time
-            DatabaseTool.resetWeekdays();
             weekdays = localizer.sortWeekdays(weekdayDAO.getAll());
             initializeForm();
             loadRoutines();
