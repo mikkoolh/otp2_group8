@@ -8,7 +8,8 @@ import jakarta.persistence.*;
  * for carrying out database operations related to the EventTime entity.
  *
  * @author Matleena Kankaanpää
- * @version 1.0 28.9.2023
+ * @version 1.0
+ * @since 28.9.2023
  */
 
 public class EventTimeDAO implements IDAO {

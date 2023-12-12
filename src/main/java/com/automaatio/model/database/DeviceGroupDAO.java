@@ -13,7 +13,8 @@ import jakarta.persistence.TypedQuery;
  * for carrying out database operations related to the DeviceGroup entity.
  *
  * @author Matleena Kankaanpää, Elmo Erla
- * @version 1.0 10.9.2023
+ * @version 1.0
+ * @since 10.9.2023
  */
 
 public class DeviceGroupDAO implements IDAO {

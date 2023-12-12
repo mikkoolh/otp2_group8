@@ -6,7 +6,8 @@ import jakarta.persistence.*;
  * The Routine class represents a Routine entity that is stored in the database.
  *
  * @author Matleena Kankaanpää
- * @version 1.0 26.9.2023
+ * @version 1.0
+ * @since 26.9.2023
  */
 
 @Entity

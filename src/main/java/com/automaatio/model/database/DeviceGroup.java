@@ -8,7 +8,8 @@ import java.util.List;
  * The DeviceGroup class represents a DeviceGroup entity that is stored in the database.
  *
  * @author Mikko Hänninen, Matleena Kankaanpää
- * @version 1.0 20.9.2023
+ * @version 1.0
+ * @since 20.9.2023
  */
 
 @Entity

@@ -5,7 +5,8 @@ import jakarta.persistence.*;
  * The Weekday class represents a Weekday entity that is stored in the database.
  *
  * @author Mikko Hänninen, Elmo Erla
- * @version 1.0 11.09.2023
+ * @version 1.0
+ * @since 11.09.2023
  */
 
 @Entity
