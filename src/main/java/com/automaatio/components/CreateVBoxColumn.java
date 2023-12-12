@@ -21,6 +21,9 @@ import javafx.scene.layout.*;
  * This class is designed to dynamically create the layout based on the type of object
  * provided (e.g., {@link Device} or {@link DeviceGroup}), adding appropriate buttons
  * and functionality.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
  */
 public class CreateVBoxColumn {
     private Button deleteBtn, expandBtn;

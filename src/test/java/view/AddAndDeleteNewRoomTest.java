@@ -20,8 +20,6 @@ import java.util.ResourceBundle;
 import static java.lang.Thread.sleep;
 
 /**
- * @author Elmo Erla
- *
  * The {@code AddAndDeleteNewRoomTest} class contains TestFX-based UI tests for
  * adding and deleting a new room in the application. It uses {@link FxRobot} to
  * simulate user interactions with the UI.
@@ -29,6 +27,9 @@ import static java.lang.Thread.sleep;
  * This test class is designed to ensure that the functionality for adding a new room
  * works as expected and that the room is correctly added to the database. It also
  * includes setup and teardown methods to prepare and clean up the testing environment.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 @ExtendWith(ApplicationExtension.class)
 public class AddAndDeleteNewRoomTest {

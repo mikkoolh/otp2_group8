@@ -20,8 +20,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * @author Elmo Erla
- *
  * The {@code ChangeDeviceLocationTest} class contains TestFX-based UI tests for
  * changing the location of a device within the application. It uses {@link FxRobot} to
  * simulate user interactions with the UI.
@@ -30,6 +28,9 @@ import java.util.ResourceBundle;
  * location (device group) works as expected. It includes setup and teardown methods to
  * prepare and clean up the testing environment, as well as specific tests for UI interactions
  * related to changing device locations.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 @ExtendWith(ApplicationExtension.class)
 public class ChangeDeviceLocationTest {

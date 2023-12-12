@@ -22,6 +22,9 @@ import java.util.concurrent.TimeoutException;
  * This abstract class is designed to be extended by specific test classes that require
  * a JavaFX environment. It handles the launching and hiding of the main application stage
  * and provides utility methods for releasing keyboard and mouse actions.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
  */
 @ExtendWith(ApplicationExtension.class)
 public abstract class AbstractTestFX extends ApplicationTest {

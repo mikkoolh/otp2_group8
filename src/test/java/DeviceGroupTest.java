@@ -5,14 +5,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * @author Elmo Erla
- *
  * The {@code DeviceGroupTest} class contains unit tests for the {@link DeviceGroup} class.
  * It evaluates the functionality and behavior of {@code DeviceGroup} objects, including
  * their constructors, getters, setters, and other methods.
  *
  * This test class ensures that {@code DeviceGroup} instances are correctly instantiated and
  * that their methods behave as expected, such as setting and retrieving properties.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 public class DeviceGroupTest {
 

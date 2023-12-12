@@ -3,13 +3,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author Elmo Erla
- *
  * The {@code CompoundMessageCreatorTest} class contains unit tests for the {@link CompoundMessageCreator} class.
  * It evaluates the functionality of creating compound messages based on provided templates and arguments.
  *
  * This test class ensures that the {@code CompoundMessageCreator} correctly constructs messages under various
  * scenarios, including standard operation, scenarios with no arguments, and cases with missing resource keys.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 class CompoundMessageCreatorTest {
 

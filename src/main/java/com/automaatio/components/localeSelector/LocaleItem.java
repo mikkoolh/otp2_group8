@@ -10,6 +10,9 @@ import javafx.scene.image.Image;
  * This class provides a straightforward way to pair a visual representation (flag)
  * with a language identifier, facilitating easy and intuitive language selection in
  * applications.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
  */
 public class LocaleItem {
     private Image flag;

@@ -12,14 +12,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author Elmo Erla
- *
  * The {@code LocalizationToolTest} class contains unit tests for the {@link LocalizationTool} class.
  * It evaluates the functionality of localizing weekdays and sorting them based on different locales.
  *
  * This test class ensures that the {@code LocalizationTool} correctly localizes weekday names and sorts
  * them according to the order specific to each locale. The tests cover various locales including English,
  * Finnish, Russian, and Arabic.
+ *
+ * @author Elmo Erla
+ * @version 1.0
  */
 class LocalizationToolTest {
     @Mock

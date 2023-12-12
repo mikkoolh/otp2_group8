@@ -17,21 +17,17 @@ import org.testfx.framework.junit5.Start;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The {@code CreateAccountTest} class contains TestFX-based UI tests for
- * the account creation functionality in the application. It uses {@link FxRobot} to
- * simulate user interactions with the UI.
+ * Tests for the registration process
  *
- * This test class is designed to ensure that the functionality for creating a new user account
- * works as expected. It includes tests for successful account creation, validation of user input,
- * and handling of duplicate account creation attempts.
+ * @author Matleena Kankaanpää
+ * @version 1.0
  */
+
 @ExtendWith(ApplicationExtension.class)
 class CreateAccountTest {
     private static final UserDAO userDAO = new UserDAO();
@@ -40,8 +36,7 @@ class CreateAccountTest {
     private static final String testUser1 = "testuser-mk-1", testUser2 = "testuser-mk-2";
 
     /**
-     * Setup method to prepare the testing environment. It ensures that test users are
-     * properly set up or removed as needed.
+     * Setup process to be run before any tests
      */
     @BeforeAll
     public static void setup() {
@@ -73,13 +68,6 @@ class CreateAccountTest {
         passwordTooltip = robot.lookup("#passwordTooltip").queryAs(Text.class);
     }
 
-    /**
-     * Initializes the JavaFX environment for the test. This method is called
-     * before each test execution to set up the UI components.
-     *
-     * @param stage The primary stage for this application.
-     * @throws IOException if there is an error during setup.
-     */
     @Start
     private void start(Stage stage) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TextResources", new Locale("en", "US"));
@@ -91,10 +79,9 @@ class CreateAccountTest {
     }
 
     /**
-     * Test method to verify successful account creation. It simulates user
-     * interactions for creating an account and asserts the success message.
+     * Tests if registration succeeds when valid input is entered.
      *
-     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     * @param robot     The automated TestFX robot that imitates a real user and executes commands
      */
     @Test
     void createAccountSuccess(FxRobot robot) {
@@ -111,10 +98,10 @@ class CreateAccountTest {
     }
 
     /**
-     * Test method to verify account creation failure due to invalid input. It simulates user
-     * interactions with various invalid inputs and asserts the appropriate error messages.
+     * Tests if registration fails as expected when given input that should
+     * not pass validations.
      *
-     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     * @param robot     The automated TestFX robot that imitates a real user and executes commands
      */
     @Test
     void createAccountFail(FxRobot robot) {
@@ -153,11 +140,10 @@ class CreateAccountTest {
     }
 
     /**
-     * Test method to verify failure when attempting to create an account with a username
-     * that already exists. It simulates user interactions for creating a duplicate account
-     * and asserts the error message.
+     * Tests if registration fails as expected when attempting to create
+     * a new account with a username that already exists in the database.
      *
-     * @param robot The {@link FxRobot} instance used to simulate user interactions.
+     * @param robot     The automated TestFX robot that imitates a real user and executes commands
      */
     @Test
     void createDuplicateAccountFail(FxRobot robot) {
@@ -167,8 +153,9 @@ class CreateAccountTest {
     }
 
     /**
-     * Teardown method to clean up after all tests. It removes any test users created
-     * during the tests to ensure a clean state for subsequent tests.
+     * Cleanup process to be run after all tests are finished.
+     * Deletes any objects that were added to the database during tests
+     * to avoid taking up space.
      */
     @AfterAll
     static void endTests() {

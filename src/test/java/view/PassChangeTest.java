@@ -26,8 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
- * @author Nikita Nossenko
- *
  * The {@code PassChangeTest} class contains TestFX-based UI tests for
  * the password change functionality in the application. It uses {@link FxRobot} to
  * simulate user interactions with the UI.
@@ -35,6 +33,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * This test class is designed to ensure that the functionality for changing a user's
  * password works as expected. It includes tests for successful password change,
  * incorrect current password, and validation of new password length.
+ *
+ * @author Nikita Nossenko
+ * @version 1.0
  */
 @ExtendWith(ApplicationExtension.class)
 public class PassChangeTest extends ApplicationTest {

@@ -26,6 +26,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  * This test class is designed to ensure that the functionality for changing the application's language
  * works as expected. It includes tests for changing the language to English, Finnish, Russian, and Arabic.
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
+ * @version 1.0
  */
 public class ChangeLanguageTest extends AbstractTestFX {
     final private String username = "testFX", passwd = "testfx123", userFieldId = "#usernameField",
