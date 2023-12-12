@@ -34,6 +34,8 @@ import java.util.*;
  * supports updating the user interface and user preferences based on the selected locale.
  * </p>
  *
+ *
+ * @author Mikko Hänninen, Elmo Erla, Nikita Nossenko, Matleena Kankaanpää
  * @version 1.0
  * @since 7.10.2023
  */
